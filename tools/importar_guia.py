@@ -10,7 +10,12 @@ fragmento, como hace build_pdf.py para los PDF, y le añade lo propio del sitio:
 - los enlaces a los dos PDF, debajo del título;
 - un aviso con el enlace a Batería y seguridad, al final del capítulo de la
   batería, y otro a Soporte y Garantía, al final de los problemas frecuentes;
-- la navegación del sitio en el pie de página.
+- la navegación del sitio en el pie de página;
+- las fuentes del sistema en lugar de las de Google Fonts: quita el @import de
+  fonts.googleapis.com del fragmento y redefine las variables de tipografía con
+  las mismas pilas que docs/assets/sitio.css, para que la página no pida nada a
+  terceros (política de privacidad, §13). Los PDF no cambian: llevan sus
+  fuentes incrustadas y no las piden a nadie.
 
 Copia también las imágenes que la página usa (img/) y los dos PDF. Para
 regenerar los PDF, usa build_pdf.py en el repositorio de origen antes de
@@ -32,6 +37,11 @@ DEST = REPO / "docs" / "guia"
 
 PDFS = ("guia-meridianv-iphone.pdf", "guia-meridianv-android.pdf")
 
+SITE_CSS = REPO / "docs" / "assets" / "sitio.css"
+
+# El @import de Google Fonts que trae el fragmento de la guía.
+GOOGLE_FONTS_IMPORT = re.compile(r'@import url\("https://fonts\.(?:googleapis|gstatic)\.com/[^"]*"\);\n?')
+
 DESCRIPTION = (
     "Guía rápida del receptor GNSS MeridianV con la app TresVizo Field para "
     "iPhone y Android: conectar, altura de antena, IMU, correcciones, medir, "
@@ -48,6 +58,13 @@ PAGE = """<!doctype html>
 {head}
 <style>
 /* Añadido por el sitio: página completa sin margen, descargas bajo el título y navegación en el pie */
+/* Fuentes del sistema, las mismas de docs/assets/sitio.css: la página no carga tipografías de terceros */
+:root {{
+  --f-display: {f_display};
+  --f-body: {f_body};
+  --f-mono: {f_mono};
+  --f-oled: {f_mono};
+}}
 body {{ margin: 0; }}
 .downloads {{ margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; align-items: center; font-size: var(--t-s); }}
 .downloads span {{ color: var(--ink-2); }}
@@ -94,6 +111,18 @@ HELP_NOTE = """  <div class="note" style="margin-top:1rem">
 """
 
 
+def site_fonts() -> dict[str, str]:
+    """Las pilas de fuentes del sistema de docs/assets/sitio.css (--f-display, --f-body, --f-mono)."""
+    css = SITE_CSS.read_text(encoding="utf-8")
+    fonts = {}
+    for name in ("display", "body", "mono"):
+        found = re.search(rf"--f-{name}:\s*([^;]+);", css)
+        if not found:
+            sys.exit(f"No encuentro --f-{name} en {SITE_CSS.relative_to(REPO)}.")
+        fonts[f"f_{name}"] = found.group(1).strip()
+    return fonts
+
+
 def split_fragment(text: str) -> tuple[str, str]:
     """Separa lo que va en <head> (el <title> y el primer <style>) del cuerpo.
 
@@ -124,6 +153,10 @@ def main() -> None:
         sys.exit(f"No existe {fragment}")
 
     head, body = split_fragment(fragment.read_text(encoding="utf-8"))
+    # Sin tipografías de terceros: fuera el @import de Google Fonts.
+    head = GOOGLE_FONTS_IMPORT.sub("", head)
+    if "fonts.googleapis.com" in head or "fonts.gstatic.com" in head:
+        sys.exit("guia.html pide fuentes a Google de una forma que este script no reconoce: revísalo.")
 
     # Los PDF, debajo de la nota del selector de teléfono.
     hint_start = body.find('<p class="os-hint">')
@@ -139,7 +172,7 @@ def main() -> None:
     # La navegación del sitio, al final del pie.
     body = insert_once(body, "</footer>", SITE_NAV, before=True)
 
-    page = PAGE.format(description=DESCRIPTION, head=head.strip(), body=body.strip())
+    page = PAGE.format(description=DESCRIPTION, head=head.strip(), body=body.strip(), **site_fonts())
 
     # Solo las imágenes que la página usa: una captura que la guía dejó de
     # enseñar no se publica.
