@@ -1,0 +1,28 @@
+# Comprueba el sitio en cada cambio de docs/ o tools/: borradores con su recuadro,
+# nada «vigente» con marcadores, nada cargado de terceros y enlaces internos.
+# Repositorio público: los minutos de Actions no cuestan. Solo Python del sistema.
+name: Comprobar el sitio
+
+on:
+  push:
+    branches: [main]
+    paths: ["docs/**", "tools/**", ".github/workflows/comprobar-sitio.yml"]
+  pull_request:
+    paths: ["docs/**", "tools/**", ".github/workflows/comprobar-sitio.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: comprobar-sitio-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  comprobar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprobar marcadores, vigencia, recursos de terceros y enlaces
+        run: python3 tools/comprobar_sitio.py

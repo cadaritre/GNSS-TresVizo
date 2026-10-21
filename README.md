@@ -24,6 +24,8 @@ compilación: lo que está en `docs/` es lo que se publica.
 | `docs/assets/` | Hoja de estilos común y logotipos |
 | `tools/importar_guia.py` | Copia la guía rápida desde el repositorio del firmware |
 | `tools/navegacion.py` | Escribe la misma cabecera y el mismo pie en todas las páginas |
+| `tools/comprobar_sitio.py` | Comprueba borradores, vigencia, recursos de terceros y enlaces; corre también en GitHub Actions |
+| `fuentes.md` | La fuente de cada afirmación del sitio (no se publica) |
 
 Las direcciones que piden las tiendas de apps son:
 
@@ -33,13 +35,16 @@ Las direcciones que piden las tiendas de apps son:
 
 ## Versiones (releases)
 
-Las versiones de este repositorio llevarán los **paquetes de geoides y sistemas de coordenadas** que la
-app descarga. Se suben aparte, como archivos adjuntos de cada versión; el repositorio en sí no los
-contiene.
+Las versiones de este repositorio llevan los **geoides y paquetes de sistemas de coordenadas** que la app
+descarga, como archivos adjuntos; el repositorio en sí no los contiene.
 
-Hoy la app trae incluidos los geoides de México, GGM25 y GGM10 del INEGI. Cada paquete nuevo conserva la
-licencia de su autoridad, y se agrega a la página `docs/geoides/` con su autoridad, su licencia y su
-crédito.
+- `datos-indice`: el índice firmado (`datos-index.json`) que leen las apps en esa dirección fija. No se
+  borra.
+- `datos-AAAA-MM-DD`: los archivos de cada publicación (hoy, `datos-2026-10-21`).
+
+De fábrica, la app trae WGS 84, Mexico ITRF2008 con sus zonas UTM 11N a 16N y los geoides GGM25 y GGM10
+del INEGI. Cada archivo publicado conserva la licencia de su autoridad, y se agrega a la página
+`docs/geoides/` con su autoridad, su licencia y su crédito, el mismo día que se publica.
 
 ## Cómo se actualiza
 
@@ -55,11 +60,16 @@ usa y los dos PDF, y añade los enlaces del sitio.
 
 **Documentos legales.** Se editan en su HTML. Al cambiar uno, sube la versión y la fecha de «Última
 revisión». Mientras un documento no esté revisado por un abogado, conserva arriba el aviso «Borrador.
-Pendiente de revisión legal.». Los datos pendientes van marcados así, y se listan con:
+Pendiente de revisión legal.», que dice que el documento «no está vigente». Los datos pendientes van
+marcados así, y se listan con:
 
 ```sh
 grep -rnoE "\[(COMPLETAR|VERIFICAR)[^]]*\]" docs
 ```
+
+**Fuentes.** Cada afirmación de una página pública lleva su fuente en `fuentes.md` (archivo, línea y commit,
+o la ley con su artículo, o la decisión del propietario con su fecha). Lo que no tiene fuente no se
+publica.
 
 **Una página nueva.** Créala en `docs/<nombre>/index.html` con un `<header class="topbar">` y un
 `<footer class="foot">` vacíos, agrégala a las listas de `tools/navegacion.py` y ejecútalo:
@@ -67,6 +77,17 @@ grep -rnoE "\[(COMPLETAR|VERIFICAR)[^]]*\]" docs
 ```sh
 python3 tools/navegacion.py
 ```
+
+**Comprobarlo antes de publicar.**
+
+```sh
+python3 tools/comprobar_sitio.py
+```
+
+Falla si una página con marcadores no lleva el recuadro de borrador, si una se declara vigente con
+marcadores, si alguna carga algo de otro dominio (fuentes incluidas) o si hay un enlace interno roto. El
+mismo script corre en GitHub Actions (`.github/workflows/comprobar-sitio.yml`) en cada cambio de `docs/` o
+`tools/`.
 
 **Verlo antes de publicar.**
 
