@@ -28,7 +28,7 @@
       <p class="eyebrow">MeridianV · MeridianVI · TresVizo Field</p>
       <h1>Soporte técnico</h1>
       <p class="lede">Cómo pedirnos ayuda, qué datos mandarnos para resolverlo rápido y las respuestas a los problemas más comunes.</p>
-      <p class="doc-meta"><span>Actualizado el 20 de octubre de 2026</span></p>
+      <p class="doc-meta"><span>Actualizado el 21 de octubre de 2026</span></p>
     </div>
   </div>
 
@@ -38,6 +38,8 @@
       <ol>
         <li><a href="#contacto">Cómo pedir ayuda</a></li>
         <li><a href="#datos">Qué datos mandar</a></li>
+        <li><a href="#requisitos">Requisitos del teléfono</a></li>
+        <li><a href="#calidad">Calidad de la posición</a></li>
         <li><a href="#preguntas">Preguntas frecuentes</a></li>
         <li><a href="#firmware">Actualizar el firmware</a></li>
         <li><a href="#reparacion">Garantía y reparaciones</a></li>
@@ -49,9 +51,9 @@
         <h2 id="h-contacto"><span class="n">1</span>Cómo pedir ayuda</h2>
         <p>Antes de escribir, busca tu problema en las <a href="#preguntas">preguntas frecuentes</a> y en la <a href="../guia/">guía rápida</a>: muchos se resuelven en un minuto.</p>
         <dl>
-          <div><dt>Correo</dt><dd><mark class="todo">[COMPLETAR: correo de soporte]</mark></dd></div>
-          <div><dt>WhatsApp</dt><dd><mark class="todo">[COMPLETAR: número de WhatsApp de soporte]</mark></dd></div>
-          <div><dt>Horario de atención</dt><dd><mark class="todo">[COMPLETAR: días y horario, con su zona horaria]</mark></dd></div>
+          <div><dt>Correo</dt><dd><a href="mailto:ingenieria@3vizo.com">ingenieria@3vizo.com</a></dd></div>
+          <div><dt>Horario de atención</dt><dd>De lunes a viernes, de 9 a 18&nbsp;h, hora del centro de México.</dd></div>
+          <div><dt>Respuesta</dt><dd>En un día hábil.</dd></div>
         </dl>
         <p>Un solo mensaje con todos los datos de la sección siguiente nos ahorra idas y vueltas.</p>
       </section>
@@ -60,17 +62,39 @@
         <h2 id="h-datos"><span class="n">2</span>Qué datos mandar</h2>
         <ol class="steps">
           <li><strong>El número de serie del receptor.</strong> Empieza con «MV-» en el MeridianV o con «MVI-» en el MeridianVI, seguido de 12 caracteres. Está en la app, en <span class="route">Receptor › Sistema y firmware › Número de serie</span>, y en el código QR de la etiqueta del receptor.</li>
-          <li><strong>La versión del firmware.</strong> En <span class="route">Receptor › Sistema y firmware</span>. También la ves en la primera línea de la pantalla del receptor, junto a su nombre.</li>
+          <li><strong>La versión del firmware.</strong> En <span class="route">Receptor › Sistema y firmware</span>. En la pantalla del receptor sale al encenderlo, a la derecha de «Iniciando...», y en la página «RECEPTOR», en la línea «Firmware». Para pasar de una página a otra, pulsa el botón brevemente.</li>
           <li><strong>La versión de la app y tu teléfono.</strong> La versión está al final de la pestaña <span class="route">Cuenta</span>, en «Versión de la app». Dinos también el modelo del teléfono y si es iPhone o Android.</li>
-          <li><strong>El informe de soporte de la app.</strong> Con el receptor conectado, entra a <span class="route">Cuenta › Soporte › Generar informe de soporte</span>. Antes de generarlo, la app te enseña qué lleva; nunca incluye contraseñas de Wi-Fi ni de NTRIP. Puede llevar las coordenadas del último estado leído: la app te avisa cuando es así. Compártelo por correo o WhatsApp.</li>
+          <li><strong>El informe de soporte de la app.</strong> Con el receptor conectado, entra a <span class="route">Cuenta › Soporte › Generar informe de soporte</span>. Antes de generarlo, la app te enseña qué lleva; nunca incluye contraseñas de Wi-Fi ni de NTRIP. Puede llevar las coordenadas del último estado leído: la app te avisa cuando es así. Mándalo por correo.</li>
           <li><strong>Qué pasó.</strong> Qué estabas haciendo, qué esperabas y qué pasó, con el mensaje exacto de la app o de la pantalla del receptor. Una captura de pantalla ayuda mucho.</li>
         </ol>
         <p>Si te lo pedimos, descarga también el diagnóstico del receptor desde su panel web: <span class="route">Configuración › Más ajustes › Diagnóstico › Descargar diagnóstico</span>.</p>
         <p class="small">Lo que nos envías se trata conforme a la <a href="../privacidad/">Política de privacidad</a>.</p>
       </section>
 
+      <section id="requisitos" aria-labelledby="h-requisitos">
+        <h2 id="h-requisitos"><span class="n">3</span>Requisitos del teléfono</h2>
+        <ul>
+          <li><strong>iPhone:</strong> iOS 26.2 o posterior.</li>
+          <li><strong>Android:</strong> Android 8.0 o posterior, con Bluetooth de baja energía (Bluetooth LE).</li>
+        </ul>
+      </section>
+
+      <section id="calidad" aria-labelledby="h-calidad">
+        <h2 id="h-calidad"><span class="n">4</span>Calidad de la posición</h2>
+        <div class="callout strong">
+          <p class="t">Ni TresVizo ni el Software garantizan la exactitud de una posición.</p>
+          <p>La exactitud de una medición GNSS depende de factores que TresVizo no controla. Tú eres responsable de comprobar tus resultados antes de usarlos.</p>
+        </div>
+        <ul>
+          <li><strong>«FIJO» no garantiza exactitud.</strong> Indica que el Receptor resolvió las ambigüedades con las correcciones que recibe. Una solución fija puede ser incorrecta, y una correcta solo es tan buena como la base de la que depende.</li>
+          <li><strong>Las cifras de precisión son estimaciones.</strong> La «Precisión H / V» y la incertidumbre de la compensación de inclinación son estimaciones estadísticas del Receptor y de la App, no medidas de tu error real.</li>
+          <li><strong>Compruébalo en campo.</strong> Mide puntos de control con coordenadas conocidas al empezar y durante cada trabajo, y revisa los resultados antes de usarlos en deslindes, obra, documentos legales o cualquier decisión que dependa de ellos.</li>
+        </ul>
+        <p class="small">Es el mismo texto de la sección 6 del <a href="../licencia/#exactitud">Contrato de licencia</a>, que explica además de qué depende la exactitud.</p>
+      </section>
+
       <section id="preguntas" aria-labelledby="h-preguntas">
-        <h2 id="h-preguntas"><span class="n">3</span>Preguntas frecuentes</h2>
+        <h2 id="h-preguntas"><span class="n">5</span>Preguntas frecuentes</h2>
         <p>Los avisos del receptor salen en la pestaña Receptor, en «Avisos del receptor». Algunos traen un botón que lo resuelve.</p>
 
         <h3>Conexión</h3>
@@ -171,7 +195,7 @@
         <div class="faq">
           <details>
             <summary>¿La app funciona sin internet?</summary>
-            <div class="answer"><p>Sí, para medir con el receptor. Los geoides de México vienen incluidos. Necesitan internet el mapa de OpenStreetMap y NTRIP por el teléfono; NTRIP del receptor necesita que el receptor esté conectado a una red Wi-Fi con internet.</p></div>
+            <div class="answer"><p>Sí, para medir con el receptor. La app trae de fábrica WGS 84, Mexico ITRF2008 con sus zonas UTM 11N a 16N y los geoides GGM10 y GGM25 del INEGI. Necesitan internet el mapa, NTRIP por el teléfono y bajar los sistemas y geoides de otros países en <span class="route">Cuenta › Sistemas y geoides</span>; lo que bajas se queda en el teléfono y funciona sin conexión. NTRIP del receptor necesita que el receptor esté conectado a una red Wi-Fi con internet.</p></div>
           </details>
           <details>
             <summary>Cambié de teléfono: ¿cómo paso mis proyectos?</summary>
@@ -181,8 +205,8 @@
       </section>
 
       <section id="firmware" aria-labelledby="h-firmware">
-        <h2 id="h-firmware"><span class="n">4</span>Actualizar el firmware</h2>
-        <p>La app trae el firmware incluido. Cuando trae una versión más nueva que la de tu receptor, te avisa al conectar: «Hay una versión nueva del firmware del receptor».</p>
+        <h2 id="h-firmware"><span class="n">6</span>Actualizar el firmware</h2>
+        <p>Cuando la app traiga una versión del firmware más nueva que la de tu receptor, te avisará al conectar: «Hay una versión nueva del firmware del receptor». Todavía no se ha publicado ninguna versión dentro de la app.</p>
         <ol class="steps" style="margin-top:1rem">
           <li>Conecta el teléfono al receptor por Wi-Fi. Por Bluetooth no se actualiza.</li>
           <li>Toca «Ver» en el aviso, o entra a <span class="route">Receptor › Sistema y firmware</span>.</li>
@@ -197,7 +221,7 @@
       </section>
 
       <section id="reparacion" aria-labelledby="h-reparacion">
-        <h2 id="h-reparacion"><span class="n">5</span>Garantía y reparaciones</h2>
+        <h2 id="h-reparacion"><span class="n">7</span>Garantía y reparaciones</h2>
         <p>Si el problema no se resuelve a distancia, te diremos cómo enviar el receptor. Qué cubre la garantía y cómo se hace una devolución o reparación está en <a href="../garantia/">Garantía</a>.</p>
         <p>Para cuidar el receptor y su batería, lee <a href="../seguridad/">Batería y seguridad</a>.</p>
       </section>
