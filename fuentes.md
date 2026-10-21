@@ -68,3 +68,19 @@ Decisiones del propietario:
 | Paquetes de sistemas y su número de sistemas (Mundo 116, México complementos 14, Argentina 30, Brasil 41, Chile 20, Colombia 17, Costa Rica 6, El Salvador 2, Perú 10); «Parámetros del registro EPSG de IOGP, v12.029»; términos de uso de IOGP | La misma carga firmada (`crsPackage.systems`, `attribution`, `license`, `licenseURL`); archivos `crs-*-r1.json` en `DATOS:` `datos-2026-10-21` |
 | La app muestra el crédito de cada modelo | `iOS-APP:UI/Data/DataLibraryView.swift:265`; `AND:feature/settings/src/main/kotlin/com/tresvizo/field/feature/settings/AccountScreen.kt:940-943` |
 | CC BY 4.0 pide citar, enlazar la licencia e indicar los cambios | Licencia CC BY 4.0, sección 3(a), <https://creativecommons.org/licenses/by/4.0/legalcode> |
+
+## Batería y seguridad (`docs/seguridad/`)
+
+| Afirmación | Fuente |
+| --- | --- |
+| Los receptores están en validación; no hay ninguna cifra medida (protección, caídas, temperatura) | `MV:docs/validacion/README.md:1-6` (el plan cubre MeridianV y MeridianVI), `:54`; `MV:docs/validacion/registros/ensayos.csv` sin ningún ensayo |
+| El MeridianV no tiene protección contra el agua ni el polvo: desagüe y uniones sin junta; no exponerlo a la lluvia ni dejarlo sobre suelo mojado | `MV:docs/validacion/ficha-tecnica-meridianv.md:105`, `:124-125`; `MV:docs/validacion/README.md:54` |
+| El MeridianVI no tiene ningún grado de protección verificado | `MV:docs/validacion/README.md:54` (AMB-3 y AMB-4 pendientes); su «IP67» es objetivo de diseño sin ensayo (`MV:docs/professional-audit-2026-10-21/07-product-docs-release.md`, DOC2-15) |
+| Sin ensayo de caída; tras un golpe, a servicio, porque la calibración de la IMU es de fábrica | `MV:docs/validacion/ficha-tecnica-meridianv.md:106`, `:126-127` |
+| Antena del MeridianV sin calibración de centro de fase: «NONE» en posproceso | `MV:docs/validacion/ficha-tecnica-meridianv.md:128-129` |
+| Lo que no está medido no se garantiza; las cifras van en la ficha con su ensayo | `MV:docs/validacion/ficha-tecnica-meridianv.md:5-7`, `:130` |
+| Batería del MeridianV: Li-ion, 1S2P con dos 18650, con circuito de protección (BMS) | `MV:firmware/esp32/include/board_profile_v03.h:97`, `:127`; `MV:docs/validacion/ficha-tecnica-meridianv.md:87`. La capacidad (5600 mAh) es «según el anuncio; sin medir» (`board_profile_v03.h:98`) y no se publica. Ojo: `MV:hardware/bom.md:21` y `MV:hardware/wiring.md:88` todavía describen la batería anterior (LiPo 3000 mAh) |
+| Energía en Wh sin medir | `MV:docs/validacion/ficha-tecnica-meridianv.md:88` (estado «pendiente», ENE-5) |
+| Temperatura de carga y de trabajo sin medir | `MV:docs/validacion/ficha-tecnica-meridianv.md:95` («de diseño, no medido»), `:102` («pendiente») |
+| UN 38.3 y Wh todavía no disponibles | `MV:docs/validacion/README.md:56-58` |
+| Sin homologación de los radios ni certificaciones NOM | `MV:docs/validacion/README.md:56-58`; `MV:docs/validacion/ficha-tecnica-meridianv.md:118` (LoRa «sin homologar») |
