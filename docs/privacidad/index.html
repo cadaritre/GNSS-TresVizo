@@ -32,7 +32,7 @@
         <strong>Borrador. Pendiente de revisión legal.</strong>
         <p>Esta política todavía no está vigente: falta la revisión de un abogado. Los datos marcados <mark class="todo">[COMPLETAR: …]</mark> y <mark class="todo">[VERIFICAR: …]</mark> se resuelven antes de publicarla.</p>
       </div>
-      <p class="doc-meta"><span>Versión 0.2</span><span>Última revisión: 21 de octubre de 2026</span><span>Vigente desde: <mark class="todo">[COMPLETAR: fecha de publicación, tras la revisión del abogado]</mark></span></p>
+      <p class="doc-meta"><span>Versión 0.3</span><span>Última revisión: 21 de octubre de 2026</span><span>Vigente desde: <mark class="todo">[COMPLETAR: fecha de publicación, tras la revisión del abogado]</mark></span></p>
     </div>
   </div>
 
@@ -64,11 +64,11 @@
         <ul>
           <li><strong>Sin cuentas.</strong> La app no pide registrarte ni iniciar sesión.</li>
           <li><strong>Tu trabajo se queda contigo.</strong> Proyectos, puntos y ajustes se guardan en tu teléfono y en tu receptor. TresVizo no los recibe.</li>
-          <li><strong>Sin analítica ni publicidad.</strong> Ni la app ni el receptor rastrean lo que haces, muestran anuncios o envían informes de fallos por su cuenta.</li>
-          <li><strong>Solo las conexiones que hacen falta.</strong> Tu servicio de correcciones NTRIP, los mapas de OpenStreetMap o del servidor de mapas que tú añadas, las imágenes de satélite de Apple en iPhone, el catálogo de geoides y sistemas de coordenadas en GitHub y las órbitas públicas de CelesTrak en el receptor.</li>
+          <li><strong>Sin analítica propia ni publicidad.</strong> Ni la app ni el receptor rastrean lo que haces, muestran anuncios o envían informes de fallos por su cuenta. El mapa de Mapbox manda a Mapbox datos de uso del mapa, que puedes apagar (sección 6).</li>
+          <li><strong>Solo las conexiones que hacen falta.</strong> Tu servicio de correcciones NTRIP, los mapas de Mapbox (calles y satélite) o del servidor de mapas que tú añadas, el catálogo de geoides y sistemas de coordenadas en GitHub y las órbitas públicas de CelesTrak en el receptor.</li>
           <li><strong>TresVizo recibe datos tuyos solo si tú los envías</strong>, por ejemplo al escribir a soporte técnico o al mandar el informe de soporte que genera la app.</li>
         </ul>
-        <p>Esta política se revisó el 21 de octubre de 2026 contra el código de la app para iPhone (versión del código <code>d9a9dcc</code>), de la app para Android (<code>f8a3c526</code>) y del firmware del MeridianV (<code>7808cd1</code>) y del MeridianVI (<code>bf02d09</code>).</p>
+        <p>Esta política se revisó el 21 de octubre de 2026 contra el código de la app para iPhone (versión del código <code>d9a9dcc</code>; los mapas, en <code>53ba7d7</code>), de la app para Android (<code>f8a3c526</code>; los mapas, en <code>ffc04dd1</code>) y del firmware del MeridianV (<code>7808cd1</code>) y del MeridianVI (<code>bf02d09</code>).</p>
       </section>
 
       <section id="responsable" aria-labelledby="h-responsable">
@@ -137,7 +137,7 @@
         <h3>Respaldos</h3>
         <ul>
           <li><strong>Respaldo de la app.</strong> La app hace una copia automática de tus proyectos. En iPhone va a la carpeta de la app («Archivos › En mi iPhone › TresVizo Field › Respaldos») o a la carpeta que elijas; en Android, a la carpeta que elijas. En iPhone llevan también tus ajustes, los receptores conocidos, los perfiles de NTRIP y los códigos de campo. Los respaldos no llevan las contraseñas de los servicios NTRIP. Si eliges una carpeta de iCloud Drive o de otro servicio en la nube, ese servicio guarda el respaldo bajo tu cuenta.</li>
-          <li><strong>Copia de seguridad de iPhone.</strong> Si tienes activada la copia de seguridad de iOS (en iCloud o en tu computadora), incluye los datos de la app, salvo las grabaciones descargadas, los mapas guardados y los geoides y sistemas descargados. Esa copia la hace Apple bajo tu cuenta, no TresVizo.</li>
+          <li><strong>Copia de seguridad de iPhone.</strong> Si tienes activada la copia de seguridad de iOS (en iCloud o en tu computadora), incluye los datos de la app, salvo las grabaciones descargadas, las zonas de mapa guardadas y los geoides y sistemas descargados. Esa copia la hace Apple bajo tu cuenta, no TresVizo. <mark class="todo">[VERIFICAR en un iPhone: que las zonas de Mapbox sin conexión, que guarda el almacén de teselas del SDK, quedan fuera de la copia de seguridad, como las zonas de antes de Mapbox]</mark></li>
           <li><strong>Copia de Android.</strong> La app desactiva la copia automática en la cuenta de Google y la transferencia entre teléfonos: para llevar tus proyectos a otro teléfono, usa el respaldo de la app.</li>
         </ul>
 
@@ -180,7 +180,7 @@
             </tbody>
           </table>
         </div>
-        <p>La app para Android no pide acceso a la cámara, las fotos, el micrófono ni los contactos.</p>
+        <p>La app para Android no pide acceso a la cámara, las fotos, el micrófono ni los contactos, y no usa los servicios de Google Play. En las dos apps, el mapa de Mapbox no añade ningún permiso.</p>
       </section>
 
       <section id="receptor" aria-labelledby="h-receptor">
@@ -226,19 +226,14 @@
                 <td data-label="Qué recibe">Las correcciones de la base, que incluyen la coordenada de la base, y el usuario (si lo configuras) y la contraseña de publicación.</td>
               </tr>
               <tr>
-                <td>OpenStreetMap</td>
-                <td data-label="Quién se conecta y cuándo">La app, con la capa «Mapa», mientras ves el mapa. Servidores de la Fundación OpenStreetMap.</td>
-                <td data-label="Qué recibe">La dirección IP, las teselas que pide la app (es decir, la zona que estás viendo) y la identificación de la app. <a href="https://osmfoundation.org/wiki/Privacy_Policy">Política de privacidad de la OSMF</a>.</td>
+                <td>Mapbox</td>
+                <td data-label="Quién se conecta y cuándo">La app, mientras ves el mapa con «Calles», «Satélite» o «Satélite con calles», y al descargar zonas para usarlas sin conexión. Servidores de Mapbox, Inc.</td>
+                <td data-label="Qué recibe">La dirección IP, las teselas que pide la app (es decir, la zona que ves o que descargas) y un identificador de instalación con el que Mapbox cuenta los usuarios activos de cada mes. Además, mientras no la apagues, la <strong>telemetría del mapa</strong>: datos de uso, rendimiento y diagnóstico del mapa. La telemetría viene encendida y se apaga en <strong>Cuenta › Privacidad › Datos de uso para Mapbox</strong> o en la «i» del mapa. El SDK de Mapbox declara que estos datos no se vinculan a tu identidad ni sirven para rastrearte, y su licencia dice que envía datos limitados de ubicación y de uso sin identificar. La app no le da a Mapbox la posición del receptor ni la del teléfono, y no activa la ubicación del SDK. <mark class="todo">[VERIFICAR con Mapbox: si, con la telemetría encendida y el permiso de ubicación concedido para el GPS del teléfono, el SDK lee la ubicación del teléfono por su cuenta, y qué deja de enviar al apagarla]</mark> <a href="https://www.mapbox.com/legal/privacy">Política de privacidad de Mapbox</a>.</td>
               </tr>
               <tr>
                 <td>Servidor de mapas que tú añadas</td>
                 <td data-label="Quién se conecta y cuándo">La app, si añades una fuente de mapa propia o contratada, mientras ves el mapa con ella y al guardar zonas para usarlas sin conexión.</td>
                 <td data-label="Qué recibe">La dirección IP, las teselas que pide la app (es decir, la zona que ves o que guardas) y la identificación de la app, conforme a la política de ese proveedor.</td>
-              </tr>
-              <tr>
-                <td>Apple</td>
-                <td data-label="Quién se conecta y cuándo">Solo la app para iPhone, con el mapa de Apple (MapKit), sobre todo con la capa «Satélite».</td>
-                <td data-label="Qué recibe">Lo que MapKit pide para dibujar el mapa de la zona que ves, conforme a la <a href="https://www.apple.com/mx/legal/privacy/">política de privacidad de Apple</a>.</td>
               </tr>
               <tr>
                 <td>CelesTrak</td>
@@ -265,11 +260,11 @@
         <h2 id="h-no"><span class="n">7</span>Lo que no se recoge</h2>
         <ul>
           <li>No hay cuentas de usuario, registro ni inicio de sesión.</li>
-          <li>No hay analítica, estadísticas de uso ni seguimiento entre apps o sitios web.</li>
+          <li>TresVizo no recoge analítica ni estadísticas de uso, y no hay seguimiento entre apps o sitios web. La telemetría del mapa va a Mapbox, no a TresVizo, y se apaga en Cuenta › Privacidad (sección 6).</li>
           <li>No hay publicidad ni identificadores publicitarios.</li>
           <li>No hay informes automáticos de fallos: el informe de soporte solo sale si tú lo compartes.</li>
           <li>No se venden ni se ceden datos.</li>
-          <li>Las apps no incluyen bibliotecas de terceros de analítica, publicidad o informes de fallos. La de iPhone no incluye ninguna biblioteca de terceros.</li>
+          <li>Las apps no incluyen bibliotecas de terceros de analítica, publicidad o informes de fallos. La única biblioteca de terceros que se conecta por su cuenta es el SDK de mapas de Mapbox (sección 6).</li>
         </ul>
       </section>
 
