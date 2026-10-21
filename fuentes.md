@@ -111,3 +111,41 @@ Decisiones del propietario:
 | Fuera «Teselas servidas conforme a la política de uso de la Fundación OpenStreetMap» | La descarga de mapas sin conexión de iOS no la cumple (`iOS:docs/publicacion/README.md` §1, auditoría DOC2-3); los mapas pasan a Mapbox (en curso) |
 | Catálogo de geoides y sistemas en GitHub, cada archivo con su licencia y crédito | Sección «Geoides y sistemas», arriba |
 | La garantía no cubre el firmware no oficial | `docs/garantia/index.html`, sección 4 («Firmware no oficial») |
+
+## Política de privacidad (`docs/privacidad/`, borrador)
+
+Revisada entera el 21-10-2026 contra `iOS` `d9a9dcc`, `AND` `f8a3c526`, `MV` `7808cd1` y `VI` `bf02d09` (en lo
+que afecta a privacidad, el firmware del VI se comporta igual que el del V). Rutas del firmware desde
+`firmware/esp32/`.
+
+| Afirmación | Fuente |
+| --- | --- |
+| Responsable, domicilio, contacto | `PROP-21`, `PROP-21D` |
+| Receptores conocidos: nombre, serie, modelo, identificador Bluetooth, dirección, papel, fecha | `iOS-CORE:Session/KnownReceivers.swift:15-30` |
+| Geoides y sistemas descargados fuera de la copia de iCloud | `iOS-APP:Session/DataLibrary.swift:13-14`, `:309` |
+| Grabaciones y mapas fuera de la copia de iCloud | `iOS-APP:Session/RecordingsModel.swift:538`; `iOS-APP:Session/MapsModel.swift:96` |
+| Respaldo de iPhone: ajustes, receptores conocidos, casters sin contraseña y códigos de campo; la app sugiere iCloud Drive | `iOS-APP:Backup/DrawingsBackup.swift:126`; `iOS-APP:Backup/AutomaticBackup.swift:160-164`; `iOS-APP:Backup/BackupSections.swift:199` |
+| Android: copia de Google y transferencia desactivadas | `AND:app/src/main/AndroidManifest.xml:89-90`; `AND:app/src/main/res/xml/data_extraction_rules.xml` |
+| Permisos de Android: estado y cambio de red Wi-Fi y multidifusión (unirse a la red del receptor, mDNS) | `AND:app/src/main/AndroidManifest.xml:40-48` |
+| Permisos de iOS y sus textos | `iOS:TresVizo Field/TresVizo Field.xcodeproj/project.pbxproj:276-281` |
+| Receptor: caster propio (puerto, punto de montaje, usuario, contraseña) y publicación con usuario | `MV:src/correction_output.cpp:33`, `:43-49`, `:276-284`, `:382-395`, `:414-427`; `MV:include/ntrip_caster.h` |
+| Contraseñas de redes y perfiles NTRIP: solo «hay una» | `MV:src/instrument.cpp:150-157`; `MV:src/ntrip_input.cpp:248` |
+| La contraseña de la red del receptor sale por HTTP y USB, no por Bluetooth | `MV:src/instrument.cpp:164-168`; `MV:src/main.cpp:241-253`; `MV:src/ble_transport.cpp:397-401` |
+| Metadatos de las grabaciones | `MV:src/sd_recorder.cpp:163-189`; `MV:include/session_metadata.h:9-34` |
+| Registro de eventos: archivos, tamaño, contenido, sin posiciones ni contraseñas, se descarga por HTTP | `MV:include/event_log.h:6-16`; `MV:include/event_record.h:13-28`; `MV:docs/diagnostics.md:180-198`; `MV:src/main.cpp:362-366` |
+| Bluetooth sin PIN: cualquiera al alcance puede cambiar ajustes | `MV:src/ble_transport.cpp:134-141`, `:376-381`; `MV:src/main.cpp:49` (`authenticated` siempre verdadero) |
+| Panel web en todas las interfaces y anunciado por mDNS | `MV:src/main.cpp:338-372`; `MV:src/instrument.cpp:1096`, `:1101` |
+| Caster propio con contraseña opcional; la tabla de fuentes no lleva la coordenada | `MV:src/correction_output.cpp:121-123`, `:148` |
+| Radio en modo base: correcciones por el aire | `MV:include/radio_module.h:7-15` |
+| NTRIP del receptor envía su posición: automático por omisión, cada 10 s, de 1 a 600 s | `MV:src/ntrip_input.cpp:31-32`, `:545-553`, `:631-643`; `MV:include/ntrip_protocol.h:48-49` |
+| NTRIP del receptor con TLS y certificado verificado; la publicación sin cifrar | `MV:src/ntrip_input.cpp:296-315`; `MV:src/tls_link.cpp`; `MV:src/correction_output.cpp:198` |
+| Servidor de mapas propio o contratado; zonas sin conexión | `iOS-CORE:Maps/TileSource.swift:49-58`, `:89-96`; `iOS-APP:UI/Survey/OfflineMapsView.swift:220-266`; `iOS-APP:Data/TileDownloader.swift:102-105`; `AND:feature/files/src/main/kotlin/com/tresvizo/field/feature/files/maps/OfflineMapsScreen.kt:413` |
+| CelesTrak: al conectarse y cada día, por HTTP, `User-Agent: MeridianV` | `MV:src/gnss_visible.cpp:15-19`, `:54-56`, `:118-131` |
+| GitHub: consulta automática del catálogo cada 12 h como mucho, «Buscar actualizaciones», descargas solo a petición; identificación en Android | Sección «Geoides y sistemas», arriba; `iOS-APP:UI/Data/DataLibraryView.swift:110`; `AND:feature/settings/src/main/res/values/strings.xml:89`; `AND:app/src/main/kotlin/com/tresvizo/field/data/OkHttpDataTransport.kt:41`, `:83` |
+| Firmware: solo el catálogo incluido en la app, sin descargas | `iOS-APP:Session/FirmwareCatalogModel.swift:26-34` |
+| Tiendas: App Store y Google Play | `iOS:docs/publicacion/README.md:1`; `AND:../docs/publicacion/README.md` |
+| Informe de soporte: aviso de coordenadas en las dos apps; aviso de redes solo en iPhone; diario de la app en iPhone | `iOS-CORE:Transfers/SupportReport.swift:78-79`, `:107`, `:115`, `:128-129`, `:135-142`; `AND:core/domain/src/main/kotlin/com/tresvizo/field/core/domain/transfers/SupportReport.kt:18-24`, `:58-81` |
+| ARCO: 20 y 15 días hábiles, ampliables una vez | `LFPDPPP` arts. 2 fr. VIII («Días: días hábiles») y 31 |
+| Autoridad: Secretaría Anticorrupción y Buen Gobierno; solicitud de protección de datos | `LFPDPPP` arts. 2 fr. XV y 41 |
+| Contenido del aviso de privacidad, incluido el medio para avisar de cambios | `LFPDPPP` art. 15 |
+| Las páginas del sitio no cargan nada de terceros; la guía publicada todavía carga Google Fonts | `docs/assets/sitio.css` (fuentes del sistema); `tools/comprobar_sitio.py` (lo comprueba); `docs/guia/index.html:10` (`@import` de Google Fonts, hasta reimportarla con `tools/importar_guia.py`) |

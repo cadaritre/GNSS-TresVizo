@@ -30,9 +30,9 @@
       <p class="lede">Qué datos tratan la app TresVizo Field y los receptores MeridianV y MeridianVI, dónde se guardan y con quién se conectan.</p>
       <div class="draft" role="note">
         <strong>Borrador. Pendiente de revisión legal.</strong>
-        <p>Este documento todavía no está vigente. Los datos marcados <mark class="todo">[COMPLETAR: …]</mark> y <mark class="todo">[VERIFICAR]</mark> se resuelven antes de publicarlo.</p>
+        <p>Esta política todavía no está vigente: faltan el RFC del responsable y la revisión de un abogado. Los datos marcados <mark class="todo">[COMPLETAR: …]</mark> y <mark class="todo">[VERIFICAR: …]</mark> se resuelven antes de publicarla.</p>
       </div>
-      <p class="doc-meta"><span>Versión 0.1</span><span>Última revisión: 20 de octubre de 2026</span><span>Vigente desde: <mark class="todo">[COMPLETAR: fecha de publicación]</mark></span></p>
+      <p class="doc-meta"><span>Versión 0.2</span><span>Última revisión: 21 de octubre de 2026</span><span>Vigente desde: <mark class="todo">[COMPLETAR: fecha de publicación, cuando estén el RFC y la revisión del abogado]</mark></span></p>
     </div>
   </div>
 
@@ -65,20 +65,20 @@
           <li><strong>Sin cuentas.</strong> La app no pide registrarte ni iniciar sesión.</li>
           <li><strong>Tu trabajo se queda contigo.</strong> Proyectos, puntos y ajustes se guardan en tu teléfono y en tu receptor. TresVizo no los recibe.</li>
           <li><strong>Sin analítica ni publicidad.</strong> Ni la app ni el receptor rastrean lo que haces, muestran anuncios o envían informes de fallos por su cuenta.</li>
-          <li><strong>Solo las conexiones que hacen falta.</strong> Tu servicio de correcciones NTRIP, los mapas de OpenStreetMap, las imágenes de satélite de Apple en iPhone y las órbitas públicas de CelesTrak en el receptor.</li>
+          <li><strong>Solo las conexiones que hacen falta.</strong> Tu servicio de correcciones NTRIP, los mapas de OpenStreetMap o del servidor de mapas que tú añadas, las imágenes de satélite de Apple en iPhone, el catálogo de geoides y sistemas de coordenadas en GitHub y las órbitas públicas de CelesTrak en el receptor.</li>
           <li><strong>TresVizo recibe datos tuyos solo si tú los envías</strong>, por ejemplo al escribir a soporte técnico o al mandar el informe de soporte que genera la app.</li>
         </ul>
-        <p>Esta política se revisó contra el código de la app para iPhone, la app para Android y el firmware de los receptores el 20 de octubre de 2026.</p>
+        <p>Esta política se revisó el 21 de octubre de 2026 contra el código de la app para iPhone (versión del código <code>d9a9dcc</code>), de la app para Android (<code>f8a3c526</code>) y del firmware del MeridianV (<code>7808cd1</code>) y del MeridianVI (<code>bf02d09</code>).</p>
       </section>
 
       <section id="responsable" aria-labelledby="h-responsable">
         <h2 id="h-responsable"><span class="n">2</span>Responsable</h2>
         <p>El responsable del tratamiento de tus datos personales, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), es:</p>
         <dl>
-          <div><dt>Razón social</dt><dd><mark class="todo">[COMPLETAR: razón social]</mark>, que comercializa sus productos con la marca TresVizo («TresVizo»).</dd></div>
-          <div><dt>Domicilio</dt><dd><mark class="todo">[COMPLETAR: domicilio completo]</mark></dd></div>
-          <div><dt>RFC</dt><dd><mark class="todo">[COMPLETAR: RFC]</mark></dd></div>
-          <div><dt>Contacto de privacidad</dt><dd><mark class="todo">[COMPLETAR: correo de contacto para privacidad]</mark></dd></div>
+          <div><dt>Responsable</dt><dd>Carlos Daniel Rivera Trevizo, persona física, que comercializa sus productos con la marca TresVizo («TresVizo»).</dd></div>
+          <div><dt>Domicilio</dt><dd>J. Domínguez de Mendoza 1704, colonia San Felipe, C.P. 31203, Chihuahua, Chihuahua, México</dd></div>
+          <div><dt>RFC</dt><dd><mark class="todo">[COMPLETAR: RFC del responsable]</mark></dd></div>
+          <div><dt>Contacto de privacidad</dt><dd><a href="mailto:ingenieria@3vizo.com">ingenieria@3vizo.com</a></dd></div>
         </dl>
         <p>Esta política cubre:</p>
         <ul>
@@ -107,7 +107,7 @@
               </tr>
               <tr>
                 <td>Receptores conocidos</td>
-                <td data-label="Para qué">Volver a conectar rápido: nombre del receptor, su dirección en la red Wi-Fi y la fecha de la última conexión.</td>
+                <td data-label="Para qué">Volver a conectar rápido: nombre, número de serie y modelo del receptor, su identificador de Bluetooth, su dirección en la red Wi-Fi, si estaba como base o rover y la fecha de la última conexión.</td>
                 <td data-label="Dónde se guarda">En el teléfono.</td>
               </tr>
               <tr>
@@ -121,6 +121,11 @@
                 <td data-label="Dónde se guarda">En el teléfono. En iPhone quedan fuera de la copia de seguridad del sistema.</td>
               </tr>
               <tr>
+                <td>Geoides y sistemas descargados</td>
+                <td data-label="Para qué">Los modelos y paquetes que bajas del catálogo de TresVizo.</td>
+                <td data-label="Dónde se guarda">En el teléfono. En iPhone quedan fuera de la copia de seguridad del sistema: se pueden volver a bajar.</td>
+              </tr>
+              <tr>
                 <td>Ubicación del teléfono</td>
                 <td data-label="Para qué">Solo si eliges usar el GPS del teléfono como receptor. La app no la pide al abrirse ni para conectar con el receptor, salvo en Android 11 o anterior, donde el sistema la exige para buscar por Bluetooth.</td>
                 <td data-label="Dónde se guarda">Se usa en el momento. Si capturas puntos con ella, quedan en el proyecto como cualquier otro punto.</td>
@@ -131,8 +136,8 @@
 
         <h3>Respaldos</h3>
         <ul>
-          <li><strong>Respaldo de la app.</strong> La app hace una copia automática de tus proyectos. En iPhone va a la carpeta de la app («Archivos › En mi iPhone › TresVizo Field › Respaldos») o a la carpeta que elijas; en Android, a la carpeta que elijas. Los respaldos no llevan las contraseñas de los servicios NTRIP.</li>
-          <li><strong>Copia de seguridad de iPhone.</strong> Si tienes activada la copia de seguridad de iOS (en iCloud o en tu computadora), incluye los datos de la app, salvo las grabaciones descargadas y los mapas guardados. Esa copia la hace Apple bajo tu cuenta, no TresVizo.</li>
+          <li><strong>Respaldo de la app.</strong> La app hace una copia automática de tus proyectos. En iPhone va a la carpeta de la app («Archivos › En mi iPhone › TresVizo Field › Respaldos») o a la carpeta que elijas; en Android, a la carpeta que elijas. En iPhone llevan también tus ajustes, los receptores conocidos, los perfiles de NTRIP y los códigos de campo. Los respaldos no llevan las contraseñas de los servicios NTRIP. Si eliges una carpeta de iCloud Drive o de otro servicio en la nube, ese servicio guarda el respaldo bajo tu cuenta.</li>
+          <li><strong>Copia de seguridad de iPhone.</strong> Si tienes activada la copia de seguridad de iOS (en iCloud o en tu computadora), incluye los datos de la app, salvo las grabaciones descargadas, los mapas guardados y los geoides y sistemas descargados. Esa copia la hace Apple bajo tu cuenta, no TresVizo.</li>
           <li><strong>Copia de Android.</strong> La app desactiva la copia automática en la cuenta de Google y la transferencia entre teléfonos: para llevar tus proyectos a otro teléfono, usa el respaldo de la app.</li>
         </ul>
 
@@ -166,7 +171,8 @@
               <tr><td>Dispositivos Wi-Fi cercanos</td><td data-label="Para qué">Solo al tocar «Buscar en la red Wi-Fi». También declarado sin uso para ubicación.</td></tr>
               <tr><td>Ubicación precisa y aproximada</td><td data-label="Para qué">El GPS del teléfono como receptor, solo si lo activas. En Android 11 o anterior, el sistema la exige además para buscar por Bluetooth. La app no pide ubicación en segundo plano.</td></tr>
               <tr><td>Notificaciones</td><td data-label="Para qué">La notificación fija que Android exige mientras la conexión con el receptor sigue activa en segundo plano.</td></tr>
-              <tr><td>Internet y estado de la red</td><td data-label="Para qué">Mapas, NTRIP por el teléfono, y unirse a la red Wi-Fi del receptor cuando tú lo pides.</td></tr>
+              <tr><td>Internet y estado de la red</td><td data-label="Para qué">Mapas, NTRIP por el teléfono, el catálogo de geoides y sistemas, y unirse a la red Wi-Fi del receptor cuando tú lo pides.</td></tr>
+              <tr><td>Estado y cambio de la red Wi-Fi, y multidifusión</td><td data-label="Para qué">Unirse a la red Wi-Fi del receptor cuando tú lo pides y encontrarlo en la red mientras buscas receptores.</td></tr>
               <tr><td>Servicio en primer plano y mantener activo el procesador</td><td data-label="Para qué">Que la conexión y las correcciones no se corten con la pantalla apagada.</td></tr>
               <tr><td>Vibración</td><td data-label="Para qué">Avisos al capturar, al ganar o perder FIJO y al cortarse las correcciones.</td></tr>
               <tr><td>USB</td><td data-label="Para qué">Receptores conectados por cable. Android pide permiso por cada aparato que conectas.</td></tr>
@@ -185,17 +191,20 @@
           <li>Su nombre y sus ajustes: modo base o rover, altura de bastón, configuración GNSS, calibración de la IMU.</li>
           <li>Hasta 5 redes Wi-Fi a las que lo conectas, con su contraseña.</li>
           <li>Hasta 5 perfiles de NTRIP del receptor: servidor, puerto, punto de montaje, usuario y contraseña.</li>
-          <li>Si lo usas como base: su coordenada y los datos para publicar sus correcciones.</li>
+          <li>Si lo usas como base: su coordenada; los datos para publicar sus correcciones en un servidor (dirección, punto de montaje, usuario y contraseña); y los de su caster propio (puerto, punto de montaje, usuario y contraseña).</li>
           <li>Un diario técnico de arranques y fallos, sin posiciones ni contraseñas.</li>
         </ul>
-        <p>Las contraseñas guardadas no se vuelven a mostrar: la app y el panel web solo indican si hay una.</p>
+        <p>Las contraseñas de las redes Wi-Fi y de los perfiles de NTRIP guardados no se vuelven a mostrar: la app y el panel web solo indican si hay una. La contraseña de la red Wi-Fi del propio receptor sí se puede leer desde el panel web y por USB, para unir un teléfono a esa red; por Bluetooth no sale.</p>
         <h3>Lo que graba en la microSD</h3>
-        <p>Si inicias una grabación, el receptor escribe los datos crudos de los satélites junto con el modelo, el número de serie, el nombre del receptor y la antena. De esos datos se puede calcular dónde y cuándo se midió. Los archivos se quedan en la tarjeta hasta que los borras.</p>
+        <p>Si inicias una grabación, el receptor escribe los datos crudos de los satélites junto con el modelo, el número de serie, el nombre del receptor, la antena, la versión del firmware, la altura del bastón, el nombre de la sesión, la fecha y hora de inicio y, si se conocen, el marco y la época de las coordenadas de la base o del servicio de correcciones. De esos datos se puede calcular dónde y cuándo se midió. Los archivos se quedan en la tarjeta hasta que los borras.</p>
+        <p>Además, siempre que haya una tarjeta puesta, el receptor lleva en ella un <strong>registro de eventos</strong> (<code>/events/events.log</code> y hasta tres archivos anteriores, 1&nbsp;MiB en total; al llenarse se borra lo más viejo): arranques, apagados y reinicios, los avisos que salen y se van, los cambios entre base y rover y de fuente de correcciones, el inicio y el fin de las grabaciones, el estado de la tarjeta, las actualizaciones y los restablecimientos, cada uno con su hora. No lleva posiciones ni contraseñas. Sirve para diagnosticar el equipo, y solo sale del receptor si tú lo descargas o lo envías.</p>
         <h3>Cómo se accede a él</h3>
         <ul>
-          <li><strong>Bluetooth:</strong> sin PIN y con un solo teléfono conectado a la vez.</li>
+          <li><strong>Bluetooth:</strong> sin PIN y con un solo teléfono conectado a la vez. Quien esté al alcance y se conecte puede cambiar sus ajustes, pero por Bluetooth no salen contraseñas.</li>
           <li><strong>Su red Wi-Fi:</strong> con contraseña. La de fábrica es igual en todas las unidades; la app te pide cambiarla.</li>
-          <li><strong>Panel web:</strong> se abre desde la red del receptor, sin usuario ni contraseña propios. Quien esté conectado a esa red puede usarlo.</li>
+          <li><strong>Panel web:</strong> sin usuario ni contraseña propios. Se abre desde la red Wi-Fi del receptor y, si lo unes a otra red Wi-Fi (la de tu oficina o el punto de acceso de tu teléfono), también desde esa red. Quien esté conectado a cualquiera de esas redes puede usarlo, ver la contraseña de la red del receptor y descargar sus grabaciones y su registro de eventos.</li>
+          <li><strong>Caster propio, en modo base:</strong> los rovers de esas mismas redes se conectan a él con el usuario y la contraseña que configures. Sin contraseña, cualquiera en esas redes puede recibir sus correcciones, que incluyen la coordenada de la base.</li>
+          <li><strong>Radio, en modo base:</strong> si usas un módulo de radio, las correcciones, con la coordenada de la base, se emiten por el aire, y las puede recibir cualquier equipo compatible en la misma frecuencia.</li>
         </ul>
       </section>
 
@@ -209,17 +218,22 @@
               <tr>
                 <td>Tu servicio de correcciones NTRIP</td>
                 <td data-label="Quién se conecta y cuándo">La app (NTRIP por el teléfono) o el receptor (NTRIP del receptor), cuando te conectas al servidor que tú configuras.</td>
-                <td data-label="Qué recibe">Tu usuario y contraseña, el punto de montaje, la dirección IP de tu conexión y la identificación del programa («NTRIP TresVizoField» o «NTRIP TresVizo»). Si activas «Enviar posición al caster» (necesario en servicios VRS), la app le envía tu posición cada 10&nbsp;s. El receptor no envía su posición al servicio.</td>
+                <td data-label="Qué recibe">Tu usuario y contraseña, el punto de montaje, la dirección IP de tu conexión y la identificación del programa («NTRIP TresVizoField» o «NTRIP TresVizo»). Si activas «Enviar posición al caster» (necesario en servicios VRS), la app le envía tu posición cada 10&nbsp;s. Con NTRIP del receptor, el receptor envía su posición cuando el punto de montaje la pide (modo automático, el de fábrica) o siempre, si así lo configuras: la primera al conectar y después cada 10&nbsp;s (ajustable de 1 a 600&nbsp;s).</td>
               </tr>
               <tr>
                 <td>Servidor al que tu base publica correcciones</td>
                 <td data-label="Quién se conecta y cuándo">El receptor en modo base, si configuras la publicación.</td>
-                <td data-label="Qué recibe">Las correcciones de la base, que incluyen la coordenada de la base, y la contraseña de publicación.</td>
+                <td data-label="Qué recibe">Las correcciones de la base, que incluyen la coordenada de la base, y el usuario (si lo configuras) y la contraseña de publicación.</td>
               </tr>
               <tr>
                 <td>OpenStreetMap</td>
                 <td data-label="Quién se conecta y cuándo">La app, con la capa «Mapa», mientras ves el mapa. Servidores de la Fundación OpenStreetMap.</td>
                 <td data-label="Qué recibe">La dirección IP, las teselas que pide la app (es decir, la zona que estás viendo) y la identificación de la app. <a href="https://osmfoundation.org/wiki/Privacy_Policy">Política de privacidad de la OSMF</a>.</td>
+              </tr>
+              <tr>
+                <td>Servidor de mapas que tú añadas</td>
+                <td data-label="Quién se conecta y cuándo">La app, si añades una fuente de mapa propia o contratada, mientras ves el mapa con ella y al guardar zonas para usarlas sin conexión.</td>
+                <td data-label="Qué recibe">La dirección IP, las teselas que pide la app (es decir, la zona que ves o que guardas) y la identificación de la app, conforme a la política de ese proveedor.</td>
               </tr>
               <tr>
                 <td>Apple</td>
@@ -228,17 +242,17 @@
               </tr>
               <tr>
                 <td>CelesTrak</td>
-                <td data-label="Quién se conecta y cuándo">El receptor, una vez al día, solo si está conectado a una red Wi-Fi con internet.</td>
-                <td data-label="Qué recibe">Una petición del archivo público de órbitas de los satélites GNSS y la dirección IP pública de tu red. No recibe tu posición: con esas órbitas el receptor calcula en el propio equipo cuántos satélites están a la vista.</td>
+                <td data-label="Quién se conecta y cuándo">El receptor, solo si está conectado a una red Wi-Fi con internet: al conectarse y después una vez al día.</td>
+                <td data-label="Qué recibe">Una petición del archivo público de órbitas de los satélites GNSS, sin cifrar y con la identificación «MeridianV», y la dirección IP pública de tu red. No recibe tu posición: con esas órbitas el receptor calcula en el propio equipo cuántos satélites están a la vista.</td>
               </tr>
               <tr>
                 <td>GitHub</td>
-                <td data-label="Quién se conecta y cuándo">Hoy, ninguna conexión: la app trae incluidos el firmware y los geoides de México. Cuando la app descargue paquetes de geoides y sistemas de coordenadas, los bajará de las versiones publicadas en GitHub. <mark class="todo">[VERIFICAR: actualizar esta fila cuando la app descargue paquetes]</mark></td>
-                <td data-label="Qué recibe">La dirección IP y el paquete que se pide, conforme a la <a href="https://docs.github.com/es/site-policy/privacy-policies/github-general-privacy-statement">declaración de privacidad de GitHub</a>.</td>
+                <td data-label="Quién se conecta y cuándo">La app, que consulta el catálogo firmado de geoides y sistemas de coordenadas de TresVizo en las <a href="https://github.com/cadaritre/GNSS-TresVizo/releases">versiones publicadas en GitHub</a>: sola al abrirse, como mucho una vez cada 12 horas, y cuando tocas «Buscar actualizaciones». Baja un geoide o un paquete de sistemas solo cuando tú lo pides, en <strong>Cuenta › Sistemas y geoides</strong>.</td>
+                <td data-label="Qué recibe">La dirección IP, el archivo que se pide y, en Android, la identificación de la app, conforme a la <a href="https://docs.github.com/es/site-policy/privacy-policies/github-general-privacy-statement">declaración de privacidad de GitHub</a>. No recibe tu posición ni tus proyectos.</td>
               </tr>
               <tr>
                 <td>Tienda de apps</td>
-                <td data-label="Quién se conecta y cuándo">Apple App Store y Google Play, al descargar y actualizar la app. <mark class="todo">[VERIFICAR: canales de distribución de las apps]</mark></td>
+                <td data-label="Quién se conecta y cuándo">Apple App Store y Google Play, al descargar y actualizar la app.</td>
                 <td data-label="Qué recibe">Lo que cada tienda trata bajo su propia política. TresVizo puede ver estadísticas agregadas de descargas que dan las tiendas.</td>
               </tr>
             </tbody>
@@ -264,12 +278,12 @@
         <p>TresVizo solo trata datos personales tuyos cuando tú se los das:</p>
         <ul>
           <li><strong>Soporte técnico.</strong> Lo que pongas en tu mensaje: nombre, correo o teléfono, el número de serie del receptor y la descripción del problema.</li>
-          <li><strong>Informe de soporte de la app.</strong> Antes de generarlo, la app te enseña qué lleva: versión de la app, modelo y versión del sistema del teléfono, número de serie, estado y configuración del receptor sin contraseñas, su diagnóstico y medidas de la conexión. Puede llevar las coordenadas del último estado leído y los nombres de las redes Wi-Fi del receptor; la app te avisa cuando es así. Tú decides si lo envías y a quién.</li>
+          <li><strong>Informe de soporte de la app.</strong> Antes de generarlo, la app te enseña qué lleva: versión de la app, modelo y versión del sistema del teléfono, número de serie, estado y configuración del receptor sin contraseñas, su diagnóstico y medidas de la conexión. Puede llevar las coordenadas del último estado leído y los nombres y las direcciones de las redes Wi-Fi del receptor. La app te avisa cuando lleva coordenadas; en iPhone, también cuando lleva redes. En iPhone lleva además el diario técnico de la app. Tú decides si lo envías y a quién.</li>
           <li><strong>Diagnóstico del panel web.</strong> El archivo que descargas del receptor y nos mandas si soporte técnico te lo pide.</li>
         </ul>
         <p><strong>Finalidades.</strong> Atender tu solicitud, diagnosticar el equipo y cumplir la garantía. No usamos estos datos para publicidad ni para fines secundarios.</p>
         <p><strong>Transferencias.</strong> TresVizo no transfiere tus datos a terceros, salvo cuando una ley o una autoridad competente lo exijan.</p>
-        <p><mark class="todo">[VERIFICAR: si esta política debe cubrir también los datos de compra y facturación del receptor, o si van en un aviso aparte]</mark></p>
+        <p><mark class="todo">[VERIFICAR con abogado: si esta política debe cubrir también los datos de compra y facturación del receptor, o si van en un aviso aparte]</mark></p>
       </section>
 
       <section id="conservacion" aria-labelledby="h-conservacion">
@@ -277,7 +291,7 @@
         <ul>
           <li><strong>En tu teléfono:</strong> mientras no los borres. Al borrar un proyecto se borra del teléfono, y al borrar un perfil de NTRIP se borra también su contraseña. Al desinstalar la app se borran sus datos; en iPhone, el Llavero puede conservar las contraseñas de NTRIP, así que bórralas en la app antes de desinstalarla. Los respaldos que guardaste en otra carpeta siguen ahí hasta que los borres.</li>
           <li><strong>En el receptor:</strong> las redes y los perfiles de NTRIP, hasta que los borres desde la app o el panel web; las grabaciones, hasta que las borres de la microSD. Antes de vender o prestar un receptor, borra sus redes y perfiles y las grabaciones que no quieras compartir.</li>
-          <li><strong>En TresVizo:</strong> los datos de soporte, durante <mark class="todo">[COMPLETAR: plazo de conservación]</mark>. Después se bloquean y se suprimen, salvo lo que una ley obligue a conservar.</li>
+          <li><strong>En TresVizo:</strong> los datos de soporte, durante <mark class="todo">[COMPLETAR: decisión del propietario con el abogado: plazo de conservación de los datos de soporte]</mark>. Después se bloquean y se suprimen, salvo lo que una ley obligue a conservar.</li>
         </ul>
       </section>
 
@@ -285,23 +299,23 @@
         <h2 id="h-arco"><span class="n">10</span>Derechos ARCO</h2>
         <p>Conforme a la LFPDPPP, tienes derecho a <strong>acceder</strong> a tus datos personales, <strong>rectificarlos</strong> si son inexactos, <strong>cancelarlos</strong> y <strong>oponerte</strong> a su tratamiento. También puedes revocar tu consentimiento y pedir que limitemos su uso o divulgación.</p>
         <p>Los datos de la app y del receptor los controlas tú directamente: puedes consultarlos, corregirlos y borrarlos desde la propia app, el panel web y la microSD, sin pedírselo a nadie.</p>
-        <p>Para los datos que tenga TresVizo, envía tu solicitud a <mark class="todo">[COMPLETAR: correo de contacto para privacidad]</mark> con:</p>
+        <p>Para los datos que tenga TresVizo, envía tu solicitud a <a href="mailto:ingenieria@3vizo.com">ingenieria@3vizo.com</a> con:</p>
         <ol>
           <li>tu nombre y un medio para responderte;</li>
           <li>una identificación oficial o, si actúas en nombre de alguien, el documento que acredite la representación;</li>
           <li>la descripción clara de los datos y del derecho que quieres ejercer;</li>
           <li>cualquier dato que ayude a localizarlos, como la fecha de tu mensaje a soporte o el número de serie del receptor.</li>
         </ol>
-        <p>Te responderemos en un máximo de 20 días hábiles y, si procede, haremos efectiva la solicitud dentro de los 15 días hábiles siguientes. <mark class="todo">[VERIFICAR: plazos con la LFPDPPP vigente]</mark></p>
-        <p>Si consideras que tu derecho a la protección de datos fue vulnerado, puedes acudir a la autoridad competente. <mark class="todo">[VERIFICAR: autoridad competente conforme a la LFPDPPP publicada en el DOF el 20 de marzo de 2025]</mark></p>
+        <p>Te responderemos en un máximo de 20 días hábiles desde que recibamos tu solicitud y, si procede, la haremos efectiva dentro de los 15 días hábiles siguientes a la respuesta. Estos plazos solo pueden ampliarse una vez, por un periodo igual, cuando el caso lo justifique (LFPDPPP, artículo 31).</p>
+        <p>Si consideras que tu derecho a la protección de datos fue vulnerado, puedes presentar una solicitud de protección de datos ante la Secretaría Anticorrupción y Buen Gobierno, la autoridad que señala la LFPDPPP (artículos 2, fracción XV, y 41).</p>
       </section>
 
       <section id="seguridad" aria-labelledby="h-seguridad">
         <h2 id="h-seguridad"><span class="n">11</span>Seguridad</h2>
         <ul>
           <li>Las contraseñas de NTRIP por el teléfono se guardan en el Llavero de iOS o cifradas con una clave del almacén de claves de Android, y solo sirven en ese teléfono.</li>
-          <li>NTRIP por el teléfono admite conexiones cifradas (TLS) con los servicios que las ofrecen. NTRIP del receptor no las admite.</li>
-          <li>La conexión entre la app y el receptor por su red Wi-Fi es local y sin cifrado propio; la red Wi-Fi del receptor sí lleva contraseña.</li>
+          <li>NTRIP por el teléfono y NTRIP del receptor admiten conexiones cifradas (TLS) con los servicios que las ofrecen; el receptor comprueba el certificado del servicio. La publicación de las correcciones de la base y su caster propio van sin cifrar.</li>
+          <li>La conexión entre la app y el receptor por Wi-Fi es local y sin cifrado propio; la red Wi-Fi del receptor sí lleva contraseña. El panel web no pide usuario ni contraseña (sección 5).</li>
           <li>El receptor solo instala firmware firmado por TresVizo.</li>
           <li>Te recomendamos cambiar la contraseña de fábrica de la red Wi-Fi del receptor y proteger tu teléfono con bloqueo de pantalla.</li>
         </ul>
@@ -316,7 +330,7 @@
         <h2 id="h-sitio"><span class="n">13</span>Este sitio web</h2>
         <ul>
           <li>Se aloja en GitHub Pages. GitHub puede registrar la dirección IP de quien lo visita por motivos de seguridad, conforme a su declaración de privacidad.</li>
-          <li>Las fuentes tipográficas se cargan de Google Fonts, que recibe la dirección IP de tu navegador.</li>
+          <li>Las páginas usan las fuentes tipográficas de tu dispositivo y no cargan nada de otros sitios. La excepción es la guía rápida, que hasta su próxima edición carga sus fuentes de Google Fonts: Google recibe la dirección IP de tu navegador cuando la abres. Los PDF de la guía no se conectan a nada.</li>
           <li>El sitio no usa cookies ni analítica.</li>
           <li>La guía rápida recuerda en tu navegador si elegiste iPhone o Android. Ese dato no sale de tu navegador.</li>
         </ul>
@@ -324,13 +338,13 @@
 
       <section id="cambios" aria-labelledby="h-cambios">
         <h2 id="h-cambios"><span class="n">14</span>Cambios a esta política</h2>
-        <p>Si cambia lo que hacen la app o el receptor con tus datos, actualizaremos esta página antes de publicar el cambio, con su fecha y su versión arriba. Si el cambio es importante, también lo avisaremos en <mark class="todo">[VERIFICAR: medio del aviso: la app, este sitio o ambos]</mark>.</p>
+        <p>Si cambia lo que hacen la app o el receptor con tus datos, actualizaremos esta página antes de publicar el cambio, con su fecha y su versión arriba. Si el cambio es importante, también lo avisaremos en <mark class="todo">[VERIFICAR con abogado: el medio del aviso de cambios (LFPDPPP, artículo 15, fracción VI): este sitio, la app o ambos]</mark>.</p>
       </section>
 
       <section id="contacto" aria-labelledby="h-contacto">
         <h2 id="h-contacto"><span class="n">15</span>Contacto</h2>
-        <p>Para dudas sobre esta política o tus datos personales: <mark class="todo">[COMPLETAR: correo de contacto para privacidad]</mark>.</p>
-        <p>Domicilio: <mark class="todo">[COMPLETAR: domicilio completo]</mark>.</p>
+        <p>Para dudas sobre esta política o tus datos personales: <a href="mailto:ingenieria@3vizo.com">ingenieria@3vizo.com</a>, de lunes a viernes de 9 a 18&nbsp;h, hora del centro de México.</p>
+        <p>Carlos Daniel Rivera Trevizo · J. Domínguez de Mendoza 1704, colonia San Felipe, C.P. 31203, Chihuahua, Chihuahua, México.</p>
       </section>
     </div>
   </div>
