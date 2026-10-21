@@ -1,7 +1,9 @@
 # Comprueba el sitio en cada cambio de docs/ o tools/: borradores con su recuadro,
 # nada «vigente» con marcadores, nada cargado de terceros y enlaces internos.
+# Solo si la comprobación pasa, publica docs/ en GitHub Pages (Pages publica desde
+# esta Action, no desde la rama: una página que no pasa la comprobación no sale).
 # Repositorio público: los minutos de Actions no cuestan. Solo Python del sistema.
-name: Comprobar el sitio
+name: Comprobar y publicar el sitio
 
 on:
   push:
@@ -16,7 +18,7 @@ permissions:
 
 concurrency:
   group: comprobar-sitio-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   comprobar:
@@ -26,3 +28,25 @@ jobs:
       - uses: actions/checkout@v4
       - name: Comprobar marcadores, vigencia, recursos de terceros y enlaces
         run: python3 tools/comprobar_sitio.py
+
+  publicar:
+    # Solo en main y solo si la comprobación pasó; nunca desde una solicitud de cambios.
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: comprobar
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - id: despliegue
+        uses: actions/deploy-pages@v4

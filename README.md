@@ -8,7 +8,7 @@ Sitio: <https://cadaritre.github.io/GNSS-TresVizo/>
 ## Qué hay
 
 El sitio se sirve con GitHub Pages desde la carpeta `docs/` de la rama `main`. Es HTML estático, sin
-compilación: lo que está en `docs/` es lo que se publica.
+compilación: lo que está en `docs/` es lo que se publica, y solo si pasa `tools/comprobar_sitio.py`.
 
 | Ruta | Página |
 | --- | --- |
@@ -98,8 +98,10 @@ cd docs && python3 -m http.server 8000
 y abre <http://localhost:8000/>. La página 404 usa rutas absolutas (`/GNSS-TresVizo/…`) porque GitHub la
 sirve desde cualquier dirección; en local solo se ve bien desde un servidor con esa ruta.
 
-**Publicar.** En GitHub, *Settings › Pages*: *Deploy from a branch*, rama `main`, carpeta `/docs`. El
-archivo `docs/.nojekyll` hace que GitHub publique los archivos tal cual.
+**Publicar.** Basta con subir a `main`: la Action `.github/workflows/comprobar-sitio.yml` corre la
+comprobación y, solo si pasa, publica `docs/` en GitHub Pages (*Settings › Pages › Source: GitHub Actions*,
+desde el 21-10-2026). Una página que no pasa la comprobación no se publica y el sitio sigue con la versión
+anterior. El archivo `docs/.nojekyll` se conserva por si Pages vuelve a publicarse desde la rama.
 
 ## Derechos
 
