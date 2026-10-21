@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geoides y sistemas · TresVizo</title>
+<meta name="description" content="Modelos de geoide y sistemas de coordenadas que usa TresVizo Field: de dónde salen, con qué licencia y cómo se obtienen desde la app.">
+<link rel="icon" type="image/png" href="../assets/img/tresvizo-marca.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/sitio.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../"><img src="../assets/img/tresvizo-marca.png" alt="" width="385" height="444"><span>TresVizo GNSS</span></a>
+    <nav class="topnav" aria-label="Sitio">
+      <a href="../guia/">Guía rápida</a>
+      <a href="../soporte/">Soporte</a>
+      <a href="../garantia/">Garantía</a>
+      <a href="../geoides/" aria-current="page">Geoides</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+  <div class="doc-head">
+    <div class="wrap">
+      <p class="eyebrow">TresVizo Field</p>
+      <h1>Geoides y sistemas de coordenadas</h1>
+      <p class="lede">Los modelos y sistemas que usa la app para dar cotas y coordenadas: quién los publica, con qué licencia y cómo llegan a tu teléfono.</p>
+      <p class="doc-meta"><span>Actualizado el 20 de octubre de 2026</span></p>
+    </div>
+  </div>
+
+  <div class="wrap doc">
+    <nav class="doc-toc" aria-labelledby="toc-t">
+      <h2 id="toc-t">En esta página</h2>
+      <ol>
+        <li><a href="#como">Cómo se obtienen</a></li>
+        <li><a href="#geoides">Modelos de geoide</a></li>
+        <li><a href="#sistemas">Sistemas de coordenadas</a></li>
+        <li><a href="#licencias">Licencias y créditos</a></li>
+      </ol>
+    </nav>
+
+    <div class="doc-body">
+      <section id="como" aria-labelledby="h-como">
+        <h2 id="h-como"><span class="n">1</span>Cómo se obtienen</h2>
+        <p>El receptor entrega alturas sobre el elipsoide. Para obtener cotas sobre el nivel medio del mar, la app resta la altura del geoide que elijas en el proyecto. Con el geoide en «Ninguno», las alturas son elipsoidales.</p>
+        <ul>
+          <li><strong>Incluidos en la app.</strong> Los modelos de México vienen con TresVizo Field para iPhone y Android y funcionan sin conexión desde el primer día.</li>
+          <li><strong>Desde la app.</strong> Los modelos y sistemas de otros países se publican como paquetes que se descargan desde la propia app. Una vez descargados, se guardan en el teléfono y funcionan sin conexión.</li>
+        </ul>
+        <p>Cada modelo se agrega a esta página con su autoridad y su licencia cuando se publica.</p>
+        <div class="callout" style="margin-top:1rem">
+          <p class="t">El geoide del proyecto</p>
+          <p>Elige el mismo modelo que usa tu cliente o la obra. Entre dos modelos del mismo país puede haber decímetros de diferencia, así que compara siempre contra un punto de control con cota conocida.</p>
+        </div>
+      </section>
+
+      <section id="geoides" aria-labelledby="h-geoides">
+        <h2 id="h-geoides"><span class="n">2</span>Modelos de geoide</h2>
+        <p>Ordenados por país y, dentro de cada país, del vigente al histórico.</p>
+
+        <h3>México</h3>
+        <div class="models">
+          <article class="model" aria-labelledby="m-ggm25">
+            <div class="model-head">
+              <h3 id="m-ggm25">GGM25 · Geoide Gravimétrico Mexicano 2025</h3>
+              <span class="tag">Incluido en la app</span>
+            </div>
+            <dl>
+              <dt>Autoridad</dt><dd>INEGI, Instituto Nacional de Estadística y Geografía</dd>
+              <dt>Situación</dt><dd>Vigente. INEGI lo publica como sustituto del GGM10.</dd>
+              <dt>Malla</dt><dd>1′ de arco, la de INEGI, sin remuestrear. Cobertura recortada al territorio mexicano.</dd>
+              <dt>Referencia</dt><dd>GRS 1980; W₀ = 62&nbsp;636&nbsp;856.0&nbsp;m²s⁻², compatible con NAPGD2022</dd>
+              <dt>Exactitud declarada</dt><dd>0.10&nbsp;m</dd>
+              <dt>Licencia</dt><dd><a href="https://www.inegi.org.mx/inegi/terminos.html">Términos de Libre Uso de la Información del INEGI</a></dd>
+              <dt>Fuente</dt><dd><a href="https://www.inegi.org.mx/temas/geoide/">inegi.org.mx/temas/geoide</a></dd>
+            </dl>
+            <p class="attr">Fuente: INEGI, Geoide Gravimétrico Mexicano 2025 (GGM25). Recortado a México y redondeado al centímetro por TresVizo Field; la modificación no es de INEGI.</p>
+          </article>
+
+          <article class="model" aria-labelledby="m-ggm10">
+            <div class="model-head">
+              <h3 id="m-ggm10">GGM10 · Geoide Gravimétrico Mexicano 2010</h3>
+              <span class="tag">Incluido en la app</span>
+            </div>
+            <dl>
+              <dt>Autoridad</dt><dd>INEGI, Instituto Nacional de Estadística y Geografía</dd>
+              <dt>Situación</dt><dd>Histórico. Se conserva para reproducir y comparar trabajos hechos con él.</dd>
+              <dt>Malla</dt><dd>2.5′ de arco y la cobertura que publica INEGI, sin remuestrear ni recortar</dd>
+              <dt>Referencia</dt><dd>GRS 1980; ITRF2008, época 2010.0</dd>
+              <dt>Exactitud declarada</dt><dd>0.20&nbsp;m</dd>
+              <dt>Licencia</dt><dd><a href="https://www.inegi.org.mx/inegi/terminos.html">Términos de Libre Uso de la Información del INEGI</a></dd>
+              <dt>Fuente</dt><dd><a href="https://www.inegi.org.mx/temas/geoide/">inegi.org.mx/temas/geoide</a></dd>
+            </dl>
+            <p class="attr">Fuente: INEGI, Geoide Gravimétrico Mexicano 2010 (GGM10). Redondeado al centímetro por TresVizo Field; la modificación no es de INEGI.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="sistemas" aria-labelledby="h-sistemas">
+        <h2 id="h-sistemas"><span class="n">3</span>Sistemas de coordenadas</h2>
+        <p>Cada sistema se identifica por su código del registro EPSG. El sistema se elige al crear el proyecto y no se cambia después; al exportar puedes convertir a otro.</p>
+        <div class="table-wrap" style="margin-top:1rem">
+          <table class="data stack">
+            <thead><tr><th scope="col">Sistema</th><th scope="col">Códigos</th><th scope="col">Cómo se obtiene</th></tr></thead>
+            <tbody>
+              <tr><td>WGS 84, geográficas</td><td data-label="Códigos">EPSG:4326</td><td data-label="Cómo se obtiene">Incluido en la app</td></tr>
+              <tr><td>WGS 84 / UTM, zonas 1 a 60, norte y sur</td><td data-label="Códigos">EPSG:32601 a 32660 y EPSG:32701 a 32760</td><td data-label="Cómo se obtiene">Incluido en la app</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><mark class="todo">[VERIFICAR: completar con los sistemas oficiales de México (Mexico ITRF2008 y sus zonas UTM) cuando salga la versión de las apps que los incluye]</mark></p>
+        <p>La app no cambia el marco de referencia de tus mediciones: con RTK, tus coordenadas quedan en el marco de la base o del servicio de correcciones que uses.</p>
+      </section>
+
+      <section id="licencias" aria-labelledby="h-licencias">
+        <h2 id="h-licencias"><span class="n">4</span>Licencias y créditos</h2>
+        <p>Los modelos son de sus autoridades, no de TresVizo. Cada uno conserva su licencia, y la app muestra su crédito en <strong>Cuenta › Avisos legales</strong>.</p>
+        <p>Los Términos de Libre Uso del INEGI permiten usar, copiar y redistribuir su información, también con fines comerciales, a cambio de citar la fuente y de avisar cuando se modifica. Por eso el crédito de cada modelo dice qué cambió TresVizo Field: el recorte y el redondeo al centímetro.</p>
+        <p>Los paquetes que se descargan desde la app se publican en las <a href="https://github.com/cadaritre/GNSS-TresVizo/releases">versiones de este repositorio</a>, cada uno con la licencia de su autoridad.</p>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <img src="../assets/img/tresvizo-logo.png" alt="TresVizo" width="990" height="444">
+    <nav aria-label="Documentos">
+      <a href="../">Inicio</a>
+      <a href="../guia/">Guía rápida</a>
+      <a href="../soporte/">Soporte</a>
+      <a href="../garantia/">Garantía</a>
+      <a href="../seguridad/">Batería y seguridad</a>
+      <a href="../geoides/" aria-current="page">Geoides y sistemas</a>
+      <a href="../licencia/">Contrato de licencia</a>
+      <a href="../privacidad/">Política de privacidad</a>
+      <a href="https://www.tresvizo.com/">tresvizo.com</a>
+    </nav>
+    <p class="fine">© 2026 TresVizo. Receptores GNSS MeridianV y MeridianVI · TresVizo Field para iPhone y Android.</p>
+  </div>
+</footer>
+</body>
+</html>

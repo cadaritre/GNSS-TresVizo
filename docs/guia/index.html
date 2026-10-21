@@ -1,0 +1,1242 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Guía rápida del receptor GNSS MeridianV con la app TresVizo Field para iPhone y Android: conectar, altura de antena, IMU, correcciones, medir, batería, firmware y posproceso.">
+<link rel="icon" type="image/png" href="img/tresvizo-marca.png">
+<title>Guía rápida MeridianV</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap");
+
+/* Manual de campo: una columna de lectura de 65 caracteres con las capturas en un riel a la derecha.
+   La banda azul claro de arriba es la barra de estado de TresVizo Field; el hexágono marca los capítulos. */
+:root {
+  --bg: #F4F7FB;
+  --surface: #FFFFFF;
+  --ink: #16222F;
+  --ink-2: #536175;
+  --heading: #0F2A4A;
+  --rule: #D9E1EB;
+  --band: #E1EDFC;
+  --band-2: #EDF4FE;
+  --brand: #008AFC;
+  --action: #006BD6;
+  --on-action: #FFFFFF;
+  --action-soft: #E4EEFB;
+  --ok: #11762F;
+  --warn: #9A5B00;
+  --warn-soft: #F8EFE0;
+  --danger: #A82A20;
+  --info: #55606E;
+  --contour: rgba(0, 138, 252, 0.09);
+  --oled-bg: #040506;
+  --oled-fg: #F1F6FB;
+  --oled-bezel: #1B232C;
+  --dwg-ink: #0F2A4A;
+  --dwg-rx: #D3E4FA;
+  --dwg-pole: #C4CFDC;
+  --dwg-ground: #8D9AA9;
+  --logo-filter: none;
+  --shot-shadow: 0 1px 2px rgba(15, 42, 74, 0.06), 0 10px 28px rgba(15, 42, 74, 0.09);
+
+  --f-display: "Barlow Semi Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", -apple-system, system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --f-oled: "VT323", "Courier New", monospace;
+
+  --t-xs: 0.8125rem;
+  --t-s: 0.9375rem;
+  --t-b: 1.0625rem;
+  --t-m: 1.3125rem;
+  --t-l: 1.875rem;
+  --t-xl: clamp(2.5rem, 4.2vw + 1.2rem, 3.75rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B141E;
+    --surface: #121F2E;
+    --ink: #E2E9F1;
+    --ink-2: #9BAABB;
+    --heading: #D3E5FA;
+    --rule: #24364A;
+    --band: #12263C;
+    --band-2: #0F2033;
+    --brand: #3D9BE9;
+    --action: #6CB4FF;
+    --on-action: #0B141E;
+    --action-soft: #16304B;
+    --ok: #6CCB86;
+    --warn: #E3A85C;
+    --warn-soft: #2F2410;
+    --danger: #F2938B;
+    --info: #9BAABB;
+    --contour: rgba(61, 155, 233, 0.10);
+    --oled-bezel: #2B3642;
+    --dwg-ink: #D3E5FA;
+    --dwg-rx: #1C3A5D;
+    --dwg-pole: #3A4B5F;
+    --dwg-ground: #6F8094;
+    --logo-filter: brightness(0) invert(1);
+    --shot-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B141E;
+  --surface: #121F2E;
+  --ink: #E2E9F1;
+  --ink-2: #9BAABB;
+  --heading: #D3E5FA;
+  --rule: #24364A;
+  --band: #12263C;
+  --band-2: #0F2033;
+  --brand: #3D9BE9;
+  --action: #6CB4FF;
+  --on-action: #0B141E;
+  --action-soft: #16304B;
+  --ok: #6CCB86;
+  --warn: #E3A85C;
+  --warn-soft: #2F2410;
+  --danger: #F2938B;
+  --info: #9BAABB;
+  --contour: rgba(61, 155, 233, 0.10);
+  --oled-bezel: #2B3642;
+  --dwg-ink: #D3E5FA;
+  --dwg-rx: #1C3A5D;
+  --dwg-pole: #3A4B5F;
+  --dwg-ground: #6F8094;
+  --logo-filter: brightness(0) invert(1);
+  --shot-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
+/* Selector de teléfono: sin atributo en la raíz se ve iPhone. */
+:root:not([data-os="android"]) [data-os="android"] { display: none !important; }
+:root[data-os="android"] [data-os="ios"] { display: none !important; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: var(--t-b);
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+* { box-sizing: border-box; }
+img { max-width: 100%; height: auto; }
+a { color: var(--action); text-underline-offset: 0.18em; }
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3, h4 { font-family: var(--f-display); color: var(--heading); line-height: 1.12; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+strong { font-weight: 700; }
+code, .mono { font-family: var(--f-mono); font-size: 0.9em; }
+code { background: var(--action-soft); padding: 0.05em 0.3em; border-radius: 4px; overflow-wrap: anywhere; }
+
+.wrap { max-width: 57rem; margin-inline: auto; padding-inline: 16px; }
+[id] { scroll-margin-top: 72px; }
+
+/* Barra de arriba: el sitio de la marca, como en la app */
+.topbar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--band);
+  border-bottom: 1px solid var(--rule);
+}
+.topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; }
+.topbar-brand { display: flex; align-items: center; gap: 10px; color: var(--heading); text-decoration: none; font-family: var(--f-display); font-weight: 600; font-size: 1.0625rem; min-width: 0; }
+.topbar-brand img { width: 22px; height: auto; filter: var(--logo-filter); flex: none; }
+.topbar-brand span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.os-switch { display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px; background: var(--surface); border: 1px solid var(--rule); flex: none; }
+.os-switch button {
+  font: 600 0.9375rem/1 var(--f-body);
+  color: var(--ink-2);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.5rem 0.95rem;
+  min-height: 36px;
+  cursor: pointer;
+}
+.os-switch button[aria-pressed="true"] { background: var(--action); color: var(--on-action); }
+.os-switch button:hover:not([aria-pressed="true"]) { color: var(--heading); }
+@media (prefers-reduced-motion: no-preference) {
+  .os-switch button { transition: background-color 0.15s ease, color 0.15s ease; }
+}
+@media (max-width: 380px) { .topbar-brand span { display: none; } }
+
+/* Portada */
+.masthead {
+  background-color: var(--band-2);
+  background-image:
+    repeating-radial-gradient(ellipse 120% 90% at 92% 8%, transparent 0 21px, var(--contour) 21px 22px),
+    repeating-radial-gradient(ellipse 80% 110% at 6% 120%, transparent 0 25px, var(--contour) 25px 26px);
+  border-bottom: 1px solid var(--rule);
+  padding-block: 2.75rem 2.5rem;
+}
+.masthead .logo { width: 132px; filter: var(--logo-filter); display: block; margin-bottom: 1.75rem; }
+.eyebrow { font-family: var(--f-display); font-weight: 600; font-size: var(--t-s); letter-spacing: 0.06em; text-transform: uppercase; color: var(--action); }
+.masthead h1 { font-size: var(--t-xl); font-weight: 700; letter-spacing: -0.01em; margin-top: 0.35rem; }
+.lede { font-size: var(--t-m); line-height: 1.45; max-width: 36rem; margin-top: 1rem; color: var(--ink); }
+.meta { margin-top: 1.25rem; font-size: var(--t-s); color: var(--ink-2); }
+.os-hint { margin-top: 0.4rem; font-size: var(--t-s); color: var(--ink-2); }
+
+/* Antes de salir + índice */
+.intro { display: grid; gap: 2rem; padding-block: 2.5rem 1rem; }
+@media (min-width: 760px) { .intro { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; } }
+.intro h2 { font-size: var(--t-m); font-weight: 700; margin-bottom: 0.75rem; }
+.needs { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
+.needs li { position: relative; padding-left: 1.6rem; }
+.needs li::before { content: ""; position: absolute; left: 0.1rem; top: 0.42em; width: 0.8rem; height: 0.8rem; border: 2px solid var(--brand); border-radius: 3px; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; counter-reset: toc; }
+.toc li { counter-increment: toc; }
+.toc a { display: flex; gap: 0.75rem; padding: 0.3rem 0; text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--rule); }
+.toc a::before { content: counter(toc); font-family: var(--f-display); font-weight: 700; color: var(--brand); min-width: 1.4rem; }
+.toc a:hover { color: var(--action); }
+
+/* En una mirada: los datos que se buscan en campo */
+.glance { padding-block: 1.5rem 0.5rem; }
+.glance h2 { font-size: var(--t-m); font-weight: 700; margin-bottom: 0.75rem; }
+.glance dl { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+.glance dl > div { padding: 0.75rem 0.9rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--surface); min-width: 0; }
+.glance dt { font-family: var(--f-display); font-weight: 600; font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.glance dd { margin: 0.2rem 0 0; font-size: var(--t-s); line-height: 1.45; }
+.glance dd b { font-family: var(--f-display); font-size: 1.125rem; color: var(--heading); }
+
+/* Capítulos */
+.chapter { padding-block: 3.25rem 0.5rem; }
+.chapter + .chapter { border-top: 1px solid var(--rule); }
+.chapter-head { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 1rem; }
+.chapter-head h2 { font-size: var(--t-l); font-weight: 700; }
+.hexno { position: relative; flex: none; width: 2.6rem; height: 2.98rem; }
+.hexno svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hexno span { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; font-family: var(--f-display); font-weight: 700; font-size: 1.25rem; color: var(--heading); line-height: 1; }
+.chapter-lede { font-size: var(--t-m); line-height: 1.45; max-width: 38rem; color: var(--ink); }
+.chapter h3 { font-size: 1.375rem; font-weight: 700; margin-top: 2.25rem; margin-bottom: 0.6rem; }
+.chapter h4 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.35rem; }
+
+.prose { max-width: 38rem; display: grid; gap: 0.8rem; }
+.prose ul, .prose ol { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.45rem; }
+.muted { color: var(--ink-2); }
+.small { font-size: var(--t-s); }
+
+/* Ruta de menús y textos de la app */
+.route {
+  font-weight: 700;
+  color: var(--heading);
+  background: var(--action-soft);
+  padding: 0.05em 0.4em;
+  border-radius: 5px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.route i { font-style: normal; color: var(--brand); padding-inline: 0.12em; }
+.ui { font-weight: 700; color: var(--heading); }
+.say {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  max-width: 38rem;
+}
+
+/* Paso con captura al lado */
+.step { display: grid; gap: 1.25rem; margin-top: 2rem; align-items: start; }
+.step > .prose { min-width: 0; }
+@media (min-width: 760px) {
+  .step.has-shot { grid-template-columns: minmax(0, 1fr) 14.5rem; gap: 2.75rem; }
+}
+.shot { margin: 0; max-width: 16.5rem; }
+.shot img { display: block; width: 100%; border-radius: 16px; border: 1px solid var(--rule); box-shadow: var(--shot-shadow); background: var(--surface); }
+.shot figcaption { margin-top: 0.6rem; font-size: var(--t-xs); line-height: 1.45; color: var(--ink-2); }
+
+/* Listas de pasos: solo donde el orden importa */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; counter-reset: paso; max-width: 38rem; }
+.steps > li { counter-increment: paso; position: relative; padding-left: 2.4rem; }
+.steps > li::before {
+  content: counter(paso);
+  position: absolute; left: 0; top: 0.05rem;
+  width: 1.65rem; height: 1.65rem; border-radius: 50%;
+  background: var(--action); color: var(--on-action);
+  font: 700 0.9375rem/1.65rem var(--f-display); text-align: center;
+}
+
+/* Avisos de la guía */
+.note { background: var(--action-soft); border-radius: 12px; padding: 0.9rem 1.1rem; max-width: 38rem; display: grid; gap: 0.4rem; }
+.note.warn { background: var(--warn-soft); }
+.note-title { font-family: var(--f-display); font-weight: 700; font-size: 1.0625rem; color: var(--heading); }
+.note.warn .note-title { color: var(--warn); }
+
+/* El botón */
+.press { display: grid; gap: 0; max-width: 38rem; margin-top: 0.5rem; border-top: 1px solid var(--rule); }
+.press > div { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 1rem; padding-block: 0.85rem; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.press .dur { font-family: var(--f-display); font-weight: 700; font-size: 2rem; line-height: 1; color: var(--action); font-variant-numeric: tabular-nums; }
+.press .dur small { font-size: 1rem; font-weight: 600; margin-left: 0.1em; }
+.press h4 { margin-bottom: 0.15rem; }
+
+/* Pantalla OLED, 128 × 64, a escala con la fuente del firmware (celda de 6 × 8) */
+.oled-row { display: grid; gap: 2rem; margin-top: 1.25rem; align-items: start; }
+@media (min-width: 820px) { .oled-row { grid-template-columns: auto minmax(0, 1fr); gap: 2.5rem; } }
+.oled-fig { margin: 0; }
+.oled {
+  --u: 2.5px;
+  position: relative;
+  width: calc(128 * var(--u));
+  height: calc(64 * var(--u));
+  margin: calc(5 * var(--u));
+  background: var(--oled-bg);
+  color: var(--oled-fg);
+  font-family: var(--f-oled);
+  font-size: calc(12.5 * var(--u));
+  line-height: 1;
+  letter-spacing: var(--u);
+  border-radius: 3px;
+  box-shadow: 0 0 0 calc(5 * var(--u)) var(--oled-bezel);
+  overflow: hidden;
+  font-variant-ligatures: none;
+}
+.oled.sm { --u: 1.5px; }
+@media (max-width: 400px) { .oled:not(.sm) { --u: 2.2px; } }
+.oled > span { position: absolute; left: 0; white-space: pre; }
+.oled .r { left: auto; right: 0; }
+.oled .big { font-size: calc(25 * var(--u)); letter-spacing: calc(2 * var(--u)); }
+.oled .hr { left: 0; right: 0; height: var(--u); background: var(--oled-fg); top: calc(10 * var(--u)); }
+.oled .y0 { top: calc(-3 * var(--u)); }
+.oled .y8 { top: calc(5 * var(--u)); }
+.oled .y13 { top: calc(10 * var(--u)); }
+.oled .y13.big { top: calc(7 * var(--u)); }
+.oled .y21 { top: calc(18 * var(--u)); }
+.oled .y24 { top: calc(21 * var(--u)); }
+.oled .y31 { top: calc(28 * var(--u)); }
+.oled .y39 { top: calc(36 * var(--u)); }
+.oled .y47 { top: calc(44 * var(--u)); }
+.oled .y56 { top: calc(53 * var(--u)); }
+.oled .band { left: 0; right: 0; top: calc(55 * var(--u)); height: calc(9 * var(--u)); background: var(--oled-fg); }
+.oled .inv { left: 0; right: 0; text-align: center; color: var(--oled-bg); }
+.oled-fig figcaption { margin-top: 0.9rem; font-size: var(--t-xs); color: var(--ink-2); max-width: 22rem; }
+.oled-key { margin: 0; display: grid; gap: 0.85rem; max-width: 30rem; }
+.oled-key > div { display: grid; gap: 0.2rem; }
+.oled-key dt { font-weight: 700; color: var(--heading); }
+.oled-key dd { margin: 0; color: var(--ink); }
+.chip {
+  font-family: var(--f-oled);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  background: var(--oled-bg);
+  color: var(--oled-fg);
+  padding: 0.12em 0.4em 0.08em;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px var(--oled-bezel);
+  white-space: nowrap;
+}
+.oled-variants { display: flex; flex-wrap: wrap; gap: 1.25rem 1.5rem; margin-top: 2rem; }
+.oled-variants figure { margin: 0; }
+.oled-variants figcaption { font-size: var(--t-xs); color: var(--ink-2); margin-top: 0.35rem; }
+
+/* Dos columnas comparadas (correcciones) */
+.pair { display: grid; gap: 1rem; margin-top: 1.25rem; }
+@media (min-width: 640px) { .pair { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.pair > div { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 1rem 1.15rem; display: grid; gap: 0.5rem; align-content: start; min-width: 0; }
+.pair ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; font-size: var(--t-s); }
+
+/* Dibujo de la altura de antena */
+.dwg-fig { margin: 1.5rem 0 0; display: grid; gap: 1.25rem; }
+@media (min-width: 760px) { .dwg-fig { grid-template-columns: minmax(0, 27rem) minmax(0, 1fr); gap: 2.5rem; align-items: end; } }
+.dwg { width: 100%; height: auto; display: block; background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; }
+.dwg-key { display: grid; gap: 1rem; max-width: 24rem; }
+.dwg-key div { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); gap: 0.75rem; align-items: baseline; }
+.dwg-key b { font-family: var(--f-display); font-size: 1.5rem; font-weight: 700; line-height: 1; }
+.dwg-key .k1 { color: var(--action); }
+.dwg-key .k2 { color: var(--heading); }
+@media screen {
+  .dwg .s-ink { stroke: var(--dwg-ink); }
+  .dwg .s-act { stroke: var(--action); }
+  .dwg .s-ground { stroke: var(--dwg-ground); }
+  .dwg .s-rule { stroke: var(--ink-2); }
+  .dwg .f-rx { fill: var(--dwg-rx); }
+  .dwg .f-pole { fill: var(--dwg-pole); }
+  .dwg .f-surf { fill: var(--surface); }
+  .dwg .f-act { fill: var(--action); }
+  .dwg .f-head { fill: var(--heading); }
+  .dwg .f-ink2 { fill: var(--ink-2); }
+  .hexno .s-brand { stroke: var(--brand); }
+}
+
+/* Problemas frecuentes */
+.issues { margin-top: 1.5rem; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.issue { display: grid; gap: 0.35rem; padding-block: 0.9rem; border-bottom: 1px solid var(--rule); }
+@media (min-width: 760px) { .issue { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 2rem; } }
+.issue .msg { font-weight: 700; color: var(--heading); }
+.issue .btn { display: inline-block; font-size: var(--t-xs); font-weight: 700; color: var(--action); border: 1px solid var(--action); border-radius: 999px; padding: 0.05rem 0.55rem; margin-top: 0.3rem; }
+.issue .fix { color: var(--ink); }
+.lvl { display: inline-block; font-family: var(--f-display); font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-right: 0.4rem; }
+.lvl.e { color: var(--danger); }
+.lvl.w { color: var(--warn); }
+.lvl.i { color: var(--info); }
+.issues-group { font-size: 1.125rem; margin-top: 2rem; }
+
+.cmd { font-family: var(--f-mono); font-size: var(--t-s); background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 0.7rem 0.9rem; overflow-x: auto; white-space: pre; max-width: 38rem; }
+
+.foot { border-top: 1px solid var(--rule); margin-top: 3.5rem; padding-block: 1.5rem 3rem; font-size: var(--t-s); color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; align-items: center; }
+.foot img { width: 90px; filter: var(--logo-filter); }
+
+/* PDF y papel: carta, siempre en tema claro, sin el selector */
+@page {
+  size: letter;
+  margin: 17mm 16mm 18mm 16mm;
+  @bottom-right { content: counter(page) " / " counter(pages); font-family: "IBM Plex Sans", sans-serif; font-size: 8.5pt; color: #536175; }
+  @bottom-left { font-family: "IBM Plex Sans", sans-serif; font-size: 8.5pt; color: #536175; }
+}
+@page :first { @bottom-left { content: none; } @bottom-right { content: none; } }
+@media print {
+  :root, :root:not([data-theme="light"]), :root[data-theme="dark"] {
+    --bg: #FFFFFF;
+    --surface: #FFFFFF;
+    --ink: #16222F;
+    --ink-2: #536175;
+    --heading: #0F2A4A;
+    --rule: #D9E1EB;
+    --band: #E1EDFC;
+    --band-2: #EDF4FE;
+    --brand: #008AFC;
+    --action: #006BD6;
+    --on-action: #FFFFFF;
+    --action-soft: #E4EEFB;
+    --ok: #11762F;
+    --warn: #9A5B00;
+    --warn-soft: #F8EFE0;
+    --danger: #A82A20;
+    --info: #55606E;
+    --contour: rgba(0, 138, 252, 0.09);
+    --oled-bezel: #1B232C;
+    --dwg-ink: #0F2A4A;
+    --dwg-rx: #D3E4FA;
+    --dwg-pole: #C4CFDC;
+    --dwg-ground: #8D9AA9;
+    --logo-filter: none;
+    --shot-shadow: none;
+    color-scheme: light;
+  }
+  html { font-size: 10pt; }
+  body { background: #FFFFFF; line-height: 1.45; }
+  .topbar, .os-hint { display: none !important; }
+  .wrap { max-width: none; padding-inline: 0; }
+  .masthead { padding: 7mm 8mm 6mm; border: 0; border-radius: 3mm; background-image: none; }
+  .masthead .logo { width: 30mm; margin-bottom: 5mm; }
+  .masthead h1 { font-size: 28pt; }
+  .lede { font-size: 12.5pt; }
+  .intro { grid-template-columns: 1fr 1fr; gap: 10mm; padding-block: 6mm 0; }
+  .needs { gap: 1.2mm; }
+  .glance { padding-block: 6mm 0; }
+  .glance dl > div { padding: 2mm 3mm; }
+  .glance dl { grid-template-columns: 1fr 1fr 1fr; }
+  .glance dl > div { break-inside: avoid; }
+  .toc a::after { content: leader(".") target-counter(attr(href), page); color: #536175; }
+  .toc a { display: block; border-bottom: 0; padding: 0.15rem 0; }
+  .toc a::before { display: inline-block; }
+  .chapter { padding-block: 9mm 0; }
+  .chapter + .chapter { border-top: 0.6pt solid #D9E1EB !important; margin-top: 6mm; }
+  #receptor { break-before: page; padding-top: 0; }
+  .chapter-head, .chapter-lede, .chapter-lede + .prose { break-after: avoid; }
+  h3, h4 { break-after: avoid; }
+  .chapter h3 { margin-top: 7mm; }
+  .step { margin-top: 6mm; break-inside: avoid; }
+  .step.has-shot { grid-template-columns: minmax(0, 1fr) 55mm; gap: 8mm; }
+  .shot { max-width: 55mm; width: 55mm; }
+  .shot img { width: 55mm; border-radius: 3mm; box-shadow: none; }
+  .steps > li, .press > div, .issue, .oled-row, .oled-variants, .dwg-fig, .pair > div, .note, .say { break-inside: avoid; }
+  .oled-row { grid-template-columns: auto minmax(0, 1fr); gap: 8mm; }
+  .dwg-fig { grid-template-columns: 82mm minmax(0, 1fr); gap: 8mm; align-items: end; }
+  .issue { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 6mm; padding-block: 2.2mm; }
+  .issues-group { margin-top: 6mm; }
+  .pair { grid-template-columns: 1fr 1fr; }
+  .foot { margin-top: 10mm; padding-block: 4mm 0; }
+  a { color: inherit; text-decoration: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+</style>
+<style>
+/* Añadido por el sitio: página completa sin margen, descargas bajo el título y navegación en el pie */
+body { margin: 0; }
+.downloads { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; align-items: center; font-size: var(--t-s); }
+.downloads span { color: var(--ink-2); }
+.downloads a { display: inline-flex; align-items: center; min-height: 40px; padding: 0.35rem 0.9rem; border: 1px solid var(--action); border-radius: 999px; font-weight: 600; text-decoration: none; }
+.downloads a:hover { background: var(--action-soft); }
+.site-nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; width: 100%; }
+.site-nav a { display: inline-block; padding-block: 0.35rem; text-decoration: none; }
+.site-nav a:hover { text-decoration: underline; }
+@media print { .downloads, .site-nav { display: none !important; } }
+</style>
+</head>
+<body>
+<script>
+(function () {
+  var root = document.documentElement;
+  var KEY = "guia-meridianv-os";
+  function syncButtons(os) {
+    var buttons = document.querySelectorAll("[data-set-os]");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].setAttribute("aria-pressed", String(buttons[i].getAttribute("data-set-os") === os));
+    }
+  }
+  function apply(os, remember) {
+    root.setAttribute("data-os", os);
+    syncButtons(os);
+    if (remember) { try { localStorage.setItem(KEY, os); } catch (e) {} }
+  }
+  var start = "ios";
+  if (location.hash === "#android") {
+    start = "android";
+  } else {
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved === "ios" || saved === "android") { start = saved; }
+    } catch (e) {}
+  }
+  root.setAttribute("data-os", start);
+  document.addEventListener("DOMContentLoaded", function () { syncButtons(root.getAttribute("data-os")); });
+  document.addEventListener("click", function (event) {
+    var button = event.target.closest ? event.target.closest("[data-set-os]") : null;
+    if (button) { apply(button.getAttribute("data-set-os"), true); }
+  });
+  window.addEventListener("hashchange", function () {
+    if (location.hash === "#android") { apply("android", true); }
+  });
+})();
+</script>
+
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <a class="topbar-brand" href="#inicio"><img src="img/tresvizo-marca.png" alt="" width="385" height="444"><span>Guía rápida MeridianV</span></a>
+    <div class="os-switch" role="group" aria-label="Tu teléfono">
+      <button type="button" id="os-ios" data-set-os="ios" aria-pressed="true">iPhone</button>
+      <button type="button" id="os-android" data-set-os="android" aria-pressed="false">Android</button>
+    </div>
+  </div>
+</div>
+
+<header class="masthead" id="inicio">
+  <div class="wrap">
+    <img class="logo" src="img/tresvizo-logo.png" alt="TresVizo" width="990" height="444">
+    <p class="eyebrow">Receptor GNSS · TresVizo Field</p>
+    <h1>Guía rápida MeridianV</h1>
+    <p class="lede">Lo del primer día en campo: encender el receptor, conectarlo a la app, ingresar la altura de antena, activar la compensación de inclinación y capturar tu primer punto.</p>
+    <p class="meta">Firmware del receptor 0.10.0 · Octubre de 2026 · <span data-os="ios">Edición para iPhone</span><span data-os="android">Edición para Android</span></p>
+    <p class="os-hint">Elige tu teléfono en la barra de arriba: cambian las capturas y las rutas de menú.</p>
+    <p class="downloads"><span>Para imprimir:</span><a href="guia-meridianv-iphone.pdf" download>PDF para iPhone</a><a href="guia-meridianv-android.pdf" download>PDF para Android</a></p>
+  </div>
+</header>
+
+<div class="wrap intro">
+  <section aria-labelledby="t-necesitas">
+    <h2 id="t-necesitas">Lo que necesitas</h2>
+    <ul class="needs">
+      <li>El receptor MeridianV cargado. Se carga por USB-C.</li>
+      <li>Un teléfono con TresVizo Field.</li>
+      <li>Un bastón con rosca de 5/8" o una base nivelante, y su altura.</li>
+      <li>Para RTK: los datos de tu servicio NTRIP (servidor, puerto, punto de montaje, usuario y contraseña) o un segundo receptor como base.</li>
+      <li>Para posproceso: una microSD en FAT32.</li>
+    </ul>
+  </section>
+  <nav class="toc" aria-labelledby="t-contenido">
+    <h2 id="t-contenido">Contenido</h2>
+    <ol>
+      <li><a href="#receptor">El receptor</a></li>
+      <li><a href="#conectar">Conectar la app</a></li>
+      <li><a href="#altura">Altura de antena</a></li>
+      <li><a href="#imu">Compensación de inclinación</a></li>
+      <li><a href="#correcciones">Correcciones</a></li>
+      <li><a href="#medir">Medir</a></li>
+      <li><a href="#bateria">Batería del receptor</a></li>
+      <li><a href="#firmware">Actualizar el firmware</a></li>
+      <li><a href="#ppk">Grabar para posproceso</a></li>
+      <li><a href="#problemas">Problemas frecuentes</a></li>
+    </ol>
+  </nav>
+</div>
+
+<div class="wrap">
+  <section class="glance" aria-labelledby="t-mirada">
+    <h2 id="t-mirada">En una mirada</h2>
+    <dl>
+      <div><dt>Botón</dt><dd><b>1&nbsp;s</b> encender · <b>2&nbsp;s</b> apagar · <b>10&nbsp;s</b> reiniciar</dd></div>
+      <div><dt>Red Wi-Fi del receptor</dt><dd><b>MeridianV-XXXXXX</b><br>Contraseña de fábrica <code>TresVizoRTK</code></dd></div>
+      <div><dt>Panel web</dt><dd><b>192.168.4.1</b><br>desde la red del receptor</dd></div>
+      <div><dt>Altura de antena</dt><dd>Del suelo a la <b>base del receptor</b>. La app suma 0.116&nbsp;m.</dd></div>
+      <div><dt>Inclinación</dt><dd>Hasta <b>30°</b>. La IMU sale calibrada de fábrica; balancea con RTK fijo.</dd></div>
+      <div><dt>Sin correcciones</dt><dd>El FIJO se sostiene <b>30&nbsp;s</b>; después se pierde.</dd></div>
+    </dl>
+  </section>
+</div>
+
+<main class="wrap">
+
+<!-- 1 · El receptor -->
+<section class="chapter" id="receptor" aria-labelledby="h-receptor">
+  <div class="chapter-head">
+    <span class="hexno" aria-hidden="true"><svg viewBox="0 0 28 32"><path class="s-brand" d="M14 1.6 26.4 8.8v14.4L14 30.4 1.6 23.2V8.8Z" fill="none" stroke="#008AFC" stroke-width="2.2" stroke-linejoin="round"/></svg><span>1</span></span>
+    <h2 id="h-receptor">El receptor</h2>
+  </div>
+  <p class="chapter-lede">El MeridianV tiene un solo botón, en la cara plana del frente, una pantalla pequeña y un puerto USB-C. Lo demás se hace desde la app.</p>
+
+  <h3>El botón</h3>
+  <div class="press">
+    <div>
+      <span class="dur">1<small>s</small></span>
+      <div><h4>Encender</h4><p>Con el receptor apagado, mantén presionado el botón 1&nbsp;s.</p></div>
+    </div>
+    <div>
+      <span class="dur">2<small>s</small></span>
+      <div><h4>Apagar</h4><p>Mantenlo presionado 2&nbsp;s. Cuando la pantalla diga «APAGANDO», suéltalo: el receptor cierra la grabación, si hay una, y se apaga.</p></div>
+    </div>
+    <div>
+      <span class="dur">10<small>s</small></span>
+      <div><h4>Reiniciar</h4><p>Si no responde, mantenlo presionado 10&nbsp;s: se reinicia en vez de apagarse. Por eso, para apagar, suelta en cuanto veas «APAGANDO».</p></div>
+    </div>
+  </div>
+  <div class="prose" style="margin-top:1rem">
+    <p>Un toque corto no hace nada.</p>
+    <p>Con el cable USB conectado, el receptor no se apaga del todo: la pantalla dice «Sigue alimentado». Se apaga solo un segundo después de quitar el cable.</p>
+  </div>
+
+  <h3>La pantalla</h3>
+  <div class="prose">
+    <p>Al encender verás el logo unos 10&nbsp;s, luego «INICIANDO» y después la pantalla principal, que se actualiza cada segundo. No tiene más páginas, no se apaga sola y escribe sin acentos.</p>
+  </div>
+  <div class="oled-row">
+    <figure class="oled-fig">
+      <div class="oled" role="img" aria-label="Pantalla principal: MeridianV-E828 0.10.0, FIJO, 78%, SAT 23, CORR. NTRIP 1.2&nbsp;s, MEM INT. LISTA, AP 192.168.4.1">
+        <span class="y0">MeridianV-E828 0.10.0</span>
+        <span class="hr"></span>
+        <span class="y13 big">FIJO</span>
+        <span class="y13 r">78%</span>
+        <span class="y31">SAT 23</span>
+        <span class="y39">CORR. NTRIP 1.2&nbsp;s</span>
+        <span class="y47">MEM INT. LISTA</span>
+        <span class="y56">AP 192.168.4.1</span>
+      </div>
+      <figcaption>Pantalla principal, a tamaño ampliado. Ejemplo del receptor MeridianV-E828 con el firmware 0.10.0.</figcaption>
+    </figure>
+    <dl class="oled-key">
+      <div><dt><span class="chip">MeridianV-E828 0.10.0</span></dt><dd>Nombre del receptor y versión del firmware.</dd></div>
+      <div><dt><span class="chip">FIJO</span></dt><dd>Calidad de la posición: FIJO, FLOTANTE, DGPS, AUTONOMO, ESTIMADO o SIN POS. «ESPERA»: el módulo GNSS todavía no manda datos. «ANTIGUO»: no hay posición nueva desde hace más de 2&nbsp;s.</dd></div>
+      <div><dt><span class="chip">78%</span></dt><dd>Batería. Debajo dice «CARGA» mientras carga. «--%»: sin lectura.</dd></div>
+      <div><dt><span class="chip">SAT 23</span></dt><dd>Satélites.</dd></div>
+      <div><dt><span class="chip">CORR. NTRIP 1.2&nbsp;s</span></dt><dd>Fuente de las correcciones y su edad. «NTRIP» es NTRIP del receptor; «BLE», NTRIP por el teléfono. «CORR. -- --»: sin fuente.</dd></div>
+      <div><dt><span class="chip">MEM INT. LISTA</span></dt><dd>Grabación. «MEM INT.» es la memoria interna, la microSD. También: «GRABANDO», «CERRANDO», «OCUPADA», «NO DISP.» (sin tarjeta) y «REVISAR».</dd></div>
+      <div><dt><span class="chip">AP 192.168.4.1</span></dt><dd>Red Wi-Fi del receptor y dirección de su panel web. Con «IP …», el receptor está conectado a otra red.</dd></div>
+    </dl>
+  </div>
+  <div class="oled-variants">
+    <figure>
+      <div class="oled sm" role="img" aria-label="Cargando: 85% y CARGA">
+        <span class="y0">MeridianV-E828 0.10.0</span>
+        <span class="hr"></span>
+        <span class="y13 big">FIJO</span>
+        <span class="y13 r">85%</span>
+        <span class="y21 r">CARGA</span>
+        <span class="y31">SAT 23</span>
+        <span class="y39">CORR. NTRIP 1.2&nbsp;s</span>
+        <span class="y47">MEM INT. LISTA</span>
+        <span class="y56">AP 192.168.4.1</span>
+      </div>
+      <figcaption>Cargando.</figcaption>
+    </figure>
+    <figure>
+      <div class="oled sm" role="img" aria-label="Batería baja: BATERIA BAJA 25 MIN en negativo, abajo">
+        <span class="y0">MeridianV-E828 0.10.0</span>
+        <span class="hr"></span>
+        <span class="y13 big">FIJO</span>
+        <span class="y13 r">12%</span>
+        <span class="y31">SAT 23</span>
+        <span class="y39">CORR. NTRIP 1.2&nbsp;s</span>
+        <span class="y47">MEM INT. LISTA</span>
+        <span class="band"></span>
+        <span class="y56 inv">BATERIA BAJA 25 MIN</span>
+      </div>
+      <figcaption>Batería baja: el aviso ocupa la última línea.</figcaption>
+    </figure>
+    <figure>
+      <div class="oled sm" role="img" aria-label="Apagando: APAGANDO, Cerrando memoria">
+        <span class="y8">APAGANDO</span>
+        <span class="y24">Cerrando memoria</span>
+      </div>
+      <figcaption>Apagando, con una grabación abierta.</figcaption>
+    </figure>
+  </div>
+  <div class="prose" style="margin-top:1.25rem">
+    <p class="muted">La pantalla no dice si el receptor es base o rover, ni cómo va la inclinación. Eso está en la app.</p>
+  </div>
+
+  <h3>Carga</h3>
+  <div class="prose">
+    <p>Carga por el USB-C del receptor, con un cargador de 5&nbsp;V. Mientras carga, la pantalla dice «CARGA» bajo el porcentaje. Puedes usarlo mientras carga.</p>
+  </div>
+
+  <h3>Número de serie y red Wi-Fi</h3>
+  <div class="prose">
+    <p>El número de serie es «MV-» y 12 caracteres, por ejemplo <code>MV-441BF674E828</code>. Viene en el código QR de la etiqueta, pegada por dentro de la tapa del costado que cubre el USB-C y la microSD (se ve al abrirla), y en la app: <span class="route">Receptor <i>›</i> Sistema y firmware <i>›</i> Número de serie</span>.</p>
+    <p>El receptor tiene su propia red Wi-Fi, <strong>MeridianV-XXXXXX</strong>. XXXXXX son los 6 últimos caracteres del número de serie: el <code>MV-441BF674E828</code> crea la red <strong>MeridianV-74E828</strong>. Con ese mismo nombre aparece por Bluetooth y en la pantalla. Con el firmware 0.10.0 eran solo los 4 últimos (<strong>MeridianV-E828</strong>): al actualizar, la red cambia de nombre y la app te lo avisa.</p>
+    <p>La contraseña de fábrica es <code>TresVizoRTK</code>, igual en todas las unidades. La app te avisa: «El receptor usa la contraseña de fábrica, igual en todas las unidades. Cámbiala.» Cámbiala en <span class="route" data-os="ios">Receptor <i>›</i> Red Wi-Fi <i>›</i> Red del receptor</span><span class="route" data-os="android">Receptor <i>›</i> Conexiones <i>›</i> Red Wi-Fi</span>: de 8 a 63 caracteres, sin acentos ni ñ.</p>
+    <p>La red está siempre activa y admite hasta 4 teléfonos o computadoras a la vez.</p>
+  </div>
+
+  <h3>El panel web</h3>
+  <div class="prose">
+    <p>Conecta el teléfono o la computadora a la red MeridianV-XXXXXX y abre <code>http://192.168.4.1</code> en el navegador. Si el receptor está conectado a otra red, usa <code>meridianv-xxxxxx.local</code> (en minúsculas, por ejemplo <code>meridianv-74e828.local</code>) o la IP que muestra la pantalla.</p>
+    <p>El panel tiene Campo, Base / rover, Correcciones, Grabación / PPK, Conexiones y Configuración. Sirve para grabar sin la app, para actualizar el firmware con un archivo y para generar el archivo de diagnóstico que pide soporte técnico.</p>
+  </div>
+</section>
+
+<!-- 2 · Conectar la app -->
+<section class="chapter" id="conectar" aria-labelledby="h-conectar">
+  <div class="chapter-head">
+    <span class="hexno" aria-hidden="true"><svg viewBox="0 0 28 32"><path class="s-brand" d="M14 1.6 26.4 8.8v14.4L14 30.4 1.6 23.2V8.8Z" fill="none" stroke="#008AFC" stroke-width="2.2" stroke-linejoin="round"/></svg><span>2</span></span>
+    <h2 id="h-conectar">Conectar la app</h2>
+  </div>
+  <p class="chapter-lede">La app se conecta al receptor por Bluetooth. No lo emparejes en los ajustes del teléfono: el receptor no pide PIN y la app lo encuentra sola.</p>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <ol class="steps">
+        <li>Enciende el receptor y espera la pantalla principal.</li>
+        <li>Abre TresVizo Field en la pestaña <span class="ui">Receptor</span>. En <span class="ui">Receptores</span>, bajo <span class="ui">Cerca</span>, aparece como «MeridianV · 74E828»: el modelo y la terminación del nombre de su red.</li>
+        <li>Toca <span class="ui">Conectar</span>.</li>
+        <li>La primera vez, el teléfono pide permiso de Bluetooth. Acéptalo.<span data-os="android"> En Android 12 o posterior es el permiso de dispositivos cercanos; en Android 11 o anterior, además, la ubicación del teléfono tiene que estar encendida.</span></li>
+      </ol>
+      <p>Si sale «No se encontraron receptores», revisa que el receptor esté encendido y a menos de 10&nbsp;m, y toca <span class="ui">Reintentar</span>. La búsqueda se detiene sola a los 30&nbsp;s.</p>
+      <p>Solo un teléfono a la vez por Bluetooth: mientras uno está conectado, el receptor no aparece en los demás.</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/02-conectado-fijo.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Receptor de la app en iPhone: placa FIJO, latitud, longitud y altura, precisión H 10&nbsp;mm y V 21&nbsp;mm, 38 satélites y 0&nbsp;s de correcciones.">
+      <img data-os="android" src="img/android/02-conectado-fijo.jpg" width="640" height="1422" loading="lazy" alt="Pantalla Receptor de la app en Android: MeridianV · C3D4 en FIJO, con precisión H 12&nbsp;mm y V 21&nbsp;mm, 24 satélites y la lista Estado, Modo, Correcciones, Configuración GNSS e IMU.">
+      <figcaption><span data-os="ios">Conectado y en FIJO. El enlace, arriba a la derecha de la tarjeta, dice por dónde está conectada la app; en esta captura, Wi-Fi.</span><span data-os="android">Conectado y en FIJO. El enlace, arriba a la derecha de la tarjeta, dice por dónde está conectada la app; aquí, Bluetooth y Wi-Fi a la vez.</span></figcaption>
+    </figure>
+  </div>
+
+  <h3>Bluetooth o Wi-Fi</h3>
+  <div class="prose">
+    <p>Trabaja por Bluetooth y usa el Wi-Fi para mover archivos. La app lo dice así:</p>
+    <p class="say">«Por Wi-Fi la posición se actualiza a intervalos. Para capturar, usa Bluetooth.»</p>
+    <p class="say">«Descargar grabaciones y actualizar el firmware requieren Wi-Fi.»</p>
+    <p>Para conectar por Wi-Fi, conecta el teléfono a la red MeridianV-XXXXXX. Luego, en <span class="ui">Receptores</span> › <span class="ui">Otras formas de conectar</span>, toca <span class="ui">Buscar en la red Wi-Fi</span> o <span class="ui">Agregar por dirección IP</span> con <code>192.168.4.1</code>.<span data-os="android"> En Android también puedes tocar <span class="ui">Conectarse a la red del receptor</span>: Android pide permiso y se une a la red desde la app.</span></p>
+  </div>
+
+  <div data-os="android">
+    <div class="step has-shot">
+      <div class="prose">
+        <h3 style="margin-top:0">Haz esto una vez en Android</h3>
+        <p>Excluye la app de la optimización de batería. Si no, Android puede detener la conexión con el receptor cuando la app queda en segundo plano y cortar las correcciones.</p>
+        <p>Entra a <span class="route">Cuenta <i>›</i> Campo <i>›</i> Optimización de batería</span> y, en la lista del sistema, excluye TresVizo Field.</p>
+      </div>
+      <figure class="shot">
+        <img src="img/android/16-optimizacion-bateria.jpg" width="640" height="1422" loading="lazy" alt="Pestaña Cuenta en Android, sección Campo: Vibración, Sonidos y la fila Optimización de batería con su explicación.">
+        <figcaption>Cuenta › Campo › Optimización de batería.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · Altura de antena -->
+<section class="chapter" id="altura" aria-labelledby="h-altura">
+  <div class="chapter-head">
+    <span class="hexno" aria-hidden="true"><svg viewBox="0 0 28 32"><path class="s-brand" d="M14 1.6 26.4 8.8v14.4L14 30.4 1.6 23.2V8.8Z" fill="none" stroke="#008AFC" stroke-width="2.2" stroke-linejoin="round"/></svg><span>3</span></span>
+    <h2 id="h-altura">Altura de antena</h2>
+  </div>
+  <p class="chapter-lede">Mídela vertical, del suelo a la base del receptor. No a la antena.</p>
+
+  <div class="dwg-fig">
+    <svg class="dwg" viewBox="0 0 520 600" role="img" aria-labelledby="dwg-t dwg-d" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="15">
+      <title id="dwg-t">Altura de antena del MeridianV</title>
+      <desc id="dwg-d">Dibujo a escala de un bastón de 1.800&nbsp;m con el receptor encima. La altura de antena va del suelo a la base del receptor. En el detalle, de la base del receptor a la base de la antena hay 0.116&nbsp;m, que suma la app.</desc>
+      <!-- Vista general, 0.25 unidades por mm -->
+      <g>
+        <line class="s-ink" x1="10" y1="560" x2="250" y2="560" stroke="#0F2A4A" stroke-width="2"/>
+        <g class="s-ground" stroke="#8D9AA9" stroke-width="1.2">
+          <line x1="30" y1="561" x2="20" y2="573"/><line x1="48" y1="561" x2="38" y2="573"/><line x1="66" y1="561" x2="56" y2="573"/><line x1="84" y1="561" x2="74" y2="573"/><line x1="102" y1="561" x2="92" y2="573"/><line x1="120" y1="561" x2="110" y2="573"/><line x1="138" y1="561" x2="128" y2="573"/><line x1="156" y1="561" x2="146" y2="573"/><line x1="174" y1="561" x2="164" y2="573"/><line x1="192" y1="561" x2="182" y2="573"/><line x1="210" y1="561" x2="200" y2="573"/><line x1="228" y1="561" x2="218" y2="573"/><line x1="246" y1="561" x2="236" y2="573"/>
+        </g>
+        <polygon class="f-pole s-ink" points="66,544 74,544 70,560" fill="#C4CFDC" stroke="#0F2A4A" stroke-width="1"/>
+        <rect class="f-pole s-ink" x="66" y="110" width="8" height="434" fill="#C4CFDC" stroke="#0F2A4A" stroke-width="1"/>
+        <rect class="f-rx s-ink" x="63" y="81" width="14" height="29" rx="1.5" fill="#D3E4FA" stroke="#0F2A4A" stroke-width="1"/>
+        <rect class="f-surf s-ink" x="64.5" y="70.8" width="11" height="10.2" rx="3" fill="#FFFFFF" stroke="#0F2A4A" stroke-width="1"/>
+        <circle class="s-act" cx="70" cy="92" r="27" fill="none" stroke="#006BD6" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <line class="s-act" x1="96" y1="85" x2="281" y2="50" stroke="#006BD6" stroke-width="1" stroke-dasharray="4 3"/>
+        <text class="lbl f-ink2" x="58" y="300" text-anchor="end" fill="#536175">Bastón</text>
+        <text class="lbl f-ink2" x="60" y="548" text-anchor="end" fill="#536175">Marca</text>
+        <!-- Cota 1.800&nbsp;m -->
+        <line class="s-act" x1="80" y1="110" x2="140" y2="110" stroke="#006BD6" stroke-width="1"/>
+        <line class="s-act" x1="130" y1="110" x2="130" y2="560" stroke="#006BD6" stroke-width="1.6"/>
+        <polygon class="f-act" points="125.5,124 134.5,124 130,110" fill="#006BD6"/>
+        <polygon class="f-act" points="125.5,546 134.5,546 130,560" fill="#006BD6"/>
+        <text class="val f-act" font-family="Barlow Semi Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="24" x="144" y="482" fill="#006BD6">1.800&nbsp;m</text>
+        <text class="lbl f-ink2" x="144" y="504" fill="#536175">altura de antena</text>
+        <!-- Escala 50&nbsp;cm -->
+        <g class="s-rule" stroke="#536175" stroke-width="1.2">
+          <line x1="10" y1="590" x2="135" y2="590"/><line x1="10" y1="584" x2="10" y2="596"/><line x1="135" y1="584" x2="135" y2="596"/><line x1="72.5" y1="587" x2="72.5" y2="593"/>
+        </g>
+        <text class="lbl f-ink2" x="142" y="595" fill="#536175">50&nbsp;cm</text>
+      </g>
+      <!-- Detalle, 2 unidades por mm -->
+      <g>
+        <path class="f-pole s-ink" d="M313 330 V392 L325 400 L337 390 L349 400 L361 390 L377 398 V330 Z" fill="#C4CFDC" stroke="#0F2A4A" stroke-width="1.5" stroke-linejoin="round"/>
+        <rect class="f-rx s-ink" x="289" y="98" width="112" height="232" rx="6" fill="#D3E4FA" stroke="#0F2A4A" stroke-width="1.5"/>
+        <path class="f-surf s-ink" d="M301.5 98 V42 Q301.5 16.4 327 16.4 H363 Q388.5 16.4 388.5 42 V98 Z" fill="#FFFFFF" stroke="#0F2A4A" stroke-width="1.5"/>
+        <line class="s-act" x1="276" y1="330" x2="414" y2="330" stroke="#006BD6" stroke-width="2.4"/>
+        <line class="s-ink" x1="276" y1="98" x2="414" y2="98" stroke="#0F2A4A" stroke-width="1.2" stroke-dasharray="5 3"/>
+        <text class="lbl f-ink2" x="281" y="92" text-anchor="end" fill="#536175">Base de la antena</text>
+        <text class="lbl f-ink2" x="281" y="324" text-anchor="end" fill="#536175">Base del receptor</text>
+        <text class="lbl f-ink2" x="281" y="345" text-anchor="end" fill="#536175">rosca de 5/8"</text>
+        <!-- Cota 0.116&nbsp;m -->
+        <line class="s-ink" x1="424" y1="98" x2="424" y2="330" stroke="#0F2A4A" stroke-width="1.6"/>
+        <polygon class="f-head" points="419.5,112 428.5,112 424,98" fill="#0F2A4A"/>
+        <polygon class="f-head" points="419.5,316 428.5,316 424,330" fill="#0F2A4A"/>
+        <line class="s-ink" x1="414" y1="98" x2="432" y2="98" stroke="#0F2A4A" stroke-width="1"/>
+        <line class="s-ink" x1="414" y1="330" x2="432" y2="330" stroke="#0F2A4A" stroke-width="1"/>
+        <text class="val f-head" font-family="Barlow Semi Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="24" x="434" y="214" fill="#0F2A4A">0.116&nbsp;m</text>
+        <text class="lbl f-ink2" x="434" y="236" fill="#536175">lo suma</text>
+        <text class="lbl f-ink2" x="434" y="255" fill="#536175">la app</text>
+        <!-- Escala 5&nbsp;cm -->
+        <g class="s-rule" stroke="#536175" stroke-width="1.2">
+          <line x1="289" y1="432" x2="389" y2="432"/><line x1="289" y1="426" x2="289" y2="438"/><line x1="389" y1="426" x2="389" y2="438"/><line x1="339" y1="429" x2="339" y2="435"/>
+        </g>
+        <text class="lbl f-ink2" x="396" y="437" fill="#536175">5&nbsp;cm</text>
+      </g>
+    </svg>
+    <div class="dwg-key">
+      <div><b class="k1">1.800&nbsp;m</b><p><strong>Altura de antena.</strong> Del suelo, la marca, a la base del receptor: el asiento de la rosca de 5/8" donde entra el bastón o el adaptador de la base nivelante. La mides tú y la ingresas.</p></div>
+      <div><b class="k2">0.116&nbsp;m</b><p>De la base del receptor a la base de la antena. La app lo suma sola: no lo sumes tú.</p></div>
+      <p class="small muted">Dibujo a escala, con un bastón de 1.800&nbsp;m. El detalle está 8 veces más grande.</p>
+    </div>
+  </div>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <p>Con el bastón a 1.800&nbsp;m, ingresa <strong>1.800&nbsp;m</strong>. La base de la antena queda a 1.916&nbsp;m del suelo; esa cuenta la hace la app.</p>
+      <p>Los 0.116&nbsp;m no aparecen en pantalla. Van en el archivo que exportas, como <code>Desp_antena_m</code>.</p>
+      <p>La altura de antena es del proyecto: se ingresa al crearlo y se cambia en <span class="route" data-os="ios">proyecto <i>›</i> ••• <i>›</i> Ajustes de captura</span><span class="route" data-os="android">proyecto <i>›</i> ⋯ <i>›</i> Ajustes de captura</span>. Hay valores rápidos de 1.5, 1.8, 2.0 y 2.5&nbsp;m.</p>
+      <p>En una base, igual: vertical, de la marca a la base del receptor.</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/09-altura-antena.jpg" width="640" height="1391" loading="lazy" alt="Hoja Ajustes de captura en iPhone: Altura de antena 1.800&nbsp;m, con la nota Vertical, del suelo a la base del receptor.">
+      <img data-os="android" src="img/android/09-altura-antena.jpg" width="640" height="1422" loading="lazy" alt="Nuevo proyecto en Android: la rueda de Altura de antena abierta en 1.80&nbsp;m, con las unidades mm, cm y m.">
+      <figcaption><span data-os="ios">Ajustes de captura: «Vertical, del suelo a la base del receptor.»</span><span data-os="android">Al crear el proyecto, la altura se elige con una rueda que lleva la unidad.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 4 · IMU -->
+<section class="chapter" id="imu" aria-labelledby="h-imu">
+  <div class="chapter-head">
+    <span class="hexno" aria-hidden="true"><svg viewBox="0 0 28 32"><path class="s-brand" d="M14 1.6 26.4 8.8v14.4L14 30.4 1.6 23.2V8.8Z" fill="none" stroke="#008AFC" stroke-width="2.2" stroke-linejoin="round"/></svg><span>4</span></span>
+    <h2 id="h-imu">Compensación de inclinación</h2>
+  </div>
+  <p class="chapter-lede">Con la compensación de inclinación capturas con el bastón inclinado hasta 30°. La IMU del receptor sale calibrada de fábrica: en cada sesión solo balanceas el bastón.</p>
+  <div class="prose" style="margin-top:1rem">
+    <p>La compensación viene apagada. Enciéndela con <span class="ui">Compensación de inclinación</span> en <span class="route">Receptor <i>›</i> IMU</span> o en <span class="ui">Ajustes de captura</span>, sección Inclinación. El ajuste se guarda en el receptor.</p>
+  </div>
+
+  <div class="note" style="margin-top:1.75rem">
+    <p class="note-title">Calibrada de fábrica</p>
+    <p>La IMU del receptor sale calibrada de fábrica: no tienes que calibrarla tú. Después de un golpe fuerte o una caída, lleva el receptor a servicio técnico para que revisen la calibración. Hasta entonces, mide con el bastón vertical.</p>
+  </div>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <h3 style="margin-top:0">Balancear</h3>
+      <p>Balancear le da al receptor el rumbo. Hace falta RTK fijo.</p>
+      <p class="say">«Con la punta quieta en el suelo, balancea el bastón adelante y atrás, y luego de lado a lado, unos segundos.»</p>
+      <p>Inclínalo unos 5° o más hacia cada lado, en línea recta mejor que en círculo. Mientras falta, la app muestra la barra «Sin compensar» con esa indicación.</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/05b-inclinacion-balancea.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Receptor en iPhone con la barra naranja Sin compensar y la indicación de balancear el bastón.">
+      <img data-os="android" src="img/android/05b-inclinacion-balancea.jpg" width="640" height="1422" loading="lazy" alt="Pantalla Receptor en Android con el aviso Sin compensar y la indicación de balancear el bastón.">
+      <figcaption>Antes de balancear.</figcaption>
+    </figure>
+  </div>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <p>Cuando el rumbo está listo, la app muestra «Compensada», con la inclinación y la incertidumbre que agrega, y la fila IMU dice «Lista».</p>
+      <h4 style="margin-top:0.6rem">El rumbo caduca</h4>
+      <p>Dura 5 minutos (300&nbsp;s). También se pierde con un golpe y se va gastando si giras el receptor sobre el bastón. La app te pide balancear de nuevo:</p>
+      <ul>
+        <li>«El rumbo caducó: balancea de nuevo.»</li>
+        <li>«Hubo un golpe: balancea de nuevo.»</li>
+      </ul>
+      <h4 style="margin-top:0.6rem">Límites</h4>
+      <ul>
+        <li>Más de 30°: «Inclinación mayor de 30°. Endereza el bastón.»</li>
+        <li>«La compensación agregaría más de 2&nbsp;cm de incertidumbre. Endereza el bastón o balancea de nuevo.»</li>
+        <li>«La altura de antena no coincide con el balanceo. Revísala y balancea de nuevo.»</li>
+      </ul>
+      <p>Si al capturar no hay punta válida, el punto se guarda igual, sin compensar, y la app lo avisa.</p>
+      <p class="muted">En Receptor › IMU la app indica «Sin validar en campo.». Compara tus primeros puntos inclinados con el mismo punto medido con el bastón vertical.</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/05-inclinacion-lista.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Receptor en iPhone con la etiqueta verde Compensada · 7.4° · ±0.014&nbsp;m bajo la tarjeta de posición.">
+      <img data-os="android" src="img/android/05-inclinacion-lista.jpg" width="640" height="1422" loading="lazy" alt="Pantalla Receptor en Android con Compensada · 6.0° · ±0.013&nbsp;m y la fila IMU en Lista.">
+      <figcaption><span data-os="ios">Después: «Compensada · 7.4° · ±0.014&nbsp;m».</span><span data-os="android">Después: «Compensada · 6.0° · ±0.013&nbsp;m» e IMU «Lista».</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 5 · Correcciones -->
+<section class="chapter" id="correcciones" aria-labelledby="h-correcciones">
+  <div class="chapter-head">
+    <span class="hexno" aria-hidden="true"><svg viewBox="0 0 28 32"><path class="s-brand" d="M14 1.6 26.4 8.8v14.4L14 30.4 1.6 23.2V8.8Z" fill="none" stroke="#008AFC" stroke-width="2.2" stroke-linejoin="round"/></svg><span>5</span></span>
+    <h2 id="h-correcciones">Correcciones</h2>
+  </div>
+  <p class="chapter-lede">Para RTK, el receptor necesita correcciones. Usa una sola fuente a la vez: al elegir otra, se sustituye la actual.</p>
+  <div class="prose" style="margin-top:1rem">
+    <p>Todo está en <span class="route">Receptor <i>›</i> Correcciones</span>.</p>
+  </div>
+
+  <div class="pair">
+    <div>
+      <h4>NTRIP por el teléfono</h4>
+      <ul>
+        <li>La app recibe las correcciones por los datos del teléfono y se las pasa al receptor por Bluetooth.</li>
+        <li>Admite casters con TLS y VRS. Para VRS, activa «Enviar posición al caster»: se envía cada 10&nbsp;s.</li>
+        <li>Los datos del caster se guardan en el teléfono.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>NTRIP del receptor</h4>
+      <ul>
+        <li>El receptor se conecta solo a internet por una red Wi-Fi de 2.4&nbsp;GHz, por ejemplo el punto de acceso personal del teléfono. Agrégala en <span class="route" data-os="ios">Receptor <i>›</i> Red Wi-Fi</span><span class="route" data-os="android">Receptor <i>›</i> Conexiones <i>›</i> Red Wi-Fi</span>.</li>
+        <li>Guarda hasta 5 perfiles. En rover, el elegido se conecta solo al encender.</li>
+        <li>No admite TLS ni VRS: para esos casters, usa NTRIP por el teléfono.</li>
+        <li>Solo funciona en modo rover.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <h3 style="margin-top:0">Agregar un perfil</h3>
+      <p>Entra a <span class="route">Receptor <i>›</i> Correcciones <i>›</i> NTRIP del receptor <i>›</i> Agregar perfil</span> e ingresa servidor, puerto (2101 es el habitual), punto de montaje, usuario y contraseña. Toca <span class="ui">Guardar</span>.</p>
+      <p><span data-os="ios">También puedes tocar <span class="ui">Conectar sin guardar perfil</span>.</span><span data-os="android">Después aparecen <span class="ui">Conectar</span> y <span class="ui">Conectar al encender</span>.</span></p>
+      <p>Para NTRIP por el teléfono, los campos son los mismos y además TLS, versión y una lista de puntos de montaje.</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/06-correcciones-ntrip.jpg" width="640" height="1391" loading="lazy" alt="Hoja Agregar perfil en iPhone con RTK2go, rtk2go.com, puerto 2101 y punto de montaje MOUNTPOINT; usuario y contraseña vacíos.">
+      <img data-os="android" src="img/android/06-correcciones-ntrip.jpg" width="640" height="1422" loading="lazy" alt="Hoja Agregar perfil en Android sobre NTRIP del receptor, con rtk2go.com, puerto 2101 y punto de montaje MOUNTPOINT.">
+      <figcaption>Agregar perfil, con datos de ejemplo.</figcaption>
+    </figure>
+  </div>
+
+  <h3>Cuando se pierden</h3>
+  <div class="prose">
+    <p>El receptor mantiene el FIJO 30&nbsp;s sin correcciones nuevas. Después deja de estar en FIJO. Lo ves así:</p>
+    <ul>
+      <li>En la barra de estado, la edad de las correcciones se pone ámbar desde 5&nbsp;s y roja a más de 30&nbsp;s. «Sin corr.»: no hay fuente.</li>
+      <li>A los 30&nbsp;s llega el aviso «No llegan correcciones desde hace más de 30&nbsp;s. Revisa la fuente de correcciones.», con <span class="ui">Ver correcciones</span>.</li>
+      <li>En Correcciones, el enlace RTK dice «Correcciones con retraso. Revisa la red o el caster.» o «Sin correcciones desde hace más de 30&nbsp;s. Se perderá el RTK.»</li>
+      <li>Al capturar: «Correcciones ausentes o retrasadas.», según la «Edad máxima de correcciones» de Ajustes de captura.</li>
+      <li>En la pantalla del receptor, la edad sube hasta «CORR. NTRIP &gt;99&nbsp;s».</li>
+      <li data-os="android">El teléfono vibra al cortarse las correcciones (Cuenta › Campo › Vibración).</li>
+    </ul>
+  </div>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <h3 style="margin-top:0">Base propia</h3>
+      <p>Con dos receptores, uno puede ser la base. Abre el asistente en <span class="route" data-os="ios">Receptor <i>›</i> Modo <i>›</i> Base</span><span class="route" data-os="android">Receptor <i>›</i> Modo <i>›</i> Cambiar modo <i>›</i> Base <i>›</i> Asistente de base</span> y elige cómo conoces la coordenada:</p>
+      <ul>
+        <li><span class="ui">Coordenada conocida</span>: latitud y longitud WGS 84, altura elipsoidal del punto en el suelo y altura de antena. El desplazamiento de antena se suma solo.</li>
+        <li><span class="ui">Promediar con la app</span>: de 2 a 900&nbsp;s, con la calidad que exijas. Si se pierde esa calidad, el promedio se cancela. Aquí la altura de antena solo sirve para la altura de la marca.</li>
+      </ul>
+      <p>Siempre WGS 84 y altura elipsoidal: el receptor no transforma coordenadas.</p>
+      <p class="say">«Revisa la coordenada antes de transmitir: un error en la base afecta a todos los rovers.»</p>
+      <p>El rover recibe la base por NTRIP. Desde el panel web de la base (Correcciones), publica sus correcciones en un caster o usa el «Caster del receptor»: puerto 2101, punto de montaje <code>MERIDIANV</code>, hasta dos rovers.</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/07-base.jpg" width="640" height="1391" loading="lazy" alt="Asistente de base en iPhone: Paso 1 Método con Promediar con la app marcado; Paso 2 Datos con calidad FIJO, duración 2&nbsp;min, identificador de estación 1 y altura de antena 1.800.">
+      <img data-os="android" src="img/android/07-base.jpg" width="640" height="1422" loading="lazy" alt="Asistente de base en Android: Paso 1 Cómo se conoce la coordenada, con Promediar con la app marcado; Paso 2 Datos con calidad FIJO, duración 2&nbsp;min, identificador de estación 1 y altura de antena 1.800&nbsp;m.">
+      <figcaption>Asistente de base, promediando con la app.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 6 · Medir -->
+<section class="chapter" id="medir" aria-labelledby="h-medir">
+  <div class="chapter-head">
+    <span class="hexno" aria-hidden="true"><svg viewBox="0 0 28 32"><path class="s-brand" d="M14 1.6 26.4 8.8v14.4L14 30.4 1.6 23.2V8.8Z" fill="none" stroke="#008AFC" stroke-width="2.2" stroke-linejoin="round"/></svg><span>6</span></span>
+    <h2 id="h-medir">Medir</h2>
+  </div>
+  <p class="chapter-lede">Del proyecto nuevo al archivo exportado. Para capturar, la app debe estar conectada por Bluetooth.</p>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <h3 style="margin-top:0">1 · Crea el proyecto</h3>
+      <p>En <span class="route">Levantamiento</span> toca <span class="ui">Crear proyecto</span> o «+» arriba a la derecha. Ingresa el nombre, el sistema de coordenadas, el geoide y la altura de antena, y toca <span class="ui">Crear</span>.</p>
+      <p class="say">«El sistema de coordenadas no se puede cambiar después. Se puede exportar a otro.»</p>
+      <p>Con el geoide en «Ninguno», las alturas son elipsoidales. Elige un geoide si necesitas cotas.</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/08-nuevo-proyecto.jpg" width="640" height="1391" loading="lazy" alt="Hoja Nuevo proyecto en iPhone: Lote 14 Tepotzotlán, sistema WGS 84 / UTM zona 14N, geoide Ninguno, altura de antena 1.800&nbsp;m.">
+      <img data-os="android" src="img/android/08-nuevo-proyecto.jpg" width="640" height="1422" loading="lazy" alt="Hoja Nuevo proyecto en Android: Lote 14 Tepotzotlán, sistema WGS 84 / UTM zona 14N, geoide Ninguno, altura de antena 1.80&nbsp;m.">
+      <figcaption>Nuevo proyecto. La app propone el sistema de coordenadas.</figcaption>
+    </figure>
+  </div>
+
+  <div class="step">
+    <div class="prose">
+      <h3 style="margin-top:0">2 · Revisa la altura de antena</h3>
+      <p>Que sea la de tu bastón, medida como en la sección 3. Se cambia en <span class="route" data-os="ios">proyecto <i>›</i> ••• <i>›</i> Ajustes de captura</span><span class="route" data-os="android">proyecto <i>›</i> ⋯ <i>›</i> Ajustes de captura</span>. Si usas la compensación de inclinación, balancea ahora.</p>
+    </div>
+  </div>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <h3 style="margin-top:0">3 · Captura el punto</h3>
+      <p>Con la app en FIJO, pon el bastón sobre el punto. Toca el «+» de abajo al centro y luego <span data-os="ios"><span class="ui">Capturar P001</span></span><span data-os="android"><span class="ui">Capturar punto</span> › <span class="ui">Capturar P1</span></span>.</p>
+      <p>La app promedia los segundos que pide el proyecto y guarda el punto. Puedes agregar descripción y código. Arriba ves la altura de antena y el tiempo de promedio.<span data-os="android"> Al terminar sale «Guardado P1», con <span class="ui">Deshacer</span>.</span></p>
+      <p>Si la calidad o la precisión no llegan a lo que pide el proyecto, la app no captura. Las tolerancias están en Ajustes de captura.</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/10-capturando-punto.jpg" width="640" height="1391" loading="lazy" alt="Panel Capturar punto en iPhone sobre el mapa: altura 1.800&nbsp;m, 5&nbsp;s, coordenadas N, E y Z, punto P001 con código ESQUINA y la barra Promediando 2 de 5&nbsp;s.">
+      <img data-os="android" src="img/android/10-capturando-punto.jpg" width="640" height="1422" loading="lazy" alt="Panel Capturar punto en Android: altura 1.800&nbsp;m, 5&nbsp;s, coordenadas, Compensada · 4.6°, punto P1 con código ESQUINA y la barra Promediando 3 de 5&nbsp;s.">
+      <figcaption><span data-os="ios">Promediando: 2 de 5&nbsp;s.</span><span data-os="android">Promediando con la compensación activa: 3 de 5&nbsp;s.</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <h3 style="margin-top:0">Mapa</h3>
+      <p>El proyecto se abre en el mapa, con cada punto y su nombre. La lista de puntos está en el botón de abajo a la izquierda.</p>
+      <p>Para unir puntos en una línea: <span data-os="ios"><span class="route">toca un punto <i>›</i> Nueva línea</span>, toca los vértices en orden y, para cerrarla, <span class="ui">Cerrar como polígono</span>. Toca <span class="ui">Guardar</span>.</span><span data-os="android"><span class="route">Herramientas <i>›</i> Línea o polígono con puntos</span>, toca los vértices en orden y, para cerrarla, <span class="ui">Cerrar como polígono</span>. Toca <span class="ui">Guardar</span>.</span></p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/11-mapa-puntos.jpg" width="640" height="1391" loading="lazy" alt="Mapa del proyecto en iPhone con los puntos P001 a P008 y un polígono azul que une cuatro esquinas.">
+      <img data-os="android" src="img/android/11-mapa-puntos.jpg" width="640" height="1422" loading="lazy" alt="Mapa del proyecto en Android con los puntos P1 a P8 unidos por un polígono azul.">
+      <figcaption>Proyecto de ejemplo con ocho puntos y un lindero cerrado.</figcaption>
+    </figure>
+  </div>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <h3 style="margin-top:0">Replanteo</h3>
+      <p>Toca <span class="ui">Replantear</span>, arriba, y elige el punto<span data-os="android"> con <span class="ui">Elegir objetivo</span></span>. La vista <span class="ui">Mapa</span> muestra la distancia, cuánto te falta al norte o al sur y al este u oeste, y la diferencia de cota. Al llegar, toca <span class="ui">Marcar</span>.</p>
+      <p>Si prefieres solo números, cambia a la vista <span class="ui" data-os="ios">Placa</span><span class="ui" data-os="android">Valores</span>.</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/12-replanteo.jpg" width="640" height="1391" loading="lazy" alt="Replanteo en iPhone, vista Mapa, hacia P005: distancia 12.505&nbsp;m, más 1.576&nbsp;m al norte, más 12.406&nbsp;m al este, cota menos 0.014&nbsp;m, rellenar. Botón Marcar.">
+      <img data-os="android" src="img/android/12-replanteo.jpg" width="640" height="1422" loading="lazy" alt="Replanteo en Android, vista Mapa, hacia P3: distancia 47.950&nbsp;m, 37.873&nbsp;m al sur, 29.408&nbsp;m al este, cota menos 0.040&nbsp;m, rellenar. Botón Marcar.">
+      <figcaption>«A MANO» indica que el objetivo es un punto ingresado a mano, no medido.</figcaption>
+    </figure>
+  </div>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <h3 style="margin-top:0">Exportar</h3>
+      <p>En <span class="route" data-os="ios">proyecto <i>›</i> ••• <i>›</i> Exportar</span><span class="route" data-os="android">proyecto <i>›</i> ⋯ <i>›</i> Exportar</span> elige los formatos (CSV, GeoJSON, DXF y KML) y el sistema de coordenadas. Toca <span class="ui">Preparar archivos</span> y compártelos.</p>
+      <p class="say">«GeoJSON y KML se exportan en WGS 84. El DXF incluye un archivo con el sistema de coordenadas.»</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/13-exportar.jpg" width="640" height="1391" loading="lazy" alt="Hoja Exportar en iPhone: CSV y GeoJSON activados, DXF y KML apagados, sistema WGS 84 / UTM zona 14N y el botón Preparar archivos.">
+      <img data-os="android" src="img/android/13-exportar.jpg" width="640" height="1422" loading="lazy" alt="Hoja Exportar en Android: CSV y GeoJSON activados, DXF y KML apagados, sistema WGS 84 / UTM zona 14N y el botón Preparar archivos.">
+      <figcaption>Exportar.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 7 · Batería -->
+<section class="chapter" id="bateria" aria-labelledby="h-bateria">
+  <div class="chapter-head">
+    <span class="hexno" aria-hidden="true"><svg viewBox="0 0 28 32"><path class="s-brand" d="M14 1.6 26.4 8.8v14.4L14 30.4 1.6 23.2V8.8Z" fill="none" stroke="#008AFC" stroke-width="2.2" stroke-linejoin="round"/></svg><span>7</span></span>
+    <h2 id="h-bateria">Batería del receptor</h2>
+  </div>
+  <p class="chapter-lede">La batería del receptor está siempre en la barra de estado de la app y en su pantalla.</p>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <h3 style="margin-top:0">En la barra</h3>
+      <p><span data-os="ios">El porcentaje sale junto a «bat.».</span><span data-os="android">El porcentaje sale bajo la placa de calidad, con el icono de batería.</span> Se pone naranja con 20&nbsp;% o menos y rojo con 10&nbsp;% o menos. Con el cargador puesto lleva un rayo.</p>
+      <p>En <span class="route">Receptor <i>›</i> Estado</span>, la fila «Batería del receptor» muestra además el tiempo que queda, estimado.</p>
+      <p>El 0&nbsp;% es el momento en que el receptor se apaga solo, no la batería vacía.</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/03-receptor-estado.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Estado en iPhone: FIJO, 38 satélites, fuente de correcciones NTRIP del receptor y Batería del receptor 78&nbsp;% · quedan unos 5&nbsp;h 10&nbsp;min.">
+      <img data-os="android" src="img/android/03-receptor-estado.jpg" width="640" height="1422" loading="lazy" alt="Pantalla Estado en Android: FIJO, 24 satélites, fuente de correcciones NTRIP del receptor y Batería del receptor 78&nbsp;% · quedan unos 6&nbsp;h 50&nbsp;min.">
+      <figcaption>Receptor › Estado. El tiempo restante es una estimación.</figcaption>
+    </figure>
+  </div>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <h3 style="margin-top:0">Avisos y apagado automático</h3>
+      <ul>
+        <li><strong>Batería baja.</strong> «Batería del receptor baja: quedan unos 25&nbsp;min.» El teléfono vibra una vez y la pantalla del receptor lo muestra abajo, en negativo: «BATERIA BAJA 25 MIN».</li>
+        <li><strong>Batería crítica.</strong> «Batería crítica: el receptor se apagará en menos de un minuto.» Conecta el cargador ya.</li>
+        <li><strong>Apagado automático.</strong> Si la batería se queda en el mínimo un minuto sin cargador, el receptor cierra la grabación y se apaga.</li>
+      </ul>
+      <p>Con el cargador conectado no sale el aviso de batería baja.</p>
+      <p class="muted small">El panel web muestra otro porcentaje, el del medidor de la batería. Guíate por el de la app y la pantalla.</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/15-bateria-baja.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Receptor en iPhone con 12&nbsp;% en naranja en la barra de estado y el aviso Batería del receptor baja: quedan unos 25&nbsp;min.">
+      <img data-os="android" src="img/android/15-bateria-baja.jpg" width="640" height="1422" loading="lazy" alt="Pantalla Receptor en Android con 12&nbsp;% en naranja bajo la placa FIJO y el aviso Batería del receptor baja: quedan unos 25&nbsp;min.">
+      <figcaption>Aviso de batería baja, con el porcentaje en naranja.</figcaption>
+    </figure>
+  </div>
+  <div class="note" style="margin-top:1.75rem">
+    <p class="note-title">Cuida la batería</p>
+    <p>Cómo cargar, guardar y transportar el receptor y su batería de litio, y qué hacer si se daña: <a href="../seguridad/">Batería y seguridad</a>.</p>
+  </div>
+</section>
+
+<!-- 8 · Firmware -->
+<section class="chapter" id="firmware" aria-labelledby="h-firmware">
+  <div class="chapter-head">
+    <span class="hexno" aria-hidden="true"><svg viewBox="0 0 28 32"><path class="s-brand" d="M14 1.6 26.4 8.8v14.4L14 30.4 1.6 23.2V8.8Z" fill="none" stroke="#008AFC" stroke-width="2.2" stroke-linejoin="round"/></svg><span>8</span></span>
+    <h2 id="h-firmware">Actualizar el firmware</h2>
+  </div>
+  <p class="chapter-lede">Cuando la app trae un firmware más nuevo que el del receptor, te avisa al conectar.</p>
+
+  <div class="step has-shot">
+    <div class="prose">
+      <p class="say">«Hay una versión nueva del firmware del receptor: 0.10.1.»</p>
+      <ol class="steps">
+        <li>Conecta el teléfono al receptor por Wi-Fi. Por Bluetooth no se actualiza: «Actualizar el firmware requiere Wi-Fi.»</li>
+        <li>Toca <span class="ui">Ver</span> en el aviso, o entra a <span class="route">Receptor <i>›</i> Sistema y firmware</span>. Ahí está la «Versión incluida en la app».</li>
+        <li>Toca <span class="ui">Actualizar a 0.10.1</span> (el número es de ejemplo) y espera a que el receptor reinicie.</li>
+      </ol>
+      <p>Necesitas la batería del receptor arriba del 20&nbsp;% o el cargador puesto. Si no, sale «Batería del receptor baja (…). Conéctalo a la corriente para actualizar.» Tampoco se puede con NTRIP activo ni con una grabación en curso.</p>
+    </div>
+    <figure class="shot">
+      <img data-os="ios" src="img/ios/16-aviso-firmware-nuevo.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Receptor en iPhone con el aviso Hay una versión nueva del firmware del receptor: 0.10.1, y el botón Ver.">
+      <img data-os="android" src="img/android/14-firmware-disponible.jpg" width="640" height="415" loading="lazy" alt="Parte de arriba de la pantalla Sistema en Android: la fila Versión incluida en la app, 0.10.1, y el botón Actualizar a 0.10.1.">
+      <figcaption><span data-os="ios">El aviso al conectar. «Ver» abre Sistema y firmware.</span><span data-os="android">Sistema y firmware: la versión que trae la app y el botón para instalarla.</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="note warn" style="margin-top:1.5rem">
+    <p class="note-title">No actualices durante una medición</p>
+    <p>Si la actualización se interrumpe, el receptor conserva el firmware actual. Solo instala firmware firmado por TresVizo y, si la versión nueva no arranca bien, vuelve sola a la anterior.</p>
+  </div>
+
+  <h3>Otras formas</h3>
+  <div class="prose">
+    <p><strong>Con un archivo, desde la app.</strong> <span class="route">Sistema y firmware <i>›</i> Actualizar firmware <i>›</i> Elegir archivo de firmware <i>›</i> Cargar en el receptor</span>. «El archivo se verifica antes de enviarlo.» También va por Wi-Fi. Esta vía no revisa la batería: conecta el cargador antes.</p>
+    <p><strong>Desde el panel web.</strong> <span class="route">Configuración <i>›</i> Actualizar firmware</span>: elige los archivos oficiales <code>.bin</code> y <code>.json</code> y toca «Verificar, instalar y reiniciar». Los ajustes se conservan. Ahí mismo está «Restaurar firmware anterior».</p>
+    <p><strong>Por USB, desde una computadora.</strong> Con el programa «Cargar firmware»: elige el modelo, la imagen y el puerto, y toca «Cargar firmware». El modo «Actualización» conserva los ajustes. Hoy funciona en macOS o con Python.</p>
+  </div>
+</section>
+
+<!-- 9 · Grabar para posproceso -->
+<section class="chapter" id="ppk" aria-labelledby="h-ppk">
+  <div class="chapter-head">
+    <span class="hexno" aria-hidden="true"><svg viewBox="0 0 28 32"><path class="s-brand" d="M14 1.6 26.4 8.8v14.4L14 30.4 1.6 23.2V8.8Z" fill="none" stroke="#008AFC" stroke-width="2.2" stroke-linejoin="round"/></svg><span>9</span></span>
+    <h2 id="h-ppk">Grabar para posproceso</h2>
+  </div>
+  <p class="chapter-lede">El receptor graba datos crudos en una microSD. Tú los conviertes a RINEX en la computadora y haces el posproceso en tu programa: ni la app ni el receptor lo hacen.</p>
+  <div class="prose" style="margin-top:1rem">
+    <p>La microSD, en FAT32, va en la ranura del costado. En pantalla se llama «Memoria interna».</p>
+  </div>
+
+  <div class="step" style="margin-top:1.5rem">
+    <ol class="steps">
+      <li><strong>Activa los datos crudos</strong> (observaciones a 1&nbsp;Hz y efemérides cada 30&nbsp;s) en <span class="route" data-os="ios">Receptor <i>›</i> GNSS <i>›</i> Datos crudos (PPK) <i>›</i> Activar datos crudos</span><span class="route" data-os="android">Receptor <i>›</i> Configuración GNSS <i>›</i> Avanzado <i>›</i> Datos crudos (PPK)</span>, o en el panel web, <span class="route">Grabación / PPK <i>›</i> Activar datos crudos</span>. Si no lo haces, el receptor los activa solo al iniciar la grabación. Sin datos crudos, la grabación no sirve para posproceso: el panel web dice cuántas observaciones llegan.</li>
+      <li><strong>Inicia la grabación</strong> en <span class="route">Receptor <i>›</i> Sistema y firmware <i>›</i> Grabación <i>›</i> Iniciar grabación</span>. Funciona por Bluetooth. También puedes hacerlo desde el panel web, en <span class="route">Grabación / PPK <i>›</i> Iniciar grabación</span>. La pantalla del receptor dice «GRABANDO».</li>
+      <li><strong>Detén la grabación</strong> en el mismo sitio, con <span class="ui">Detener grabación</span>, y espera a que se cierre antes de apagar. Si apagas con el botón, el receptor la cierra antes de cortar. Cada 64&nbsp;MB (unas 2 a 4 horas con datos crudos) la grabación sigue sola en un archivo nuevo: no se corta.</li>
+      <li><strong>Descárgala por Wi-Fi</strong> en <span class="route">Receptor <i>›</i> Sistema y firmware <i>›</i> Descargar grabaciones</span> y toca <span class="ui">Compartir el archivo</span>. Puede tardar. Desde la lista del panel web se descarga mucho más rápido, con su nombre (unidad, fecha y hora: <code>MeridianV-74E828_20261019_1432UTC.bin</code>), y ahí también se borran las que ya descargaste.</li>
+      <li><strong>Conviértela a RINEX</strong> en la computadora. La app te lo recuerda: «Datos crudos del receptor (no RINEX). Conviértelos para posproceso.»</li>
+    </ol>
+  </div>
+
+  <h3>La herramienta de la computadora</h3>
+  <div class="prose">
+    <p>Es un programa de Python 3 con ventana; necesita Tk. Se abre así:</p>
+    <p class="cmd">python3 to_rinex_gui.py</p>
+    <p>Elige el archivo <code>.bin</code> (o <code>.part</code>, si la grabación se cortó), escribe la altura de antena hasta la base del receptor y el nombre del punto, y toca «Convertir a RINEX». La herramienta suma los 0.116&nbsp;m.</p>
+    <p>Salen dos archivos RINEX 3.04, <code>.obs</code> y <code>.nav</code>, con el nombre del punto, la fecha y la hora: <code>P01_20261020_143205.obs</code>.</p>
+    <p>Desde la terminal hace lo mismo:</p>
+    <p class="cmd">python3 to_rinex.py SESION.bin --antenna-height 1.800 --marker P01 --out ~/PPK</p>
+  </div>
+</section>
+
+<!-- 10 · Problemas frecuentes -->
+<section class="chapter" id="problemas" aria-labelledby="h-problemas">
+  <div class="chapter-head">
+    <span class="hexno" aria-hidden="true"><svg viewBox="0 0 28 32"><path class="s-brand" d="M14 1.6 26.4 8.8v14.4L14 30.4 1.6 23.2V8.8Z" fill="none" stroke="#008AFC" stroke-width="2.2" stroke-linejoin="round"/></svg><span>10</span></span>
+    <h2 id="h-problemas">Problemas frecuentes</h2>
+  </div>
+  <p class="chapter-lede">Los avisos del receptor salen en la pestaña Receptor, en «Avisos del receptor», tal como los manda el receptor. Algunos traen un botón.</p>
+
+  <h3 class="issues-group">Conexión</h3>
+  <div class="issues">
+    <div class="issue"><div><p class="msg">«No se encontraron receptores»</p></div><p class="fix">Revisa que el receptor esté encendido, a menos de 10&nbsp;m y sin otro teléfono conectado.<span data-os="android"> En Android 11 o anterior, enciende la ubicación.</span> Toca «Reintentar».</p></div>
+    <div class="issue"><div><p class="msg">La posición se actualiza a saltos</p></div><p class="fix">La app está conectada por Wi-Fi. Para capturar, conecta por Bluetooth.</p></div>
+    <div class="issue"><div><p class="msg">«Actualizar el firmware requiere Wi-Fi.»</p></div><p class="fix">Conecta el teléfono a la red MeridianV-XXXXXX y vuelve a intentarlo.</p></div>
+    <div class="issue"><div><p class="msg">El receptor no se apaga</p></div><p class="fix">Si la pantalla dice «Sigue alimentado», tiene el cable USB puesto: quítalo y se apaga en un segundo.</p></div>
+    <div class="issue" data-os="android"><div><p class="msg">La conexión se corta con la app en segundo plano</p></div><p class="fix">Excluye la app de la optimización de batería: Cuenta › Campo › Optimización de batería.</p></div>
+  </div>
+
+  <h3 class="issues-group">Posición</h3>
+  <div class="issues">
+    <div class="issue"><div><p class="msg"><span class="lvl e">Error</span>«El módulo GNSS no envía posiciones. Aplica una frecuencia de salida en los ajustes del receptor.»</p><span class="btn">Aplicar frecuencia</span></div><p class="fix">Toca el botón. Si sigue, reinicia el receptor.</p></div>
+    <div class="issue"><div><p class="msg"><span class="lvl e">Error</span>«Error del módulo GNSS. Reinicia el receptor.»</p><span class="btn">Ver diagnóstico</span></div><p class="fix">Reinicia el receptor.</p></div>
+    <div class="issue"><div><p class="msg">«Sin compensar» o «El rumbo caducó: balancea de nuevo.»</p></div><p class="fix">Con RTK fijo y la punta quieta, balancea el bastón. Si dice que pasa de 30°, endereza el bastón.</p></div>
+  </div>
+
+  <h3 class="issues-group">Correcciones y base</h3>
+  <div class="issues">
+    <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«No llegan correcciones desde hace más de 30&nbsp;s. Revisa la fuente de correcciones.»</p><span class="btn">Ver correcciones</span></div><p class="fix">Revisa el internet del teléfono o de la red Wi-Fi, los datos del caster y la conexión Bluetooth.</p></div>
+    <div class="issue"><div><p class="msg"><span class="lvl i">Info</span>«No hay redes Wi-Fi guardadas. Agrega una en Red Wi-Fi para usar NTRIP.»</p><span class="btn">Agregar red Wi-Fi</span></div><p class="fix">Solo importa si usas NTRIP del receptor. Agrega la red de 2.4&nbsp;GHz.</p></div>
+    <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«Las correcciones pueden no llegar al módulo GNSS. Revisa su configuración en los ajustes del receptor.»</p></div><p class="fix">Si sigue después de revisar los ajustes, avisa a soporte técnico.</p></div>
+    <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«El receptor está en modo base y tiene una entrada de correcciones activa. Detén la entrada de correcciones.»</p><span class="btn" data-os="ios">Detener la entrada</span><span class="btn" data-os="android">Detener correcciones</span></div><p class="fix">Toca el botón: una base no recibe correcciones.</p></div>
+    <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«Se publican correcciones, pero el receptor no está en modo base. Cambia a base o detén la publicación.»</p><span class="btn">Detener la publicación</span></div><p class="fix">Pasa el receptor a base o toca el botón.</p></div>
+    <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«La base no está enviando correcciones a los rovers. Vuelve a aplicar la base.»</p></div><p class="fix">Vuelve a aplicar la base en el asistente de base.</p></div>
+  </div>
+
+  <h3 class="issues-group">Batería</h3>
+  <div class="issues">
+    <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«Batería del receptor baja: quedan unos 25&nbsp;min.»</p></div><p class="fix">Conecta el cargador.</p></div>
+    <div class="issue"><div><p class="msg"><span class="lvl e">Error</span>«Batería crítica: el receptor se apagará en menos de un minuto.»</p></div><p class="fix">Conecta el cargador ya. Si grabas, detén la grabación.</p></div>
+    <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«Porcentaje de batería no disponible. El apagado por batería baja sigue activo.»</p></div><p class="fix">Puedes seguir trabajando. Avisa a soporte técnico.</p></div>
+    <div class="issue"><div><p class="msg"><span class="lvl e">Error</span>«Sin lectura de batería. El receptor no podrá apagarse solo con la batería baja; apágalo antes de que se agote.»</p></div><p class="fix">Apágalo tú antes de que se agote y avisa a soporte técnico.</p></div>
+  </div>
+
+  <h3 class="issues-group">Reinicios</h3>
+  <div class="issues">
+    <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«El receptor se reinició por una caída de tensión. Revisa la batería y el cable.»</p><span class="btn">Ver diagnóstico</span></div><p class="fix">Carga el receptor y revisa el cable USB-C.</p></div>
+    <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«El receptor se reinició por un error del firmware.»</p><span class="btn">Ver diagnóstico</span></div><p class="fix">Avisa a soporte técnico.</p></div>
+    <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«El receptor se reinició por un bloqueo del firmware. Anota qué estabas haciendo.»</p><span class="btn">Ver diagnóstico</span></div><p class="fix">Anótalo y avisa a soporte técnico.</p></div>
+  </div>
+
+  <div class="note" style="margin-top:2rem">
+    <p class="note-title">Para soporte técnico</p>
+    <p>Ten a la mano el número de serie (Receptor › Sistema y firmware). Si te lo piden, descarga el diagnóstico desde el panel web: Configuración › Más ajustes › Diagnóstico › «Descargar diagnóstico».</p>
+  </div>
+  <div class="note" style="margin-top:1rem">
+    <p class="note-title">¿No se resolvió?</p>
+    <p>Escríbenos con los datos que pide la página de <a href="../soporte/">Soporte</a>. Si el receptor necesita reparación, lee la <a href="../garantia/">Garantía</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap foot">
+  <img src="img/tresvizo-logo.png" alt="TresVizo" width="990" height="444">
+  <span>Guía rápida MeridianV · firmware 0.10.0 · TresVizo Field para iPhone y Android</span>
+  <nav class="site-nav" aria-label="Sitio">
+    <a href="../">Inicio</a>
+    <a href="../soporte/">Soporte</a>
+    <a href="../garantia/">Garantía</a>
+    <a href="../seguridad/">Batería y seguridad</a>
+    <a href="../geoides/">Geoides y sistemas</a>
+    <a href="../licencia/">Contrato de licencia</a>
+    <a href="../privacidad/">Política de privacidad</a>
+  </nav>
+</footer>
+</body>
+</html>
