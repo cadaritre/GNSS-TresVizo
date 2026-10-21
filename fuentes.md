@@ -84,3 +84,20 @@ Decisiones del propietario:
 | Temperatura de carga y de trabajo sin medir | `MV:docs/validacion/ficha-tecnica-meridianv.md:95` («de diseño, no medido»), `:102` («pendiente») |
 | UN 38.3 y Wh todavía no disponibles | `MV:docs/validacion/README.md:56-58` |
 | Sin homologación de los radios ni certificaciones NOM | `MV:docs/validacion/README.md:56-58`; `MV:docs/validacion/ficha-tecnica-meridianv.md:118` (LoRa «sin homologar») |
+
+## Garantía (`docs/garantia/`, borrador)
+
+| Afirmación | Fuente |
+| --- | --- |
+| Garante, domicilio, contacto | `PROP-21`, `PROP-21D` |
+| Domicilio para reclamaciones, alcance, duración, condiciones y mecanismos en la póliza | `LFPC` art. 78 |
+| Si no se puede reparar ni sustituir, devolución de lo pagado; bonificación | `LFPC` arts. 82 (restitución, rescisión o reducción del precio, y bonificación) y 92 Ter |
+| Refacciones y servicio durante la garantía y mientras se fabrique o venda | `LFPC` art. 80 |
+| Receptor 12 meses, batería 6 meses | `PROP-21` |
+| Contados a partir de la entrega | `LFPC` art. 77 |
+| Mínimo legal de 90 días | `LFPC` art. 77 (texto vigente, reformado DOF 11-01-2018; la reforma de 2023 a 12 meses para electrónicos no aparece en el texto vigente del 12-12-2025) |
+| Piezas repuestas con garantía nueva; sustitución renueva el plazo; el tiempo en reparación no cuenta | `LFPC` art. 83 |
+| Reparación que falla en 90 días naturales se repite sin costo | `LFPC` art. 81 |
+| Exclusión de agua y polvo; limitaciones de uso | Las de Batería y seguridad, arriba |
+| Cinco días hábiles para revocar una venta a distancia o fuera del establecimiento | `LFPC` arts. 51 y 56 |
+| Gastos de hacer efectiva la garantía fuera del lugar de compra, a cargo del proveedor | `LFPC` art. 79, segundo párrafo |
