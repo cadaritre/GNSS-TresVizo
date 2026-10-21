@@ -314,6 +314,7 @@ table.data td:first-child { font-weight: 600; color: var(--heading); }
 .model-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 1rem; }
 .model h3 { margin: 0; font-size: 1.375rem; }
 .tag { display: inline-block; font-family: var(--f-display); font-weight: 700; font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 999px; background: var(--action-soft); color: var(--action); white-space: nowrap; }
+.tag.alt { background: var(--band-2); color: var(--ink-2); border: 1px solid var(--rule); }
 .model dl { margin: 0; display: grid; gap: 0.5rem 1.25rem; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 560px) { .model dl { grid-template-columns: 9.5rem minmax(0, 1fr); } }
 .model dt { font-weight: 600; color: var(--ink-2); font-size: var(--t-s); }

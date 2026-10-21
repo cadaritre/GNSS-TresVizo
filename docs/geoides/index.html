@@ -28,7 +28,7 @@
       <p class="eyebrow">TresVizo Field</p>
       <h1>Geoides y sistemas de coordenadas</h1>
       <p class="lede">Los modelos y sistemas que usa la app para dar cotas y coordenadas: quién los publica, con qué licencia y cómo llegan a tu teléfono.</p>
-      <p class="doc-meta"><span>Actualizado el 20 de octubre de 2026</span></p>
+      <p class="doc-meta"><span>Actualizado el 21 de octubre de 2026</span></p>
     </div>
   </div>
 
@@ -48,10 +48,10 @@
         <h2 id="h-como"><span class="n">1</span>Cómo se obtienen</h2>
         <p>El receptor entrega alturas sobre el elipsoide. Para obtener cotas sobre el nivel medio del mar, la app resta la altura del geoide que elijas en el proyecto. Con el geoide en «Ninguno», las alturas son elipsoidales.</p>
         <ul>
-          <li><strong>Incluidos en la app.</strong> Los modelos de México vienen con TresVizo Field para iPhone y Android y funcionan sin conexión desde el primer día.</li>
-          <li><strong>Desde la app.</strong> Los modelos y sistemas de otros países se publican como paquetes que se descargan desde la propia app. Una vez descargados, se guardan en el teléfono y funcionan sin conexión.</li>
+          <li><strong>De fábrica.</strong> TresVizo Field para iPhone y Android trae WGS 84, Mexico ITRF2008 con sus zonas UTM 11N a 16N y los geoides GGM25 y GGM10 del INEGI. Funcionan sin conexión desde el primer día.</li>
+          <li><strong>Desde la app.</strong> Los demás modelos y los sistemas de otros países se bajan en <strong>Cuenta › Sistemas y geoides</strong>, solo cuando tú lo pides. Una vez bajados, se quedan en el teléfono y funcionan sin conexión.</li>
         </ul>
-        <p>Cada modelo se agrega a esta página con su autoridad y su licencia cuando se publica.</p>
+        <p>Lo que se puede bajar lo describe un catálogo firmado por TresVizo, publicado en las <a href="https://github.com/cadaritre/GNSS-TresVizo/releases">versiones de este repositorio</a> en GitHub. La app trae una copia del catálogo para mostrar la lista sin conexión y, al abrirse, busca uno más nuevo como mucho cada 12 horas. Antes de instalar un archivo, comprueba la firma del catálogo y el tamaño y la suma SHA-256 del archivo; si algo no coincide, no lo instala.</p>
         <div class="callout" style="margin-top:1rem">
           <p class="t">El geoide del proyecto</p>
           <p>Elige el mismo modelo que usa tu cliente o la obra. Entre dos modelos del mismo país puede haber decímetros de diferencia, así que compara siempre contra un punto de control con cota conocida.</p>
@@ -60,14 +60,14 @@
 
       <section id="geoides" aria-labelledby="h-geoides">
         <h2 id="h-geoides"><span class="n">2</span>Modelos de geoide</h2>
-        <p>Ordenados por país y, dentro de cada país, del vigente al histórico.</p>
+        <p>Ordenados por región y, dentro de cada una, del vigente al histórico.</p>
 
         <h3>México</h3>
         <div class="models">
           <article class="model" aria-labelledby="m-ggm25">
             <div class="model-head">
               <h3 id="m-ggm25">GGM25 · Geoide Gravimétrico Mexicano 2025</h3>
-              <span class="tag">Incluido en la app</span>
+              <span class="tag">De fábrica</span>
             </div>
             <dl>
               <dt>Autoridad</dt><dd>INEGI, Instituto Nacional de Estadística y Geografía</dd>
@@ -80,11 +80,10 @@
             </dl>
             <p class="attr">Fuente: INEGI, Geoide Gravimétrico Mexicano 2025 (GGM25). Recortado a México y redondeado al centímetro por TresVizo Field; la modificación no es de INEGI.</p>
           </article>
-
           <article class="model" aria-labelledby="m-ggm10">
             <div class="model-head">
               <h3 id="m-ggm10">GGM10 · Geoide Gravimétrico Mexicano 2010</h3>
-              <span class="tag">Incluido en la app</span>
+              <span class="tag">De fábrica</span>
             </div>
             <dl>
               <dt>Autoridad</dt><dd>INEGI, Instituto Nacional de Estadística y Geografía</dd>
@@ -98,29 +97,134 @@
             <p class="attr">Fuente: INEGI, Geoide Gravimétrico Mexicano 2010 (GGM10). Redondeado al centímetro por TresVizo Field; la modificación no es de INEGI.</p>
           </article>
         </div>
+
+        <h3>Mundo</h3>
+        <div class="models">
+          <article class="model" aria-labelledby="m-egm2008">
+            <div class="model-head">
+              <h3 id="m-egm2008">EGM2008 · modelo mundial</h3>
+              <span class="tag alt">Se descarga</span>
+            </div>
+            <dl>
+              <dt>Autoridad</dt><dd>NGA, National Geospatial-Intelligence Agency, Estados Unidos</dd>
+              <dt>Situación</dt><dd>Vigente</dd>
+              <dt>Malla</dt><dd>2.5′ de arco, la que publica la NGA, sin remuestrear. Cobertura mundial.</dd>
+              <dt>Referencia</dt><dd>WGS 84; altura vertical EGM2008 (EPSG:3855)</dd>
+              <dt>Exactitud declarada</dt><dd>0.10&nbsp;m</dd>
+              <dt>Licencia</dt><dd>Dominio público (Gobierno de los Estados Unidos)</dd>
+              <dt>Fuente</dt><dd><a href="https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84">earth-info.nga.mil</a></dd>
+              <dt>Descarga</dt><dd>10.6&nbsp;MB</dd>
+            </dl>
+            <p class="attr">EGM2008, National Geospatial-Intelligence Agency (NGA), EE. UU.; Pavlis, Holmes, Kenyon y Factor (2012), J. Geophys. Res. 117, B04406. TresVizo Field redondeó los valores al centímetro y ordenó las longitudes de −180° a 180°. No se remuestreó: la malla conserva el paso de 2,5′ que publica la NGA. La conversión es de TresVizo Field; la NGA no la respalda.</p>
+          </article>
+          <article class="model" aria-labelledby="m-egm96">
+            <div class="model-head">
+              <h3 id="m-egm96">EGM96 · modelo mundial</h3>
+              <span class="tag alt">Se descarga</span>
+            </div>
+            <dl>
+              <dt>Autoridad</dt><dd>NGA y NASA, Estados Unidos</dd>
+              <dt>Situación</dt><dd>Histórico</dd>
+              <dt>Malla</dt><dd>15′ de arco, la que publica la NGA, sin remuestrear. Cobertura mundial.</dd>
+              <dt>Referencia</dt><dd>WGS 84; altura vertical EGM96 (EPSG:5773)</dd>
+              <dt>Exactitud declarada</dt><dd>1&nbsp;m</dd>
+              <dt>Licencia</dt><dd>Dominio público (Gobierno de los Estados Unidos)</dd>
+              <dt>Fuente</dt><dd><a href="https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84">earth-info.nga.mil</a></dd>
+              <dt>Descarga</dt><dd>0.7&nbsp;MB</dd>
+            </dl>
+            <p class="attr">EGM96, National Geospatial-Intelligence Agency (NGA) y NASA, EE. UU.; Lemoine et al. (1998), NASA/TP-1998-206861. TresVizo Field redondeó los valores al centímetro y ordenó las longitudes de −180° a 180°. No se remuestreó: la malla conserva el paso de 15′ que publica la NGA. La conversión es de TresVizo Field; la NGA no la respalda.</p>
+          </article>
+        </div>
+
+        <h3>Brasil</h3>
+        <div class="models">
+          <article class="model" aria-labelledby="m-mapgeo2015">
+            <div class="model-head">
+              <h3 id="m-mapgeo2015">MAPGEO2015 · Brasil</h3>
+              <span class="tag alt">Se descarga</span>
+            </div>
+            <dl>
+              <dt>Autoridad</dt><dd>IBGE, Instituto Brasileiro de Geografia e Estatística, con la EPUSP</dd>
+              <dt>Situación</dt><dd>Histórico. Referido a la red altimétrica de Brasil anterior a REALT-2018 (Imbituba y Santana).</dd>
+              <dt>Malla</dt><dd>5′ de arco y la cobertura del modelo, sin remuestrear ni recortar</dd>
+              <dt>Referencia</dt><dd>GRS 1980; SIRGAS2000, época 2000.4</dd>
+              <dt>Exactitud declarada</dt><dd>0.17&nbsp;m</dd>
+              <dt>Licencia</dt><dd><a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Atribución 4.0 (CC BY 4.0)</a></dd>
+              <dt>Fuente</dt><dd><a href="https://www.ibge.gov.br/geociencias/informacoes-sobre-posicionamento-geodesico/servicos-para-posicionamento-geodesico/10855-modelo-de-ondulacao-geoidal.html">ibge.gov.br</a></dd>
+              <dt>Descarga</dt><dd>0.2&nbsp;MB</dd>
+            </dl>
+            <p class="attr">D. Blitzkow, A.C.O.C. de Matos, W.C. Machado, M.A. Nunes, N.V. Lengruber, E.M.L. Xavier, L.P.S. Fortes (2015). The Brazilian gravimetric geoid: MAPGEO2015. GFZ Data Services. <a href="https://doi.org/10.5880/isg.2015.001">doi.org/10.5880/isg.2015.001</a>. IBGE y EPUSP; licencia CC BY 4.0. TresVizo Field redondeó los valores al centímetro. No se remuestreó ni se recortó: la malla conserva el paso de 5′ y la cobertura del modelo. La conversión es de TresVizo Field y no del IBGE ni de los autores.</p>
+          </article>
+        </div>
+
+        <h3>Colombia</h3>
+        <div class="models">
+          <article class="model" aria-labelledby="m-qgeoidcol2023">
+            <div class="model-head">
+              <h3 id="m-qgeoidcol2023">QGeoidCOL2023 · Colombia</h3>
+              <span class="tag alt">Se descarga</span>
+            </div>
+            <dl>
+              <dt>Autoridad</dt><dd>IGAC, Instituto Geográfico Agustín Codazzi</dd>
+              <dt>Situación</dt><dd>Vigente. Modelo oficial de Colombia por la Resolución IGAC 0515 de 2026.</dd>
+              <dt>Malla</dt><dd>5′ de arco y la cobertura del modelo, sin remuestrear ni recortar</dd>
+              <dt>Referencia</dt><dd>GRS 1980; MAGNA-SIRGAS (ITRF2014), época 2018. Es un cuasigeoide: da alturas normales referidas al IHRS, no ajustadas al datum de Buenaventura.</dd>
+              <dt>Exactitud declarada</dt><dd>0.21&nbsp;m</dd>
+              <dt>Licencia</dt><dd><a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Atribución 4.0 (CC BY 4.0)</a></dd>
+              <dt>Fuente</dt><dd><a href="https://www.igac.gov.co/">igac.gov.co</a></dd>
+              <dt>Descarga</dt><dd>0.03&nbsp;MB</dd>
+            </dl>
+            <p class="attr">Q. Liu, M. Schmidt, L. Sánchez, L. Moisés, D. Cortez (2023). The Colombian gravimetric quasi-geoid: QgeoidCOL2023. V 2.0. GFZ Data Services. <a href="https://doi.org/10.5880/isg.2023.007">doi.org/10.5880/isg.2023.007</a>. Modelo oficial de Colombia por la Resolución IGAC 0515 de 2026, licencia CC BY 4.0. TresVizo Field redondeó los valores al centímetro. No se remuestreó ni se recortó: la malla conserva el paso de 5′ y la cobertura del modelo. La conversión es de TresVizo Field y no del IGAC ni de los autores.</p>
+          </article>
+        </div>
       </section>
 
       <section id="sistemas" aria-labelledby="h-sistemas">
         <h2 id="h-sistemas"><span class="n">3</span>Sistemas de coordenadas</h2>
         <p>Cada sistema se identifica por su código del registro EPSG. El sistema se elige al crear el proyecto y no se cambia después; al exportar puedes convertir a otro.</p>
-        <div class="table-wrap" style="margin-top:1rem">
+        <h3>De fábrica</h3>
+        <div class="table-wrap">
           <table class="data stack">
-            <thead><tr><th scope="col">Sistema</th><th scope="col">Códigos</th><th scope="col">Cómo se obtiene</th></tr></thead>
+            <thead><tr><th scope="col">Sistema</th><th scope="col">Códigos</th></tr></thead>
             <tbody>
-              <tr><td>WGS 84, geográficas</td><td data-label="Códigos">EPSG:4326</td><td data-label="Cómo se obtiene">Incluido en la app</td></tr>
-              <tr><td>WGS 84 / UTM, zonas 1 a 60, norte y sur</td><td data-label="Códigos">EPSG:32601 a 32660 y EPSG:32701 a 32760</td><td data-label="Cómo se obtiene">Incluido en la app</td></tr>
+              <tr><td>WGS 84, geográficas</td><td data-label="Códigos">EPSG:4326</td></tr>
+              <tr><td>WGS 84 / UTM, zonas 11N a 16N</td><td data-label="Códigos">EPSG:32611 a EPSG:32616</td></tr>
+              <tr><td>Mexico ITRF2008, geográficas (ITRF2008, época 2010.0)</td><td data-label="Códigos">EPSG:6365</td></tr>
+              <tr><td>Mexico ITRF2008 / UTM, zonas 11N a 16N</td><td data-label="Códigos">EPSG:6366 a EPSG:6371</td></tr>
             </tbody>
           </table>
         </div>
-        <p><mark class="todo">[VERIFICAR: completar con los sistemas oficiales de México (Mexico ITRF2008 y sus zonas UTM) cuando salga la versión de las apps que los incluye]</mark></p>
+        <h3>Paquetes que se bajan</h3>
+        <p>Cada paquete reúne los sistemas de un país o región. Sus parámetros salen del registro EPSG de IOGP, versión 12.029, y de los institutos nacionales.</p>
+        <div class="table-wrap">
+          <table class="data stack">
+            <thead><tr><th scope="col">Paquete</th><th scope="col">Sistemas</th></tr></thead>
+            <tbody>
+              <tr><td>Mundo: UTM de WGS 84 y regionales</td><td data-label="Sistemas">116</td></tr>
+              <tr><td>México (complementos)</td><td data-label="Sistemas">14</td></tr>
+              <tr><td>Argentina</td><td data-label="Sistemas">30</td></tr>
+              <tr><td>Brasil</td><td data-label="Sistemas">41</td></tr>
+              <tr><td>Chile</td><td data-label="Sistemas">20</td></tr>
+              <tr><td>Colombia</td><td data-label="Sistemas">17</td></tr>
+              <tr><td>Costa Rica</td><td data-label="Sistemas">6</td></tr>
+              <tr><td>El Salvador</td><td data-label="Sistemas">2</td></tr>
+              <tr><td>Perú</td><td data-label="Sistemas">10</td></tr>
+            </tbody>
+          </table>
+        </div>
         <p>La app no cambia el marco de referencia de tus mediciones: con RTK, tus coordenadas quedan en el marco de la base o del servicio de correcciones que uses.</p>
       </section>
 
       <section id="licencias" aria-labelledby="h-licencias">
         <h2 id="h-licencias"><span class="n">4</span>Licencias y créditos</h2>
-        <p>Los modelos son de sus autoridades, no de TresVizo. Cada uno conserva su licencia, y la app muestra su crédito en <strong>Cuenta › Avisos legales</strong>.</p>
-        <p>Los Términos de Libre Uso del INEGI permiten usar, copiar y redistribuir su información, también con fines comerciales, a cambio de citar la fuente y de avisar cuando se modifica. Por eso el crédito de cada modelo dice qué cambió TresVizo Field: el recorte y el redondeo al centímetro.</p>
-        <p>Los paquetes que se descargan desde la app se publican en las <a href="https://github.com/cadaritre/GNSS-TresVizo/releases">versiones de este repositorio</a>, cada uno con la licencia de su autoridad.</p>
+        <p>Los modelos y los parámetros son de sus autoridades, no de TresVizo. Cada uno conserva su licencia, y la app muestra su crédito.</p>
+        <ul>
+          <li><strong>INEGI (GGM25 y GGM10).</strong> Los <a href="https://www.inegi.org.mx/inegi/terminos.html">Términos de Libre Uso de la Información del INEGI</a> permiten usar, copiar y redistribuir su información, también con fines comerciales, a cambio de citar la fuente y de avisar cuando se modifica. Por eso el crédito de cada modelo dice qué cambió TresVizo Field: el recorte y el redondeo al centímetro.</li>
+          <li><strong>NGA (EGM2008 y EGM96).</strong> Son obras del Gobierno de los Estados Unidos, de dominio público. Su crédito cita a la NGA y la publicación de cada modelo, y dice qué cambió TresVizo Field.</li>
+          <li><strong>IBGE (MAPGEO2015) e IGAC (QGeoidCOL2023).</strong> Se publican con licencia <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Atribución 4.0 (CC BY 4.0)</a>, que pide citar a los autores, enlazar la licencia e indicar los cambios: lo hace el crédito de cada modelo, arriba.</li>
+          <li><strong>Registro EPSG (paquetes de sistemas).</strong> Sus parámetros se usan conforme a los <a href="https://epsg.org/terms-of-use.html">términos de uso de IOGP</a>, que permiten usarlos citando la fuente: «Parámetros del registro EPSG de IOGP, v12.029».</li>
+        </ul>
+        <p>Los archivos que bajan las apps están en las <a href="https://github.com/cadaritre/GNSS-TresVizo/releases">versiones de este repositorio</a>, cada uno con la licencia de su autoridad.</p>
       </section>
     </div>
   </div>
