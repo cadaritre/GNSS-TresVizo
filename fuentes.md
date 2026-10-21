@@ -101,3 +101,13 @@ Decisiones del propietario:
 | Exclusión de agua y polvo; limitaciones de uso | Las de Batería y seguridad, arriba |
 | Cinco días hábiles para revocar una venta a distancia o fuera del establecimiento | `LFPC` arts. 51 y 56 |
 | Gastos de hacer efectiva la garantía fuera del lugar de compra, a cargo del proveedor | `LFPC` art. 79, segundo párrafo |
+
+## Contrato de licencia (`docs/licencia/`, borrador)
+
+| Afirmación | Fuente |
+| --- | --- |
+| Titular, domicilio, correo; tribunales de Chihuahua, Chihuahua | `PROP-21`, `PROP-21D` |
+| «Cuando la App traiga una versión del Firmware…» (hoy no trae ninguna) | `iOS:TresVizo Field/Firmware/index.json:1`; `AND:app/src/main/assets/firmware/index.json:1` |
+| Fuera «Teselas servidas conforme a la política de uso de la Fundación OpenStreetMap» | La descarga de mapas sin conexión de iOS no la cumple (`iOS:docs/publicacion/README.md` §1, auditoría DOC2-3); los mapas pasan a Mapbox (en curso) |
+| Catálogo de geoides y sistemas en GitHub, cada archivo con su licencia y crédito | Sección «Geoides y sistemas», arriba |
+| La garantía no cubre el firmware no oficial | `docs/garantia/index.html`, sección 4 («Firmware no oficial») |
