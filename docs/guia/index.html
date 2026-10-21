@@ -52,64 +52,6 @@
   --t-l: 1.875rem;
   --t-xl: clamp(2.5rem, 4.2vw + 1.2rem, 3.75rem);
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0B141E;
-    --surface: #121F2E;
-    --ink: #E2E9F1;
-    --ink-2: #9BAABB;
-    --heading: #D3E5FA;
-    --rule: #24364A;
-    --band: #12263C;
-    --band-2: #0F2033;
-    --brand: #3D9BE9;
-    --action: #6CB4FF;
-    --on-action: #0B141E;
-    --action-soft: #16304B;
-    --ok: #6CCB86;
-    --warn: #E3A85C;
-    --warn-soft: #2F2410;
-    --danger: #F2938B;
-    --info: #9BAABB;
-    --contour: rgba(61, 155, 233, 0.10);
-    --oled-bezel: #2B3642;
-    --dwg-ink: #D3E5FA;
-    --dwg-rx: #1C3A5D;
-    --dwg-pole: #3A4B5F;
-    --dwg-ground: #6F8094;
-    --logo-filter: brightness(0) invert(1);
-    --shot-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.35);
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0B141E;
-  --surface: #121F2E;
-  --ink: #E2E9F1;
-  --ink-2: #9BAABB;
-  --heading: #D3E5FA;
-  --rule: #24364A;
-  --band: #12263C;
-  --band-2: #0F2033;
-  --brand: #3D9BE9;
-  --action: #6CB4FF;
-  --on-action: #0B141E;
-  --action-soft: #16304B;
-  --ok: #6CCB86;
-  --warn: #E3A85C;
-  --warn-soft: #2F2410;
-  --danger: #F2938B;
-  --info: #9BAABB;
-  --contour: rgba(61, 155, 233, 0.10);
-  --oled-bezel: #2B3642;
-  --dwg-ink: #D3E5FA;
-  --dwg-rx: #1C3A5D;
-  --dwg-pole: #3A4B5F;
-  --dwg-ground: #6F8094;
-  --logo-filter: brightness(0) invert(1);
-  --shot-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.35);
-  color-scheme: dark;
-}
 
 /* Selector de teléfono: sin atributo en la raíz se ve iPhone. */
 :root:not([data-os="android"]) [data-os="android"] { display: none !important; }
@@ -395,35 +337,7 @@ code { background: var(--action-soft); padding: 0.05em 0.3em; border-radius: 4px
 }
 @page :first { @bottom-left { content: none; } @bottom-right { content: none; } }
 @media print {
-  :root, :root:not([data-theme="light"]), :root[data-theme="dark"] {
-    --bg: #FFFFFF;
-    --surface: #FFFFFF;
-    --ink: #16222F;
-    --ink-2: #536175;
-    --heading: #0F2A4A;
-    --rule: #D9E1EB;
-    --band: #E1EDFC;
-    --band-2: #EDF4FE;
-    --brand: #008AFC;
-    --action: #006BD6;
-    --on-action: #FFFFFF;
-    --action-soft: #E4EEFB;
-    --ok: #11762F;
-    --warn: #9A5B00;
-    --warn-soft: #F8EFE0;
-    --danger: #A82A20;
-    --info: #55606E;
-    --contour: rgba(0, 138, 252, 0.09);
-    --oled-bezel: #1B232C;
-    --dwg-ink: #0F2A4A;
-    --dwg-rx: #D3E4FA;
-    --dwg-pole: #C4CFDC;
-    --dwg-ground: #8D9AA9;
-    --logo-filter: none;
-    --shot-shadow: none;
-    color-scheme: light;
-  }
-  html { font-size: 10pt; }
+  :root, :root:not([data-theme="light"]),   html { font-size: 10pt; }
   body { background: #FFFFFF; line-height: 1.45; }
   .topbar, .os-hint { display: none !important; }
   .wrap { max-width: none; padding-inline: 0; }

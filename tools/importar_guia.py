@@ -16,6 +16,8 @@ fragmento, como hace build_pdf.py para los PDF, y le añade lo propio del sitio:
   las mismas pilas que docs/assets/sitio.css, para que la página no pida nada a
   terceros (política de privacidad, §13). Los PDF no cambian: llevan sus
   fuentes incrustadas y no las piden a nadie.
+- siempre en modo claro: quita los bloques de modo oscuro del fragmento, como
+  docs/assets/sitio.css.
 
 Copia también las imágenes que la página usa (img/) y los dos PDF. Para
 regenerar los PDF, usa build_pdf.py en el repositorio de origen antes de
@@ -41,6 +43,34 @@ SITE_CSS = REPO / "docs" / "assets" / "sitio.css"
 
 # El @import de Google Fonts que trae el fragmento de la guía.
 GOOGLE_FONTS_IMPORT = re.compile(r'@import url\("https://fonts\.(?:googleapis|gstatic)\.com/[^"]*"\);\n?')
+
+# Modo oscuro de la guía: el sitio se ve siempre claro (decisión del propietario, 21-10-2026).
+DARK_BLOCKS = (re.compile(r"@media\s*\(prefers-color-scheme:\s*dark\)\s*\{"),
+               re.compile(r':root\[data-theme="dark"\]\s*\{'))
+
+
+def without_dark_mode(css: str) -> str:
+    """Quita los bloques de modo oscuro (con sus llaves anidadas) de una hoja o un <style>."""
+    for pattern in DARK_BLOCKS:
+        while (m := pattern.search(css)):
+            depth, end = 0, None
+            for k in range(css.index("{", m.start()), len(css)):
+                if css[k] == "{":
+                    depth += 1
+                elif css[k] == "}":
+                    depth -= 1
+                    if depth == 0:
+                        end = k + 1
+                        break
+            if end is None:
+                sys.exit("guia.html tiene un bloque de modo oscuro sin cerrar: revísalo.")
+            while end < len(css) and css[end] in " \t":
+                end += 1
+            if end < len(css) and css[end] == "\n":
+                end += 1
+            css = css[:m.start()] + css[end:]
+    return css
+
 
 DESCRIPTION = (
     "Guía rápida del receptor GNSS MeridianV con la app TresVizo Field para "
@@ -155,6 +185,8 @@ def main() -> None:
     head, body = split_fragment(fragment.read_text(encoding="utf-8"))
     # Sin tipografías de terceros: fuera el @import de Google Fonts.
     head = GOOGLE_FONTS_IMPORT.sub("", head)
+    # Siempre claro, como el resto del sitio.
+    head = without_dark_mode(head)
     if "fonts.googleapis.com" in head or "fonts.gstatic.com" in head:
         sys.exit("guia.html pide fuentes a Google de una forma que este script no reconoce: revísalo.")
 
