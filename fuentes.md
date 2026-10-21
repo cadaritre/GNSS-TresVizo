@@ -36,7 +36,8 @@ Decisiones del propietario:
 | --- | --- | --- |
 | `PROP-21` | Titular: Carlos Daniel Rivera Trevizo, como desarrollador (persona física), con la marca TresVizo. Soporte y privacidad: `ingenieria@3vizo.com`. | `MV:docs/professional-audit-2026-10-21.md:127`, `:129` |
 | `PROP-21` | Horario: lunes a viernes, 9 a 18 h, hora del centro de México; respuesta en un día hábil. Sin WhatsApp. Garantía: receptor 12 meses, batería 6 meses. No hay clientes ni unidades armadas. | Decisión del 21-10-2026, recibida por el coordinador de la auditoría 2 |
-| `PROP-21D` | Domicilio del titular: J. Domínguez de Mendoza 1704, colonia San Felipe, C.P. 31203, Chihuahua, Chihuahua, México. Jurisdicción: tribunales de Chihuahua, Chihuahua. El RFC todavía no. | Decisión del 21-10-2026, recibida por el coordinador de la auditoría 2 |
+| `PROP-21D` | Domicilio del titular: J. Domínguez de Mendoza 1704, colonia San Felipe, C.P. 31203, Chihuahua, Chihuahua, México. Jurisdicción: tribunales de Chihuahua, Chihuahua. | Decisión del 21-10-2026, recibida por el coordinador de la auditoría 2 |
+| `PROP-RFC` | RFC del titular (persona física): RITC991104IZ4. | Decisión del propietario, 21-10-2026, recibida por el coordinador de la auditoría 2 |
 | `PROP-TONOS` | Con el teléfono en silencio no suena nada. | Decisión del 21-10-2026 (AND2-10). El sitio no dice lo contrario en ninguna página (búsqueda de «silencio», «tono», «sonido» el 21-10-2026). |
 
 ## Soporte (`docs/soporte/`)
@@ -89,7 +90,7 @@ Decisiones del propietario:
 
 | Afirmación | Fuente |
 | --- | --- |
-| Garante, domicilio, contacto | `PROP-21`, `PROP-21D` |
+| Garante, domicilio, RFC, contacto | `PROP-21`, `PROP-21D`, `PROP-RFC` |
 | Domicilio para reclamaciones, alcance, duración, condiciones y mecanismos en la póliza | `LFPC` art. 78 |
 | Si no se puede reparar ni sustituir, devolución de lo pagado; bonificación | `LFPC` arts. 82 (restitución, rescisión o reducción del precio, y bonificación) y 92 Ter |
 | Refacciones y servicio durante la garantía y mientras se fabrique o venda | `LFPC` art. 80 |
@@ -106,7 +107,7 @@ Decisiones del propietario:
 
 | Afirmación | Fuente |
 | --- | --- |
-| Titular, domicilio, correo; tribunales de Chihuahua, Chihuahua | `PROP-21`, `PROP-21D` |
+| Titular, domicilio, RFC, correo; tribunales de Chihuahua, Chihuahua | `PROP-21`, `PROP-21D`, `PROP-RFC` |
 | «Cuando la App traiga una versión del Firmware…» (hoy no trae ninguna) | `iOS:TresVizo Field/Firmware/index.json:1`; `AND:app/src/main/assets/firmware/index.json:1` |
 | Fuera «Teselas servidas conforme a la política de uso de la Fundación OpenStreetMap» | La descarga de mapas sin conexión de iOS no la cumple (`iOS:docs/publicacion/README.md` §1, auditoría DOC2-3); los mapas pasan a Mapbox (en curso) |
 | Catálogo de geoides y sistemas en GitHub, cada archivo con su licencia y crédito | Sección «Geoides y sistemas», arriba |
@@ -120,7 +121,7 @@ que afecta a privacidad, el firmware del VI se comporta igual que el del V). Rut
 
 | Afirmación | Fuente |
 | --- | --- |
-| Responsable, domicilio, contacto | `PROP-21`, `PROP-21D` |
+| Responsable, domicilio, RFC, contacto | `PROP-21`, `PROP-21D`, `PROP-RFC` |
 | Receptores conocidos: nombre, serie, modelo, identificador Bluetooth, dirección, papel, fecha | `iOS-CORE:Session/KnownReceivers.swift:15-30` |
 | Geoides y sistemas descargados fuera de la copia de iCloud | `iOS-APP:Session/DataLibrary.swift:13-14`, `:309` |
 | Grabaciones y mapas fuera de la copia de iCloud | `iOS-APP:Session/RecordingsModel.swift:538`; `iOS-APP:Session/MapsModel.swift:96` |
