@@ -32,7 +32,7 @@
         <strong>Borrador. Pendiente de revisión legal.</strong>
         <p>Este contrato todavía no está vigente: falta la revisión de un abogado. Los datos marcados <mark class="todo">[COMPLETAR: …]</mark> y <mark class="todo">[VERIFICAR: …]</mark> se resuelven antes de publicarlo.</p>
       </div>
-      <p class="doc-meta"><span>Versión 0.2</span><span>Última revisión: 21 de octubre de 2026</span><span>Vigente desde: <mark class="todo">[COMPLETAR: fecha de publicación, tras la revisión del abogado]</mark></span></p>
+      <p class="doc-meta"><span>Versión 0.3</span><span>Última revisión: 21 de octubre de 2026</span><span>Vigente desde: <mark class="todo">[COMPLETAR: fecha de publicación, tras la revisión del abogado]</mark></span></p>
     </div>
   </div>
 
@@ -129,13 +129,14 @@
           <li><strong>los satélites:</strong> cuántos hay a la vista, su geometría y el estado de la ionosfera;</li>
           <li><strong>el entorno:</strong> árboles, edificios, multitrayectoria e interferencias;</li>
           <li><strong>la altura de antena:</strong> medida e ingresada correctamente, como indica la guía rápida;</li>
-          <li><strong>el uso y la calibración del equipo:</strong> el bastón a plomo o, con la compensación de inclinación, balanceado y dentro de su ángulo; la calibración de la IMU, que puede alterarse con un golpe o una caída;</li>
+          <li><strong>el uso y la calibración del equipo:</strong> el bastón a plomo o, con la compensación de inclinación, balanceado y dentro de su ángulo (hasta 60°); la calibración de la IMU, que puede alterarse con un golpe o una caída;</li>
           <li><strong>la configuración del proyecto:</strong> el sistema de coordenadas, el geoide y la época de las coordenadas.</li>
         </ul>
         <p>Además:</p>
         <ul>
           <li><strong>«FIJO» no garantiza exactitud.</strong> Indica que el Receptor resolvió las ambigüedades con las correcciones que recibe. Una solución fija puede ser incorrecta, y una correcta solo es tan buena como la base de la que depende.</li>
           <li><strong>Las cifras de precisión son estimaciones.</strong> La «Precisión H / V» y la incertidumbre de la compensación de inclinación son estimaciones estadísticas del Receptor y de la App, no medidas de tu error real.</li>
+          <li><strong>Inclinación hasta 60°.</strong> Con la compensación de inclinación, el bastón puede inclinarse hasta 60°. La precisión que muestra la App ya incluye lo que añade la compensación, y el Receptor no da la punta por buena cuando esa parte pasa de 4&nbsp;cm. La exactitud a esos ángulos todavía está pendiente de validar en campo.</li>
           <li><strong>Los geoides son modelos</strong> publicados por sus autoridades con su propia exactitud declarada. La cota que calcula la App no es mejor que el modelo elegido.</li>
           <li><strong>Compruébalo en campo.</strong> Mide puntos de control con coordenadas conocidas al empezar y durante cada trabajo, y revisa los resultados antes de usarlos en deslindes, obra, documentos legales o cualquier decisión que dependa de ellos.</li>
           <li><strong>Usos no previstos.</strong> El Software no está diseñado para la navegación de vehículos o aeronaves, para sistemas de seguridad ni para ningún uso en el que un error de posición pueda causar lesiones, muerte o daños graves.</li>
@@ -166,7 +167,8 @@
 
       <section id="servicios" aria-labelledby="h-servicios">
         <h2 id="h-servicios"><span class="n">10</span>Servicios de terceros</h2>
-        <p>El Software puede conectarse a servicios que TresVizo no opera: tu servicio de correcciones NTRIP, los mapas de OpenStreetMap o del servidor de mapas que añadas, el mapa y las imágenes de satélite de Apple, el catálogo de geoides y sistemas de coordenadas en GitHub, las órbitas de CelesTrak y las tiendas de apps. TresVizo no controla su disponibilidad, su contenido ni su exactitud, y su uso se rige por las condiciones de cada proveedor. Tú eres responsable de tener derecho a usar el servicio de correcciones que configuras.</p>
+        <p>El Software puede conectarse a servicios que TresVizo no opera: tu servicio de correcciones NTRIP, los mapas y las imágenes de satélite de Mapbox o del servidor de mapas que añadas, el catálogo de geoides y sistemas de coordenadas en GitHub, las órbitas de CelesTrak y las tiendas de apps. TresVizo no controla su disponibilidad, su contenido ni su exactitud, y su uso se rige por las condiciones de cada proveedor. Tú eres responsable de tener derecho a usar el servicio de correcciones que configuras.</p>
+        <p><mark class="todo">[VERIFICAR con abogado: si este contrato debe trasladar al usuario alguna condición de los Términos de servicio de Mapbox (https://www.mapbox.com/legal/tos) para el uso de sus mapas en la App]</mark></p>
       </section>
 
       <section id="componentes" aria-labelledby="h-componentes">
@@ -178,8 +180,8 @@
           <table class="data stack">
             <thead><tr><th scope="col">Componente</th><th scope="col">Dónde</th><th scope="col">Licencia y crédito</th></tr></thead>
             <tbody>
-              <tr><td>Mapa de OpenStreetMap</td><td data-label="Dónde">App, iPhone y Android</td><td data-label="Licencia y crédito">© Colaboradores de OpenStreetMap, datos con licencia <a href="https://www.openstreetmap.org/copyright">ODbL</a>.</td></tr>
-              <tr><td>Mapa e imágenes de satélite de Apple</td><td data-label="Dónde">App, iPhone</td><td data-label="Licencia y crédito">Apple y sus proveedores, conforme a las condiciones de Apple. El aviso «Legal» del propio mapa lleva sus créditos.</td></tr>
+              <tr><td>Mapa de Mapbox («Calles»)</td><td data-label="Dónde">App, iPhone y Android</td><td data-label="Licencia y crédito">© Mapbox, © Colaboradores de OpenStreetMap, datos con licencia <a href="https://www.openstreetmap.org/copyright">ODbL</a>, conforme a los <a href="https://www.mapbox.com/about/maps/">términos y la atribución de Mapbox</a>. Con los mapas de Mapbox, su logotipo y su «i» están siempre a la vista.</td></tr>
+              <tr><td>Imágenes de satélite de Mapbox («Satélite» y «Satélite con calles»)</td><td data-label="Dónde">App, iPhone y Android</td><td data-label="Licencia y crédito">© Mapbox, © Colaboradores de OpenStreetMap, © Maxar.</td></tr>
               <tr><td>Geoide Gravimétrico Mexicano 2025 (GGM25)</td><td data-label="Dónde">App, iPhone y Android</td><td data-label="Licencia y crédito"><a href="https://www.inegi.org.mx/inegi/terminos.html">Términos de Libre Uso de la Información del INEGI</a>. «Fuente: INEGI, Geoide Gravimétrico Mexicano 2025 (GGM25). Recortado a México y redondeado al centímetro por TresVizo Field; la modificación no es de INEGI.»</td></tr>
               <tr><td>Geoide Gravimétrico Mexicano 2010 (GGM10)</td><td data-label="Dónde">App, iPhone y Android</td><td data-label="Licencia y crédito"><a href="https://www.inegi.org.mx/inegi/terminos.html">Términos de Libre Uso de la Información del INEGI</a>. «Fuente: INEGI, Geoide Gravimétrico Mexicano 2010 (GGM10). Redondeado al centímetro por TresVizo Field; la modificación no es de INEGI.»</td></tr>
               <tr><td>Geoides y sistemas de coordenadas que se bajan del catálogo</td><td data-label="Dónde">App, iPhone y Android</td><td data-label="Licencia y crédito">Cada uno con la licencia de su autoridad (CC BY 4.0, dominio público o los términos de uso del registro EPSG de IOGP) y su crédito, en <a href="../geoides/">Geoides y sistemas</a>.</td></tr>
@@ -187,21 +189,36 @@
           </table>
         </div>
 
-        <h3>Bibliotecas de la app para Android</h3>
-        <p>La app para iPhone no incluye bibliotecas de terceros: solo usa las del sistema de Apple.</p>
+        <h3>Bibliotecas de la app para iPhone</h3>
         <div class="table-wrap">
           <table class="data stack">
             <thead><tr><th scope="col">Componente</th><th scope="col">Versión</th><th scope="col">Licencia</th></tr></thead>
             <tbody>
-              <tr><td>usb-serial-for-android (controladores USB serie)</td><td data-label="Versión">3.11.0</td><td data-label="Licencia">MIT · © 2011-2013 Google Inc., © 2013 Mike Wakerly</td></tr>
-              <tr><td>AndroidX: Core, Lifecycle, Activity, Compose, Material 3, Navigation, Room, DataStore, Security</td><td data-label="Versión">Las de la compilación publicada</td><td data-label="Licencia">Apache 2.0</td></tr>
-              <tr><td>Dagger Hilt</td><td data-label="Versión">2.60.1</td><td data-label="Licencia">Apache 2.0</td></tr>
-              <tr><td>OkHttp</td><td data-label="Versión">5.5.0</td><td data-label="Licencia">Apache 2.0</td></tr>
-              <tr><td>Kotlin, kotlinx.coroutines, kotlinx.serialization</td><td data-label="Versión">2.4.20, 1.11.0, 1.11.0</td><td data-label="Licencia">Apache 2.0</td></tr>
+              <tr><td>Mapbox Maps SDK para iOS, con Mapbox Core Maps y Mapbox Common</td><td data-label="Versión">11.26.0 (Common 24.26.0)</td><td data-label="Licencia">Términos de servicio de Mapbox, con componentes de código abierto bajo sus propias licencias</td></tr>
+              <tr><td>Turf para Swift (Mapbox)</td><td data-label="Versión">4.0.0</td><td data-label="Licencia">ISC · © 2014–2024 Mapbox</td></tr>
             </tbody>
           </table>
         </div>
-        <p><mark class="todo">[VERIFICAR: pendiente en la app para Android (DOC2-4): la app lleva el texto de la licencia MIT de usb-serial-for-android dentro del paquete, pero sus Avisos legales no la muestran, ni tampoco las bibliotecas Apache 2.0. Conviene añadirlas a Avisos legales]</mark></p>
+        <p><mark class="todo">[VERIFICAR: pendiente en la app para iPhone: su pantalla «Licencias de código abierto» todavía dice que la app no incluye bibliotecas de terceros; tiene que listar el SDK de Mapbox y Turf con el texto de sus licencias, como la de Android]</mark></p>
+
+        <h3>Bibliotecas de la app para Android</h3>
+        <p>La app las muestra, con el texto completo de cada licencia, en Cuenta, en <strong>Licencias de código abierto</strong>.</p>
+        <div class="table-wrap">
+          <table class="data stack">
+            <thead><tr><th scope="col">Componente</th><th scope="col">Versión</th><th scope="col">Licencia</th></tr></thead>
+            <tbody>
+              <tr><td>Mapbox Maps SDK para Android</td><td data-label="Versión">11.26.0</td><td data-label="Licencia">Términos de servicio de Mapbox, con componentes de código abierto bajo sus propias licencias</td></tr>
+              <tr><td>usb-serial-for-android (controladores USB serie)</td><td data-label="Versión">3.11.0</td><td data-label="Licencia">MIT · © 2011-2013 Google Inc., © 2013 Mike Wakerly</td></tr>
+              <tr><td>Kotlin, kotlinx.coroutines, kotlinx.serialization (JetBrains)</td><td data-label="Versión">2.4.20, 1.11.0, 1.11.0</td><td data-label="Licencia">Apache 2.0</td></tr>
+              <tr><td>AndroidX: Core, Activity, Lifecycle, Compose, Material 3, Navigation, Room, SQLite, DataStore, Security Crypto</td><td data-label="Versión">Core 1.19.1 · Activity 1.13.0 · Lifecycle 2.11.0 · Compose 1.12.1 · Material 3 1.4.0 · Navigation 2.10.2 · Room 2.8.5 · SQLite 2.6.2 · DataStore 1.2.1 · Security Crypto 1.1.0</td><td data-label="Licencia">Apache 2.0</td></tr>
+              <tr><td>Dagger, Hilt y Hilt Navigation (Google)</td><td data-label="Versión">2.60.1 · Hilt Navigation 1.4.0</td><td data-label="Licencia">Apache 2.0</td></tr>
+              <tr><td>OkHttp y Okio (Square)</td><td data-label="Versión">5.5.0, 3.18.1</td><td data-label="Licencia">Apache 2.0</td></tr>
+              <tr><td>Tink, Gson y Guava ListenableFuture (Google)</td><td data-label="Versión">1.8.0, 2.8.9, 1.0</td><td data-label="Licencia">Apache 2.0</td></tr>
+              <tr><td>Protocol Buffers (Google), en DataStore y en Tink</td><td data-label="Versión">La que incluyen DataStore 1.2.1 y Tink 1.8.0</td><td data-label="Licencia">BSD de 3 cláusulas</td></tr>
+              <tr><td>Anotaciones JSR 305, JetBrains y JSpecify</td><td data-label="Versión">3.0.2, 23.0.0, 1.0.0</td><td data-label="Licencia">Apache 2.0</td></tr>
+            </tbody>
+          </table>
+        </div>
 
         <h3>Bibliotecas del firmware</h3>
         <div class="table-wrap">
