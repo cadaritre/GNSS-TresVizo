@@ -7,7 +7,6 @@
 <link rel="icon" type="image/png" href="img/tresvizo-marca.png">
 <title>Guía rápida MeridianV</title>
 <style>
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap");
 
 /* Manual de campo: una columna de lectura de 65 caracteres con las capturas en un riel a la derecha.
    La banda azul claro de arriba es la barra de estado de TresVizo Field; el hexágono marca los capítulos. */
@@ -39,6 +38,7 @@
   --dwg-ground: #8D9AA9;
   --logo-filter: none;
   --shot-shadow: 0 1px 2px rgba(15, 42, 74, 0.06), 0 10px 28px rgba(15, 42, 74, 0.09);
+  color-scheme: light;
 
   --f-display: "Barlow Semi Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
   --f-body: "IBM Plex Sans", "Segoe UI", -apple-system, system-ui, sans-serif;
@@ -52,7 +52,6 @@
   --t-l: 1.875rem;
   --t-xl: clamp(2.5rem, 4.2vw + 1.2rem, 3.75rem);
 }
-
 /* Selector de teléfono: sin atributo en la raíz se ve iPhone. */
 :root:not([data-os="android"]) [data-os="android"] { display: none !important; }
 :root[data-os="android"] [data-os="ios"] { display: none !important; }
@@ -220,45 +219,10 @@ code { background: var(--action-soft); padding: 0.05em 0.3em; border-radius: 4px
 .press .dur small { font-size: 1rem; font-weight: 600; margin-left: 0.1em; }
 .press h4 { margin-bottom: 0.15rem; }
 
-/* Pantalla OLED, 128 × 64, a escala con la fuente del firmware (celda de 6 × 8) */
+/* Pantalla del receptor: imagen a la izquierda y su leyenda */
 .oled-row { display: grid; gap: 2rem; margin-top: 1.25rem; align-items: start; }
 @media (min-width: 820px) { .oled-row { grid-template-columns: auto minmax(0, 1fr); gap: 2.5rem; } }
 .oled-fig { margin: 0; }
-.oled {
-  --u: 2.5px;
-  position: relative;
-  width: calc(128 * var(--u));
-  height: calc(64 * var(--u));
-  margin: calc(5 * var(--u));
-  background: var(--oled-bg);
-  color: var(--oled-fg);
-  font-family: var(--f-oled);
-  font-size: calc(12.5 * var(--u));
-  line-height: 1;
-  letter-spacing: var(--u);
-  border-radius: 3px;
-  box-shadow: 0 0 0 calc(5 * var(--u)) var(--oled-bezel);
-  overflow: hidden;
-  font-variant-ligatures: none;
-}
-.oled.sm { --u: 1.5px; }
-@media (max-width: 400px) { .oled:not(.sm) { --u: 2.2px; } }
-.oled > span { position: absolute; left: 0; white-space: pre; }
-.oled .r { left: auto; right: 0; }
-.oled .big { font-size: calc(25 * var(--u)); letter-spacing: calc(2 * var(--u)); }
-.oled .hr { left: 0; right: 0; height: var(--u); background: var(--oled-fg); top: calc(10 * var(--u)); }
-.oled .y0 { top: calc(-3 * var(--u)); }
-.oled .y8 { top: calc(5 * var(--u)); }
-.oled .y13 { top: calc(10 * var(--u)); }
-.oled .y13.big { top: calc(7 * var(--u)); }
-.oled .y21 { top: calc(18 * var(--u)); }
-.oled .y24 { top: calc(21 * var(--u)); }
-.oled .y31 { top: calc(28 * var(--u)); }
-.oled .y39 { top: calc(36 * var(--u)); }
-.oled .y47 { top: calc(44 * var(--u)); }
-.oled .y56 { top: calc(53 * var(--u)); }
-.oled .band { left: 0; right: 0; top: calc(55 * var(--u)); height: calc(9 * var(--u)); background: var(--oled-fg); }
-.oled .inv { left: 0; right: 0; text-align: center; color: var(--oled-bg); }
 .oled-fig figcaption { margin-top: 0.9rem; font-size: var(--t-xs); color: var(--ink-2); max-width: 22rem; }
 .oled-key { margin: 0; display: grid; gap: 0.85rem; max-width: 30rem; }
 .oled-key > div { display: grid; gap: 0.2rem; }
@@ -277,9 +241,13 @@ code { background: var(--action-soft); padding: 0.05em 0.3em; border-radius: 4px
   box-shadow: 0 0 0 1px var(--oled-bezel);
   white-space: nowrap;
 }
-.oled-variants { display: flex; flex-wrap: wrap; gap: 1.25rem 1.5rem; margin-top: 2rem; }
-.oled-variants figure { margin: 0; }
-.oled-variants figcaption { font-size: var(--t-xs); color: var(--ink-2); margin-top: 0.35rem; }
+
+/* Pantalla del receptor: vistas previas del dibujo del firmware (tools/oled_preview), 128 × 64 a 4× */
+.oled-pic { display: block; width: 20rem; max-width: 100%; height: auto; border: 7px solid var(--oled-bezel); border-radius: 6px; image-rendering: pixelated; }
+.oled-pic.sm { width: 12.5rem; border-width: 5px; }
+.oled-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: 1.25rem 1.5rem; margin-top: 1.75rem; }
+.oled-grid figure { margin: 0; }
+.oled-grid figcaption { font-size: var(--t-xs); color: var(--ink-2); margin-top: 0.45rem; max-width: 13rem; }
 
 /* Dos columnas comparadas (correcciones) */
 .pair { display: grid; gap: 1rem; margin-top: 1.25rem; }
@@ -337,7 +305,35 @@ code { background: var(--action-soft); padding: 0.05em 0.3em; border-radius: 4px
 }
 @page :first { @bottom-left { content: none; } @bottom-right { content: none; } }
 @media print {
-  :root, :root:not([data-theme="light"]),   html { font-size: 10pt; }
+  :root {
+    --bg: #FFFFFF;
+    --surface: #FFFFFF;
+    --ink: #16222F;
+    --ink-2: #536175;
+    --heading: #0F2A4A;
+    --rule: #D9E1EB;
+    --band: #E1EDFC;
+    --band-2: #EDF4FE;
+    --brand: #008AFC;
+    --action: #006BD6;
+    --on-action: #FFFFFF;
+    --action-soft: #E4EEFB;
+    --ok: #11762F;
+    --warn: #9A5B00;
+    --warn-soft: #F8EFE0;
+    --danger: #A82A20;
+    --info: #55606E;
+    --contour: rgba(0, 138, 252, 0.09);
+    --oled-bezel: #1B232C;
+    --dwg-ink: #0F2A4A;
+    --dwg-rx: #D3E4FA;
+    --dwg-pole: #C4CFDC;
+    --dwg-ground: #8D9AA9;
+    --logo-filter: none;
+    --shot-shadow: none;
+    color-scheme: light;
+  }
+  html { font-size: 10pt; }
   body { background: #FFFFFF; line-height: 1.45; }
   .topbar, .os-hint { display: none !important; }
   .wrap { max-width: none; padding-inline: 0; }
@@ -364,8 +360,12 @@ code { background: var(--action-soft); padding: 0.05em 0.3em; border-radius: 4px
   .step.has-shot { grid-template-columns: minmax(0, 1fr) 55mm; gap: 8mm; }
   .shot { max-width: 55mm; width: 55mm; }
   .shot img { width: 55mm; border-radius: 3mm; box-shadow: none; }
-  .steps > li, .press > div, .issue, .oled-row, .oled-variants, .dwg-fig, .pair > div, .note, .say { break-inside: avoid; }
+  .steps > li, .press > div, .issue, .oled-row, .oled-grid figure, .dwg-fig, .pair > div, .note, .say { break-inside: avoid; }
   .oled-row { grid-template-columns: auto minmax(0, 1fr); gap: 8mm; }
+  .oled-pic { width: 62mm; }
+  .oled-pic.sm { width: 40mm; }
+  .oled-grid { grid-template-columns: repeat(3, 1fr); gap: 4mm 6mm; }
+  .oled-grid figure { break-inside: avoid; }
   .dwg-fig { grid-template-columns: 82mm minmax(0, 1fr); gap: 8mm; align-items: end; }
   .issue { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 6mm; padding-block: 2.2mm; }
   .issues-group { margin-top: 6mm; }
@@ -379,6 +379,13 @@ code { background: var(--action-soft); padding: 0.05em 0.3em; border-radius: 4px
 </style>
 <style>
 /* Añadido por el sitio: página completa sin margen, descargas bajo el título y navegación en el pie */
+/* Fuentes del sistema, las mismas de docs/assets/sitio.css: la página no carga tipografías de terceros */
+:root {
+  --f-display: "Avenir Next Condensed", "Roboto Condensed", "sans-serif-condensed", "Arial Narrow", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif;
+  --f-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --f-oled: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
 body { margin: 0; }
 .downloads { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; align-items: center; font-size: var(--t-s); }
 .downloads span { color: var(--ink-2); }
@@ -443,7 +450,7 @@ body { margin: 0; }
     <p class="eyebrow">Receptor GNSS · TresVizo Field</p>
     <h1>Guía rápida MeridianV</h1>
     <p class="lede">Lo del primer día en campo: encender el receptor, conectarlo a la app, ingresar la altura de antena, activar la compensación de inclinación y capturar tu primer punto.</p>
-    <p class="meta">Firmware del receptor 0.10.0 · Octubre de 2026 · <span data-os="ios">Edición para iPhone</span><span data-os="android">Edición para Android</span></p>
+    <p class="meta">Aplica al firmware 1.0.x del receptor · Octubre de 2026 · <span data-os="ios">Edición para iPhone</span><span data-os="android">Edición para Android</span></p>
     <p class="os-hint">Elige tu teléfono en la barra de arriba: cambian las capturas y las rutas de menú.</p>
     <p class="downloads"><span>Para imprimir:</span><a href="guia-meridianv-iphone.pdf" download>PDF para iPhone</a><a href="guia-meridianv-android.pdf" download>PDF para Android</a></p>
   </div>
@@ -454,7 +461,7 @@ body { margin: 0; }
     <h2 id="t-necesitas">Lo que necesitas</h2>
     <ul class="needs">
       <li>El receptor MeridianV cargado. Se carga por USB-C.</li>
-      <li>Un teléfono con TresVizo Field.</li>
+      <li>Un teléfono con TresVizo Field: iPhone con iOS 26.2 o posterior, o Android 8.0 o posterior.</li>
       <li>Un bastón con rosca de 5/8" o una base nivelante, y su altura.</li>
       <li>Para RTK: los datos de tu servicio NTRIP (servidor, puerto, punto de montaje, usuario y contraseña) o un segundo receptor como base.</li>
       <li>Para posproceso: una microSD en FAT32.</li>
@@ -481,12 +488,12 @@ body { margin: 0; }
   <section class="glance" aria-labelledby="t-mirada">
     <h2 id="t-mirada">En una mirada</h2>
     <dl>
-      <div><dt>Botón</dt><dd><b>1&nbsp;s</b> encender · <b>2&nbsp;s</b> apagar · <b>10&nbsp;s</b> reiniciar</dd></div>
+      <div><dt>Botón</dt><dd><b>1&nbsp;s</b> encender · <b>corto</b> cambia de página · <b>2&nbsp;s</b> apagar</dd></div>
       <div><dt>Red Wi-Fi del receptor</dt><dd><b>MeridianV-XXXXXX</b><br>Contraseña de fábrica <code>TresVizoRTK</code></dd></div>
       <div><dt>Panel web</dt><dd><b>192.168.4.1</b><br>desde la red del receptor</dd></div>
       <div><dt>Altura de antena</dt><dd>Del suelo a la <b>base del receptor</b>. La app suma 0.116&nbsp;m.</dd></div>
-      <div><dt>Inclinación</dt><dd>Hasta <b>30°</b>. La IMU sale calibrada de fábrica; balancea con RTK fijo.</dd></div>
-      <div><dt>Sin correcciones</dt><dd>El FIJO se sostiene <b>30&nbsp;s</b>; después se pierde.</dd></div>
+      <div><dt>Inclinación</dt><dd>Hasta <b>60°</b>. La IMU sale calibrada de fábrica; balancea con RTK fijo.</dd></div>
+      <div><dt>Sin correcciones</dt><dd>El FIJO se sostiene <b>30&nbsp;s</b> (ajustable de 1 a 600&nbsp;s); después se pierde.</dd></div>
     </dl>
   </section>
 </div>
@@ -508,8 +515,12 @@ body { margin: 0; }
       <div><h4>Encender</h4><p>Con el receptor apagado, mantén presionado el botón 1&nbsp;s.</p></div>
     </div>
     <div>
+      <span class="dur">corto</span>
+      <div><h4>Cambiar de página</h4><p>Un toque corto pasa de la pantalla principal a la de la red Wi-Fi, luego a la del receptor y de vuelta a la principal. Si la pantalla está atenuada, el toque solo la despierta.</p></div>
+    </div>
+    <div>
       <span class="dur">2<small>s</small></span>
-      <div><h4>Apagar</h4><p>Mantenlo presionado 2&nbsp;s. Cuando la pantalla diga «APAGANDO», suéltalo: el receptor cierra la grabación, si hay una, y se apaga.</p></div>
+      <div><h4>Apagar</h4><p>Mantenlo presionado: la pantalla dice «APAGAR» y llena una barra. A los 2&nbsp;s dice «APAGANDO» y «SUELTA EL BOTON»: suéltalo. El receptor cierra la grabación, si hay una, y se apaga. Si sueltas antes de los 2&nbsp;s, no pasa nada.</p></div>
     </div>
     <div>
       <span class="dur">10<small>s</small></span>
@@ -517,88 +528,53 @@ body { margin: 0; }
     </div>
   </div>
   <div class="prose" style="margin-top:1rem">
-    <p>Un toque corto no hace nada.</p>
-    <p>Con el cable USB conectado, el receptor no se apaga del todo: la pantalla dice «Sigue alimentado». Se apaga solo un segundo después de quitar el cable.</p>
+    <p><strong>Grabar sin el teléfono</strong>: da <strong>cinco toques cortos seguidos</strong> para iniciar la grabación para posproceso; la pantalla dice «GRABANDO». Otros cinco toques la detienen: «GRAB. DETENIDA».</p>
+    <p><strong>Si no puedes entrar a la red del receptor</strong> (olvidaste la contraseña que pusiste o apagaste el Bluetooth): da <strong>siete toques cortos seguidos</strong>. La pantalla pregunta «¿Reiniciar la red?»; mantén el botón 2&nbsp;s. El receptor se reinicia con la contraseña Wi-Fi de fábrica y el Bluetooth encendido, y la página de red de la pantalla enseña la contraseña. La base, los perfiles NTRIP, las redes guardadas y tus datos se conservan.</p>
+    <p><strong>Para restablecer todo de fábrica</strong>: con esa pregunta en la pantalla, da otros cinco toques cortos; la pregunta cambia a la de restablecer de fábrica. Mantén el botón 2&nbsp;s para confirmar o da un toque corto para cancelar. Borra las redes, los perfiles NTRIP, la base y las preferencias; conserva las grabaciones y la calibración de la IMU. También se puede hacer desde el panel del receptor, en Diagnóstico.</p>
+    <p>Si apagas con el cable USB conectado, el receptor queda en reposo de carga: la pantalla dice «CARGANDO» y «Receptor en reposo». Solo carga. Para encenderlo, mantén el botón 1&nbsp;s.</p>
   </div>
 
   <h3>La pantalla</h3>
   <div class="prose">
-    <p>Al encender verás el logo unos 10&nbsp;s, luego «INICIANDO» y después la pantalla principal, que se actualiza cada segundo. No tiene más páginas, no se apaga sola y escribe sin acentos.</p>
+    <p>Al encender verás el logo y una lista de comprobación: GNSS, Bluetooth, Wi-Fi, memoria, inclinación y batería. Después sale la pantalla principal. La pantalla no se apaga sola: tras 60&nbsp;s sin cambios baja el brillo y se despierta con un toque corto.</p>
   </div>
   <div class="oled-row">
     <figure class="oled-fig">
-      <div class="oled" role="img" aria-label="Pantalla principal: MeridianV-E828 0.10.0, FIJO, 78%, SAT 23, CORR. NTRIP 1.2&nbsp;s, MEM INT. LISTA, AP 192.168.4.1">
-        <span class="y0">MeridianV-E828 0.10.0</span>
-        <span class="hr"></span>
-        <span class="y13 big">FIJO</span>
-        <span class="y13 r">78%</span>
-        <span class="y31">SAT 23</span>
-        <span class="y39">CORR. NTRIP 1.2&nbsp;s</span>
-        <span class="y47">MEM INT. LISTA</span>
-        <span class="y56">AP 192.168.4.1</span>
-      </div>
-      <figcaption>Pantalla principal, a tamaño ampliado. Ejemplo del receptor MeridianV-E828 con el firmware 0.10.0.</figcaption>
+      <img class="oled-pic" src="img/oled/01-fijo-12mm.png" width="512" height="256" alt="Pantalla principal: arriba los iconos de Bluetooth y Wi-Fi, 74E828 y la batería al 85 %; en grande FIJO, H 12 mm y V 17 mm; abajo 31/38 satélites y NTRIP 1.2 s.">
+      <figcaption>Pantalla principal en RTK fijo. Vista previa del dibujo del firmware 1.0.0, ampliada.</figcaption>
     </figure>
     <dl class="oled-key">
-      <div><dt><span class="chip">MeridianV-E828 0.10.0</span></dt><dd>Nombre del receptor y versión del firmware.</dd></div>
-      <div><dt><span class="chip">FIJO</span></dt><dd>Calidad de la posición: FIJO, FLOTANTE, DGPS, AUTONOMO, ESTIMADO o SIN POS. «ESPERA»: el módulo GNSS todavía no manda datos. «ANTIGUO»: no hay posición nueva desde hace más de 2&nbsp;s.</dd></div>
-      <div><dt><span class="chip">78%</span></dt><dd>Batería. Debajo dice «CARGA» mientras carga. «--%»: sin lectura.</dd></div>
-      <div><dt><span class="chip">SAT 23</span></dt><dd>Satélites.</dd></div>
-      <div><dt><span class="chip">CORR. NTRIP 1.2&nbsp;s</span></dt><dd>Fuente de las correcciones y su edad. «NTRIP» es NTRIP del receptor; «BLE», NTRIP por el teléfono. «CORR. -- --»: sin fuente.</dd></div>
-      <div><dt><span class="chip">MEM INT. LISTA</span></dt><dd>Grabación. «MEM INT.» es la memoria interna, la microSD. También: «GRABANDO», «CERRANDO», «OCUPADA», «NO DISP.» (sin tarjeta) y «REVISAR».</dd></div>
-      <div><dt><span class="chip">AP 192.168.4.1</span></dt><dd>Red Wi-Fi del receptor y dirección de su panel web. Con «IP …», el receptor está conectado a otra red.</dd></div>
+      <div><dt>Arriba</dt><dd>A la izquierda, los iconos que aplican: Bluetooth (un teléfono conectado), Wi-Fi (conectado a una red, o alguien conectado a la red del receptor), grabación (parpadea mientras graba) e inclinación (fija si la compensación está lista, parpadea si no). En medio, la terminación del nombre del receptor, <span class="chip">74E828</span>. A la derecha, el rayo al cargar y la batería con su porcentaje, el mismo que en la app.</dd></div>
+      <div><dt>La calidad</dt><dd><span class="chip">FIJO</span>, <span class="chip">FLOTANTE</span>, <span class="chip">DGPS</span>, <span class="chip">AUTONOMO</span>, <span class="chip">SIN POS.</span> o <span class="chip">SIN DATOS</span> (el módulo GNSS todavía no manda nada). Al pasar a FIJO la pantalla destella.</dd></div>
+      <div><dt>H y V</dt><dd>La precisión en planta y en vertical que muestran también las apps: en milímetros y, desde un metro, en metros. Con la compensación de inclinación en uso, es la de la punta del bastón. «--»: sin dato.</dd></div>
+      <div><dt>Satélites y correcciones</dt><dd><span class="chip">31/38</span>: satélites rastreados y visibles. Luego la fuente de las correcciones y su edad: «NTRIP» (NTRIP del receptor), «Tel.» (NTRIP por el teléfono) o «Radio»; «Sin corr.» si no hay. Pasados 99&nbsp;s dice «&gt;99 s».</dd></div>
+      <div><dt>Última línea</dt><dd>La grabación y el estado de la inclinación, que se turnan cada 3&nbsp;s («INCL: LISTA», «INCL: CAMINA/BALANCEA»…). Con la batería baja, el aviso ocupa la línea en negativo.</dd></div>
     </dl>
   </div>
-  <div class="oled-variants">
-    <figure>
-      <div class="oled sm" role="img" aria-label="Cargando: 85% y CARGA">
-        <span class="y0">MeridianV-E828 0.10.0</span>
-        <span class="hr"></span>
-        <span class="y13 big">FIJO</span>
-        <span class="y13 r">85%</span>
-        <span class="y21 r">CARGA</span>
-        <span class="y31">SAT 23</span>
-        <span class="y39">CORR. NTRIP 1.2&nbsp;s</span>
-        <span class="y47">MEM INT. LISTA</span>
-        <span class="y56">AP 192.168.4.1</span>
-      </div>
-      <figcaption>Cargando.</figcaption>
-    </figure>
-    <figure>
-      <div class="oled sm" role="img" aria-label="Batería baja: BATERIA BAJA 25 MIN en negativo, abajo">
-        <span class="y0">MeridianV-E828 0.10.0</span>
-        <span class="hr"></span>
-        <span class="y13 big">FIJO</span>
-        <span class="y13 r">12%</span>
-        <span class="y31">SAT 23</span>
-        <span class="y39">CORR. NTRIP 1.2&nbsp;s</span>
-        <span class="y47">MEM INT. LISTA</span>
-        <span class="band"></span>
-        <span class="y56 inv">BATERIA BAJA 25 MIN</span>
-      </div>
-      <figcaption>Batería baja: el aviso ocupa la última línea.</figcaption>
-    </figure>
-    <figure>
-      <div class="oled sm" role="img" aria-label="Apagando: APAGANDO, Cerrando memoria">
-        <span class="y8">APAGANDO</span>
-        <span class="y24">Cerrando memoria</span>
-      </div>
-      <figcaption>Apagando, con una grabación abierta.</figcaption>
-    </figure>
+  <div class="oled-grid">
+    <figure><img class="oled-pic sm" src="img/oled/15-pagina-red.png" width="512" height="256" loading="lazy" alt="Página RED WI-FI: MeridianV-74E828, Panel 192.168.4.1, Conectados 0; INTERNET Obra-4G, IP 192.168.43.17."><figcaption>Página de la red (un toque): la red del receptor, su panel, los conectados y, si se unió a otra red, cuál y su IP.</figcaption></figure>
+    <figure><img class="oled-pic sm" src="img/oled/16-pagina-receptor.png" width="512" height="256" loading="lazy" alt="Página RECEPTOR: número de serie MV-441BF674E828, Firmware 1.0.0, Batería 85 %, Quedan 5 h 20 min, Encendido 02:13:05, Bluetooth conectado."><figcaption>Página del receptor (dos toques): número de serie, versión del firmware, batería y tiempo que queda. Vuelve sola a la principal a los 30&nbsp;s.</figcaption></figure>
+    <figure><img class="oled-pic sm" src="img/oled/20-arranque.png" width="512" height="256" loading="lazy" alt="Arranque: MeridianV-74E828, Iniciando 1.0.0, GNSS ESPERA, Bluetooth OK, Wi-Fi OK, Memoria OK, Inclinación OK, Batería 85 %."><figcaption>Al encender: la lista de comprobación, con la versión del firmware.</figcaption></figure>
+    <figure><img class="oled-pic sm" src="img/oled/23-camina-balancea.png" width="512" height="256" loading="lazy" alt="FIJO con H 12 mm y V 17 mm, cargando, y abajo INCL: CAMINA/BALANCEA."><figcaption>Compensación encendida, esperando rumbo: «INCL: CAMINA/BALANCEA».</figcaption></figure>
+    <figure><img class="oled-pic sm" src="img/oled/03-grabando.png" width="512" height="256" loading="lazy" alt="FIJO con el punto de grabación arriba e INCL: LISTA abajo."><figcaption>Grabando (el punto de arriba) y con la inclinación lista.</figcaption></figure>
+    <figure><img class="oled-pic sm" src="img/oled/07-bateria-baja.png" width="512" height="256" loading="lazy" alt="FLOTANTE con H 34 mm y V 39 mm, batería al 9 % y abajo, en negativo, BATERIA BAJA 25 MIN."><figcaption>Batería baja: el aviso, abajo y en negativo.</figcaption></figure>
+    <figure><img class="oled-pic sm" src="img/oled/10-base-transmitiendo.png" width="512" height="256" loading="lazy" alt="BASE, Transmitiendo 0.4 s, NTRIP · Caster, 31/38 satélites, 2 rovers, GRAB. 00:03:58 2 MB."><figcaption>En modo base: si transmite, por dónde y cuántos rovers tiene.</figcaption></figure>
+    <figure><img class="oled-pic sm" src="img/oled/12-promedio.png" width="512" height="256" loading="lazy" alt="PROMEDIO con la barra, 74 de 120 s, Exige FIJO, Ahora FLOTANTE."><figcaption>La base promediando su posición.</figcaption></figure>
+    <figure><img class="oled-pic sm" src="img/oled/18-apagando.png" width="512" height="256" loading="lazy" alt="APAGANDO, Cerrando grabación, SUELTA EL BOTON, la barra y A los 10 s reinicia."><figcaption>Apagando, con una grabación abierta.</figcaption></figure>
   </div>
   <div class="prose" style="margin-top:1.25rem">
-    <p class="muted">La pantalla no dice si el receptor es base o rover, ni cómo va la inclinación. Eso está en la app.</p>
+    <p class="muted">Las pantallas son vistas previas del dibujo del firmware 1.0.0 con datos de ejemplo.</p>
   </div>
 
   <h3>Carga</h3>
   <div class="prose">
-    <p>Carga por el USB-C del receptor, con un cargador de 5&nbsp;V. Mientras carga, la pantalla dice «CARGA» bajo el porcentaje. Puedes usarlo mientras carga.</p>
+    <p>Carga por el USB-C del receptor, con un cargador de 5&nbsp;V. Mientras carga, la pantalla enseña un rayo junto a la batería. Puedes usarlo mientras carga.</p>
   </div>
 
   <h3>Número de serie y red Wi-Fi</h3>
   <div class="prose">
     <p>El número de serie es «MV-» y 12 caracteres, por ejemplo <code>MV-441BF674E828</code>. Viene en el código QR de la etiqueta, pegada por dentro de la tapa del costado que cubre el USB-C y la microSD (se ve al abrirla), y en la app: <span class="route">Receptor <i>›</i> Sistema y firmware <i>›</i> Número de serie</span>.</p>
-    <p>El receptor tiene su propia red Wi-Fi, <strong>MeridianV-XXXXXX</strong>. XXXXXX son los 6 últimos caracteres del número de serie: el <code>MV-441BF674E828</code> crea la red <strong>MeridianV-74E828</strong>. Con ese mismo nombre aparece por Bluetooth y en la pantalla. Con el firmware 0.10.0 eran solo los 4 últimos (<strong>MeridianV-E828</strong>): al actualizar, la red cambia de nombre y la app te lo avisa.</p>
+    <p>El receptor tiene su propia red Wi-Fi, <strong>MeridianV-XXXXXX</strong>. XXXXXX son los 6 últimos caracteres del número de serie: el <code>MV-441BF674E828</code> crea la red <strong>MeridianV-74E828</strong>. Con ese mismo nombre aparece por Bluetooth y en la pantalla. Si tu receptor traía el firmware 0.10, al pasar a 1.0.0 la red y el Bluetooth cambian de nombre (antes eran solo los 4 últimos caracteres, <strong>MeridianV-E828</strong>): vuelve a elegir el receptor en la app y la red en el teléfono.</p>
     <p>La contraseña de fábrica es <code>TresVizoRTK</code>, igual en todas las unidades. La app te avisa: «El receptor usa la contraseña de fábrica, igual en todas las unidades. Cámbiala.» Cámbiala en <span class="route" data-os="ios">Receptor <i>›</i> Red Wi-Fi <i>›</i> Red del receptor</span><span class="route" data-os="android">Receptor <i>›</i> Conexiones <i>›</i> Red Wi-Fi</span>: de 8 a 63 caracteres, sin acentos ni ñ.</p>
     <p>La red está siempre activa y admite hasta 4 teléfonos o computadoras a la vez.</p>
   </div>
@@ -630,7 +606,7 @@ body { margin: 0; }
       <p>Solo un teléfono a la vez por Bluetooth: mientras uno está conectado, el receptor no aparece en los demás.</p>
     </div>
     <figure class="shot">
-      <img data-os="ios" src="img/ios/02-conectado-fijo.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Receptor de la app en iPhone: placa FIJO, latitud, longitud y altura, precisión H 10&nbsp;mm y V 21&nbsp;mm, 38 satélites y 0&nbsp;s de correcciones.">
+      <img data-os="ios" src="img/ios/02-conectado-fijo.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Receptor de la app en iPhone: placa FIJO, precisión H 10&nbsp;mm y V 21&nbsp;mm, 38 satélites, batería del receptor 78&nbsp;% y enlace por Wi-Fi.">
       <img data-os="android" src="img/android/02-conectado-fijo.jpg" width="640" height="1422" loading="lazy" alt="Pantalla Receptor de la app en Android: MeridianV · C3D4 en FIJO, con precisión H 12&nbsp;mm y V 21&nbsp;mm, 24 satélites y la lista Estado, Modo, Correcciones, Configuración GNSS e IMU.">
       <figcaption><span data-os="ios">Conectado y en FIJO. El enlace, arriba a la derecha de la tarjeta, dice por dónde está conectada la app; en esta captura, Wi-Fi.</span><span data-os="android">Conectado y en FIJO. El enlace, arriba a la derecha de la tarjeta, dice por dónde está conectada la app; aquí, Bluetooth y Wi-Fi a la vez.</span></figcaption>
     </figure>
@@ -642,6 +618,13 @@ body { margin: 0; }
     <p class="say">«Por Wi-Fi la posición se actualiza a intervalos. Para capturar, usa Bluetooth.»</p>
     <p class="say">«Descargar grabaciones y actualizar el firmware requieren Wi-Fi.»</p>
     <p>Para conectar por Wi-Fi, conecta el teléfono a la red MeridianV-XXXXXX. Luego, en <span class="ui">Receptores</span> › <span class="ui">Otras formas de conectar</span>, toca <span class="ui">Buscar en la red Wi-Fi</span> o <span class="ui">Agregar por dirección IP</span> con <code>192.168.4.1</code>.<span data-os="android"> En Android también puedes tocar <span class="ui">Conectarse a la red del receptor</span>: Android pide permiso y se une a la red desde la app.</span></p>
+  </div>
+
+  <h3>Con la pantalla bloqueada</h3>
+  <div class="prose">
+    <p>Con el receptor conectado por Bluetooth, la app sigue avisando aunque bloquees el teléfono o cambies de app: si se pierde el FIJO o las correcciones, si se corta el NTRIP del teléfono o del receptor, y de los avisos del receptor. La primera vez pide permiso para las notificaciones: acéptalo.<span data-os="ios"> Solo por Wi-Fi, iOS detiene la app al salir de ella.</span></p>
+    <p>En <span class="route">Cuenta <i>›</i> Con la app fuera de la vista</span> están esos avisos y <span class="ui">Solución en la pantalla bloqueada</span>: <span data-os="ios">la solución y la edad de las correcciones en la pantalla bloqueada, mientras corre el NTRIP por el teléfono o una captura.</span><span data-os="android">la solución y la edad de las correcciones en la notificación de la app, también con la pantalla bloqueada.</span></p>
+    <p>Los tonos y la vibración están en <span class="route">Cuenta <i>›</i> Campo</span>, en <span class="ui">Sonidos</span> y <span class="ui">Vibración</span>. Con el teléfono en silencio no suena nada.</p>
   </div>
 
   <div data-os="android">
@@ -752,7 +735,7 @@ body { margin: 0; }
     <span class="hexno" aria-hidden="true"><svg viewBox="0 0 28 32"><path class="s-brand" d="M14 1.6 26.4 8.8v14.4L14 30.4 1.6 23.2V8.8Z" fill="none" stroke="#008AFC" stroke-width="2.2" stroke-linejoin="round"/></svg><span>4</span></span>
     <h2 id="h-imu">Compensación de inclinación</h2>
   </div>
-  <p class="chapter-lede">Con la compensación de inclinación capturas con el bastón inclinado hasta 30°. La IMU del receptor sale calibrada de fábrica: en cada sesión solo balanceas el bastón.</p>
+  <p class="chapter-lede">Con la compensación de inclinación capturas con el bastón inclinado hasta 60°. La IMU del receptor sale calibrada de fábrica: en cada sesión solo caminas unos pasos o balanceas el bastón. La precisión en pantalla ya incluye lo que agrega la inclinación.</p>
   <div class="prose" style="margin-top:1rem">
     <p>La compensación viene apagada. Enciéndela con <span class="ui">Compensación de inclinación</span> en <span class="route">Receptor <i>›</i> IMU</span> o en <span class="ui">Ajustes de captura</span>, sección Inclinación. El ajuste se guarda en el receptor.</p>
   </div>
@@ -764,38 +747,39 @@ body { margin: 0; }
 
   <div class="step has-shot">
     <div class="prose">
-      <h3 style="margin-top:0">Balancear</h3>
-      <p>Balancear le da al receptor el rumbo. Hace falta RTK fijo.</p>
-      <p class="say">«Con la punta quieta en el suelo, balancea el bastón adelante y atrás, y luego de lado a lado, unos segundos.»</p>
-      <p>Inclínalo unos 5° o más hacia cada lado, en línea recta mejor que en círculo. Mientras falta, la app muestra la barra «Sin compensar» con esa indicación.</p>
+      <h3 style="margin-top:0">Iniciar el rumbo</h3>
+      <p>Para compensar, el receptor necesita saber hacia dónde mira. Lo averigua solo, con RTK fijo, cuando te mueves con el bastón. Mientras falta, la app muestra la barra «Sin compensar» y la pantalla del receptor, «INCL: CAMINA/BALANCEA».</p>
+      <p class="say">«Camina unos pasos o balancea el bastón.»</p>
+      <p>Para balancear sin moverte del punto: con la punta quieta en el suelo, inclínalo adelante y atrás y luego de lado a lado unos segundos, unos 5° o más hacia cada lado.</p>
     </div>
     <figure class="shot">
-      <img data-os="ios" src="img/ios/05b-inclinacion-balancea.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Receptor en iPhone con la barra naranja Sin compensar y la indicación de balancear el bastón.">
+      <img data-os="ios" src="img/ios/05b-inclinacion-balancea.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Receptor en iPhone con la barra Sin compensar: Camina unos pasos o balancea el bastón.">
       <img data-os="android" src="img/android/05b-inclinacion-balancea.jpg" width="640" height="1422" loading="lazy" alt="Pantalla Receptor en Android con el aviso Sin compensar y la indicación de balancear el bastón.">
-      <figcaption>Antes de balancear.</figcaption>
+      <figcaption>Antes de iniciar el rumbo.</figcaption>
     </figure>
   </div>
 
   <div class="step has-shot">
     <div class="prose">
       <p>Cuando el rumbo está listo, la app muestra «Compensada», con la inclinación y la incertidumbre que agrega, y la fila IMU dice «Lista».</p>
+      <p>Con la compensación en uso, la precisión que muestra la app es la de la punta: la del receptor más lo que agrega la compensación. Por eso sube un poco al inclinar el bastón y vuelve a la de siempre con el bastón vertical o la compensación apagada.</p>
       <h4 style="margin-top:0.6rem">El rumbo caduca</h4>
-      <p>Dura 5 minutos (300&nbsp;s). También se pierde con un golpe y se va gastando si giras el receptor sobre el bastón. La app te pide balancear de nuevo:</p>
+      <p>El rumbo se mantiene mientras trabajas. Si el bastón pasa mucho tiempo sin moverse, pierde exactitud y caduca; un golpe también lo invalida. La app te lo pide:</p>
       <ul>
-        <li>«El rumbo caducó: balancea de nuevo.»</li>
-        <li>«Hubo un golpe: balancea de nuevo.»</li>
+        <li>«El rumbo caducó: camina unos pasos o balancea el bastón.»</li>
+        <li>«Hubo un golpe: camina unos pasos o balancea el bastón.»</li>
       </ul>
       <h4 style="margin-top:0.6rem">Límites</h4>
       <ul>
-        <li>Más de 30°: «Inclinación mayor de 30°. Endereza el bastón.»</li>
-        <li>«La compensación agregaría más de 2&nbsp;cm de incertidumbre. Endereza el bastón o balancea de nuevo.»</li>
+        <li>Más de 60°: «Inclinación mayor de 60°. Endereza el bastón.»</li>
+        <li>«La compensación agregaría más de 4&nbsp;cm de incertidumbre. Endereza el bastón o balancea de nuevo.» El receptor no da la punta por buena si lo que agrega la inclinación pasa de 4&nbsp;cm. Suele pasar si el bastón lleva un par de minutos quieto en la mano: camina unos pasos o balancéalo.</li>
         <li>«La altura de antena no coincide con el balanceo. Revísala y balancea de nuevo.»</li>
       </ul>
-      <p>Si al capturar no hay punta válida, el punto se guarda igual, sin compensar, y la app lo avisa.</p>
-      <p class="muted">En Receptor › IMU la app indica «Sin validar en campo.». Compara tus primeros puntos inclinados con el mismo punto medido con el bastón vertical.</p>
+      <p>Si la punta deja de valer mientras capturas, la app pausa el promedio y te pregunta: endereza el bastón (o balancéalo) y sigue, o guarda el punto marcado «sin compensar».</p>
+      <p class="muted">La exactitud a ángulos grandes todavía está pendiente de validar en campo; en Receptor › IMU la app indica «Sin validar en campo.». Compara tus primeros puntos inclinados con el mismo punto medido con el bastón vertical.</p>
     </div>
     <figure class="shot">
-      <img data-os="ios" src="img/ios/05-inclinacion-lista.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Receptor en iPhone con la etiqueta verde Compensada · 7.4° · ±0.014&nbsp;m bajo la tarjeta de posición.">
+      <img data-os="ios" src="img/ios/05-inclinacion-lista.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Receptor en iPhone con la etiqueta verde Compensada · 11.9° · ±0.013&nbsp;m bajo la tarjeta de posición.">
       <img data-os="android" src="img/android/05-inclinacion-lista.jpg" width="640" height="1422" loading="lazy" alt="Pantalla Receptor en Android con Compensada · 6.0° · ±0.013&nbsp;m y la fila IMU en Lista.">
       <figcaption><span data-os="ios">Después: «Compensada · 7.4° · ±0.014&nbsp;m».</span><span data-os="android">Después: «Compensada · 6.0° · ±0.013&nbsp;m» e IMU «Lista».</span></figcaption>
     </figure>
@@ -820,15 +804,17 @@ body { margin: 0; }
         <li>La app recibe las correcciones por los datos del teléfono y se las pasa al receptor por Bluetooth.</li>
         <li>Admite casters con TLS y VRS. Para VRS, activa «Enviar posición al caster»: se envía cada 10&nbsp;s.</li>
         <li>Los datos del caster se guardan en el teléfono.</li>
+        <li data-os="ios">«Con la pantalla bloqueada, iOS puede cortarlo: para trabajos largos, usa NTRIP del receptor.»</li>
       </ul>
     </div>
     <div>
       <h4>NTRIP del receptor</h4>
       <ul>
         <li>El receptor se conecta solo a internet por una red Wi-Fi de 2.4&nbsp;GHz, por ejemplo el punto de acceso personal del teléfono. Agrégala en <span class="route" data-os="ios">Receptor <i>›</i> Red Wi-Fi</span><span class="route" data-os="android">Receptor <i>›</i> Conexiones <i>›</i> Red Wi-Fi</span>.</li>
-        <li>Guarda hasta 5 perfiles. En rover, el elegido se conecta solo al encender.</li>
-        <li>No admite TLS ni VRS: para esos casters, usa NTRIP por el teléfono.</li>
-        <li>Solo funciona en modo rover.</li>
+        <li>Habla NTRIP v2 y, si el caster no la admite, v1. Admite casters con TLS (revisa el certificado antes de enviar la contraseña) y redes VRS: envía su posición si el punto de montaje la pide.</li>
+        <li>Guarda hasta 5 perfiles. Con <span class="ui">Conectar al encender</span>, el elegido se conecta solo cada vez que enciendes el receptor.</li>
+        <li>Una contraseña o un punto de montaje equivocados no se reintentan sin fin: la conexión se detiene y dice el motivo.</li>
+        <li>No depende del teléfono: sigue aunque bloquees el teléfono o cierres la app. Solo funciona en modo rover.</li>
       </ul>
     </div>
   </div>
@@ -838,10 +824,10 @@ body { margin: 0; }
       <h3 style="margin-top:0">Agregar un perfil</h3>
       <p>Entra a <span class="route">Receptor <i>›</i> Correcciones <i>›</i> NTRIP del receptor <i>›</i> Agregar perfil</span> e ingresa servidor, puerto (2101 es el habitual), punto de montaje, usuario y contraseña. Toca <span class="ui">Guardar</span>.</p>
       <p><span data-os="ios">También puedes tocar <span class="ui">Conectar sin guardar perfil</span>.</span><span data-os="android">Después aparecen <span class="ui">Conectar</span> y <span class="ui">Conectar al encender</span>.</span></p>
-      <p>Para NTRIP por el teléfono, los campos son los mismos y además TLS, versión y una lista de puntos de montaje.</p>
+      <p>Más abajo están <span class="ui">Versión</span> («Automática»: v2 y, si no, v1), <span class="ui">TLS</span> (suele ser el puerto 443), <span class="ui">Enviar posición al caster</span> («Automático»: si el punto de montaje la pide, cada 10&nbsp;s) y el <span class="ui">Marco de las correcciones</span>, si tu red lo indica (p. ej. ITRF2008, 2010.0). NTRIP por el teléfono tiene campos parecidos y la lista de puntos de montaje.</p>
     </div>
     <figure class="shot">
-      <img data-os="ios" src="img/ios/06-correcciones-ntrip.jpg" width="640" height="1391" loading="lazy" alt="Hoja Agregar perfil en iPhone con RTK2go, rtk2go.com, puerto 2101 y punto de montaje MOUNTPOINT; usuario y contraseña vacíos.">
+      <img data-os="ios" src="img/ios/06-correcciones-ntrip.jpg" width="640" height="1391" loading="lazy" alt="Hoja Agregar perfil del NTRIP del receptor en iPhone: RTK2go, rtk2go.com, puerto 2101 y punto de montaje MOUNTPOINT; Versión Automática, TLS y Enviar posición al caster Automático cada 10&nbsp;s.">
       <img data-os="android" src="img/android/06-correcciones-ntrip.jpg" width="640" height="1422" loading="lazy" alt="Hoja Agregar perfil en Android sobre NTRIP del receptor, con rtk2go.com, puerto 2101 y punto de montaje MOUNTPOINT.">
       <figcaption>Agregar perfil, con datos de ejemplo.</figcaption>
     </figure>
@@ -849,7 +835,7 @@ body { margin: 0; }
 
   <h3>Cuando se pierden</h3>
   <div class="prose">
-    <p>El receptor mantiene el FIJO 30&nbsp;s sin correcciones nuevas. Después deja de estar en FIJO. Lo ves así:</p>
+    <p>El receptor mantiene el FIJO 30&nbsp;s sin correcciones nuevas. Después deja de estar en FIJO. Ese tiempo se cambia, de 1 a 600&nbsp;s, en el panel web: <span class="route">Ajustes GNSS <i>›</i> Edad máxima para el FIJO</span>. Lo ves así:</p>
     <ul>
       <li>En la barra de estado, la edad de las correcciones se pone ámbar desde 5&nbsp;s y roja a más de 30&nbsp;s. «Sin corr.»: no hay fuente.</li>
       <li>A los 30&nbsp;s llega el aviso «No llegan correcciones desde hace más de 30&nbsp;s. Revisa la fuente de correcciones.», con <span class="ui">Ver correcciones</span>.</li>
@@ -865,15 +851,21 @@ body { margin: 0; }
       <h3 style="margin-top:0">Base propia</h3>
       <p>Con dos receptores, uno puede ser la base. Abre el asistente en <span class="route" data-os="ios">Receptor <i>›</i> Modo <i>›</i> Base</span><span class="route" data-os="android">Receptor <i>›</i> Modo <i>›</i> Cambiar modo <i>›</i> Base <i>›</i> Asistente de base</span> y elige cómo conoces la coordenada:</p>
       <ul>
-        <li><span class="ui">Coordenada conocida</span>: latitud y longitud WGS 84, altura elipsoidal del punto en el suelo y altura de antena. El desplazamiento de antena se suma solo.</li>
-        <li><span class="ui">Promediar con la app</span>: de 2 a 900&nbsp;s, con la calidad que exijas. Si se pierde esa calidad, el promedio se cancela. Aquí la altura de antena solo sirve para la altura de la marca.</li>
+        <li><span class="ui">Coordenada conocida</span>: latitud y longitud WGS 84 y altura elipsoidal de la marca, escritas o tomadas de un punto con <span class="ui">Elegir del proyecto</span>, y la altura de antena. El desplazamiento de antena se suma solo. La base arranca siempre en esa coordenada.</li>
+        <li><span class="ui">Promediar con la app</span> o <span class="ui">Promedio del receptor</span>: la base mide su propia posición durante el tiempo y con la calidad que elijas. Si se pierde esa calidad, el promedio se cancela.</li>
+      </ul>
+      <p>Como en los receptores de Emlid, <strong>una base con promedio vuelve a promediar en cada encendido</strong>. Al terminar, en <span class="route">Receptor <i>›</i> Modo</span> ves el promedio con su σ y dos botones para conservarlo:</p>
+      <ul>
+        <li><span class="ui">Fijar esta posición</span>: desde entonces la base arranca siempre en esa coordenada.</li>
+        <li><span class="ui">Guardar como punto conocido</span>: la guarda en el proyecto abierto con su altura elipsoidal, para elegirla otro día en «Coordenada conocida» › «Elegir del proyecto».</li>
       </ul>
       <p>Siempre WGS 84 y altura elipsoidal: el receptor no transforma coordenadas.</p>
       <p class="say">«Revisa la coordenada antes de transmitir: un error en la base afecta a todos los rovers.»</p>
-      <p>El rover recibe la base por NTRIP. Desde el panel web de la base (Correcciones), publica sus correcciones en un caster o usa el «Caster del receptor»: puerto 2101, punto de montaje <code>MERIDIANV</code>, hasta dos rovers.</p>
+      <p><strong>Si la base cambia, el rover avisa.</strong> Si la base de la que llegan las correcciones se mueve más de 5&nbsp;cm o vuelve a promediar en otro sitio, sale «La base de las correcciones cambió 0.12&nbsp;m: se movió o volvió a promediar. Revisa el desfase y la localización.» (la cifra es de ejemplo). El aviso se queda, aunque reinicies, hasta que lo das por visto. Solo avisa: no detiene nada.</p>
+      <p>El rover recibe la base por NTRIP. Desde el panel web de la base (Correcciones), publica sus correcciones en un caster o usa el «Caster del receptor»: puerto 2101, punto de montaje <code>MERIDIANV</code>, hasta cuatro rovers.</p>
     </div>
     <figure class="shot">
-      <img data-os="ios" src="img/ios/07-base.jpg" width="640" height="1391" loading="lazy" alt="Asistente de base en iPhone: Paso 1 Método con Promediar con la app marcado; Paso 2 Datos con calidad FIJO, duración 2&nbsp;min, identificador de estación 1 y altura de antena 1.800.">
+      <img data-os="ios" src="img/ios/07-base.jpg" width="640" height="1391" loading="lazy" alt="Asistente de base en iPhone con Promedio del receptor marcado y la nota: el promedio se repite en cada encendido; para conservarlo, Fijar esta posición o Guardar como punto conocido.">
       <img data-os="android" src="img/android/07-base.jpg" width="640" height="1422" loading="lazy" alt="Asistente de base en Android: Paso 1 Cómo se conoce la coordenada, con Promediar con la app marcado; Paso 2 Datos con calidad FIJO, duración 2&nbsp;min, identificador de estación 1 y altura de antena 1.800&nbsp;m.">
       <figcaption>Asistente de base, promediando con la app.</figcaption>
     </figure>
@@ -894,9 +886,10 @@ body { margin: 0; }
       <p>En <span class="route">Levantamiento</span> toca <span class="ui">Crear proyecto</span> o «+» arriba a la derecha. Ingresa el nombre, el sistema de coordenadas, el geoide y la altura de antena, y toca <span class="ui">Crear</span>.</p>
       <p class="say">«El sistema de coordenadas no se puede cambiar después. Se puede exportar a otro.»</p>
       <p>Con el geoide en «Ninguno», las alturas son elipsoidales. Elige un geoide si necesitas cotas.</p>
+      <p>De fábrica la app trae WGS 84, Mexico ITRF2008 con sus zonas UTM 11N a 16N y los geoides de México GGM10 y GGM25. Los sistemas y geoides de otros países se bajan en <span class="route">Cuenta <i>›</i> Sistemas y geoides</span>; lo que bajas se queda en el teléfono y funciona sin conexión. Una localización que guardes como sistema queda en <span class="ui">Mis sistemas</span> y se elige al crear un proyecto.</p>
     </div>
     <figure class="shot">
-      <img data-os="ios" src="img/ios/08-nuevo-proyecto.jpg" width="640" height="1391" loading="lazy" alt="Hoja Nuevo proyecto en iPhone: Lote 14 Tepotzotlán, sistema WGS 84 / UTM zona 14N, geoide Ninguno, altura de antena 1.800&nbsp;m.">
+      <img data-os="ios" src="img/ios/08-nuevo-proyecto.jpg" width="640" height="1391" loading="lazy" alt="Hoja Nuevo proyecto en iPhone: Lote 14, sistema WGS 84 / UTM zona 14N, geoide Ninguno, altura de antena 1.800&nbsp;m.">
       <img data-os="android" src="img/android/08-nuevo-proyecto.jpg" width="640" height="1422" loading="lazy" alt="Hoja Nuevo proyecto en Android: Lote 14 Tepotzotlán, sistema WGS 84 / UTM zona 14N, geoide Ninguno, altura de antena 1.80&nbsp;m.">
       <figcaption>Nuevo proyecto. La app propone el sistema de coordenadas.</figcaption>
     </figure>
@@ -927,6 +920,7 @@ body { margin: 0; }
     <div class="prose">
       <h3 style="margin-top:0">Mapa</h3>
       <p>El proyecto se abre en el mapa, con cada punto y su nombre. La lista de puntos está en el botón de abajo a la izquierda.</p>
+      <p>El fondo es de Mapbox, con calles y satélite, y necesita internet. Para trabajar sin cobertura, baja antes la zona: en las capas del mapa o en <span class="route">Cuenta <i>›</i> Mapas sin conexión</span>, toca <span class="ui">Descargar esta zona</span>. Medir no necesita internet.</p>
       <p>Para unir puntos en una línea: <span data-os="ios"><span class="route">toca un punto <i>›</i> Nueva línea</span>, toca los vértices en orden y, para cerrarla, <span class="ui">Cerrar como polígono</span>. Toca <span class="ui">Guardar</span>.</span><span data-os="android"><span class="route">Herramientas <i>›</i> Línea o polígono con puntos</span>, toca los vértices en orden y, para cerrarla, <span class="ui">Cerrar como polígono</span>. Toca <span class="ui">Guardar</span>.</span></p>
     </div>
     <figure class="shot">
@@ -952,11 +946,14 @@ body { margin: 0; }
   <div class="step has-shot">
     <div class="prose">
       <h3 style="margin-top:0">Exportar</h3>
-      <p>En <span class="route" data-os="ios">proyecto <i>›</i> ••• <i>›</i> Exportar</span><span class="route" data-os="android">proyecto <i>›</i> ⋯ <i>›</i> Exportar</span> elige los formatos (CSV, GeoJSON, DXF y KML) y el sistema de coordenadas. Toca <span class="ui">Preparar archivos</span> y compártelos.</p>
-      <p class="say">«GeoJSON y KML se exportan en WGS 84. El DXF incluye un archivo con el sistema de coordenadas.»</p>
+      <p>En <span class="route" data-os="ios">proyecto <i>›</i> ••• <i>›</i> Exportar</span><span class="route" data-os="android">proyecto <i>›</i> ⋯ <i>›</i> Exportar</span> elige los formatos (CSV, GeoJSON, DXF, KML y KMZ) y el sistema de coordenadas. Toca <span class="ui">Preparar archivos</span> y compártelos. Ahí mismo está el <span class="ui">Informe PDF</span> del levantamiento.</p>
+      <p>El CSV es como el de Emlid Flow: en <span class="ui">Opciones de CSV</span>, «Todas las columnas» saca las de Emlid Flow en su orden y después las de TresVizo Field. También hay PENZD, PNEZD, NXYZD o una disposición «Personalizada», en la que eliges, ordenas y renombras columnas, y el separador, la coma decimal, los encabezados y la codificación.</p>
+      <p>GeoJSON, KML y KMZ salen en WGS 84; el DXF lleva un archivo con el sistema de coordenadas.</p>
+      <h4 style="margin-top:0.6rem">Importar puntos</h4>
+      <p>En el menú del proyecto, <span class="ui">Importar puntos</span> lee un CSV en NXYZD, PNEZD o PENZD, o con «Detectar» lo reconoce solo; también el CSV de Emlid. Antes de importar enseña una vista previa y las líneas con error.</p>
     </div>
     <figure class="shot">
-      <img data-os="ios" src="img/ios/13-exportar.jpg" width="640" height="1391" loading="lazy" alt="Hoja Exportar en iPhone: CSV y GeoJSON activados, DXF y KML apagados, sistema WGS 84 / UTM zona 14N y el botón Preparar archivos.">
+      <img data-os="ios" src="img/ios/13-exportar.jpg" width="640" height="1391" loading="lazy" alt="Hoja Exportar en iPhone con los formatos CSV, GeoJSON, DXF, KML, KMZ e Informe PDF, y Opciones de CSV.">
       <img data-os="android" src="img/android/13-exportar.jpg" width="640" height="1422" loading="lazy" alt="Hoja Exportar en Android: CSV y GeoJSON activados, DXF y KML apagados, sistema WGS 84 / UTM zona 14N y el botón Preparar archivos.">
       <figcaption>Exportar.</figcaption>
     </figure>
@@ -1018,13 +1015,14 @@ body { margin: 0; }
 
   <div class="step has-shot">
     <div class="prose">
-      <p class="say">«Hay una versión nueva del firmware del receptor: 0.10.1.»</p>
+      <p class="say">«Hay una versión nueva del firmware del receptor: …»</p>
       <ol class="steps">
         <li>Conecta el teléfono al receptor por Wi-Fi. Por Bluetooth no se actualiza: «Actualizar el firmware requiere Wi-Fi.»</li>
         <li>Toca <span class="ui">Ver</span> en el aviso, o entra a <span class="route">Receptor <i>›</i> Sistema y firmware</span>. Ahí está la «Versión incluida en la app».</li>
-        <li>Toca <span class="ui">Actualizar a 0.10.1</span> (el número es de ejemplo) y espera a que el receptor reinicie.</li>
+        <li>Toca <span class="ui">Actualizar a …</span>, con el número de la versión nueva, y espera a que el receptor reinicie.</li>
       </ol>
-      <p>Necesitas la batería del receptor arriba del 20&nbsp;% o el cargador puesto. Si no, sale «Batería del receptor baja (…). Conéctalo a la corriente para actualizar.» Tampoco se puede con NTRIP activo ni con una grabación en curso.</p>
+      <p>Necesitas la batería del receptor arriba del 20&nbsp;% o el cargador puesto. Si no, sale «Batería del receptor baja (…). Conéctalo a la corriente para actualizar.»</p>
+      <p><strong>No hace falta detener NTRIP ni la grabación.</strong> La app solo avisa: «Actualizar detiene NTRIP; la grabación se cierra al instalar.» Mientras se carga la imagen, la grabación y el promedio de la base siguen; NTRIP se pausa y, si la carga no termina, vuelve solo.</p>
     </div>
     <figure class="shot">
       <img data-os="ios" src="img/ios/16-aviso-firmware-nuevo.jpg" width="640" height="1391" loading="lazy" alt="Pantalla Receptor en iPhone con el aviso Hay una versión nueva del firmware del receptor: 0.10.1, y el botón Ver.">
@@ -1036,6 +1034,23 @@ body { margin: 0; }
   <div class="note warn" style="margin-top:1.5rem">
     <p class="note-title">No actualices durante una medición</p>
     <p>Si la actualización se interrumpe, el receptor conserva el firmware actual. Solo instala firmware firmado por TresVizo y, si la versión nueva no arranca bien, vuelve sola a la anterior.</p>
+  </div>
+
+  <h3>Qué trae la 1.0.0</h3>
+  <div class="prose">
+    <ul>
+      <li>Compensación de inclinación <strong>hasta 60°</strong>, con un filtro de Kalman que inicia el rumbo caminando o balanceando; la precisión en pantalla es la de la punta.</li>
+      <li>La IMU sale con su calibración completa de fábrica, que se conserva al restablecer.</li>
+      <li>Pantalla nueva con la precisión en grande, iconos, tres páginas y la lista de comprobación al encender.</li>
+      <li>Base como en Emlid: promedia en cada encendido, «Fijar esta posición», «Guardar como punto conocido» y aviso en el rover si la base cambia.</li>
+      <li>NTRIP del receptor con NTRIP v2 y v1, TLS y VRS.</li>
+      <li>Tiempo máximo en FIJO sin correcciones ajustable de 1 a 600&nbsp;s.</li>
+      <li>Grabaciones en tramos que se cortan al terminar una época, sin perder datos, y descarga entera desde la app.</li>
+      <li>Actualizar ya no corta la grabación al empezar.</li>
+      <li>Con el botón, sin teléfono ni computadora: iniciar y detener la grabación, reiniciar la red o restablecer de fábrica.</li>
+      <li>Red Wi-Fi y Bluetooth con los 6 últimos caracteres del número de serie.</li>
+    </ul>
+    <p class="muted small">Todavía no hay un ensayo de campo publicado de esta versión. Una solución FIJA no garantiza la exactitud: depende de la base, su coordenada y el entorno.</p>
   </div>
 
   <h3>Otras formas</h3>
@@ -1060,9 +1075,9 @@ body { margin: 0; }
   <div class="step" style="margin-top:1.5rem">
     <ol class="steps">
       <li><strong>Activa los datos crudos</strong> (observaciones a 1&nbsp;Hz y efemérides cada 30&nbsp;s) en <span class="route" data-os="ios">Receptor <i>›</i> GNSS <i>›</i> Datos crudos (PPK) <i>›</i> Activar datos crudos</span><span class="route" data-os="android">Receptor <i>›</i> Configuración GNSS <i>›</i> Avanzado <i>›</i> Datos crudos (PPK)</span>, o en el panel web, <span class="route">Grabación / PPK <i>›</i> Activar datos crudos</span>. Si no lo haces, el receptor los activa solo al iniciar la grabación. Sin datos crudos, la grabación no sirve para posproceso: el panel web dice cuántas observaciones llegan.</li>
-      <li><strong>Inicia la grabación</strong> en <span class="route">Receptor <i>›</i> Sistema y firmware <i>›</i> Grabación <i>›</i> Iniciar grabación</span>. Funciona por Bluetooth. También puedes hacerlo desde el panel web, en <span class="route">Grabación / PPK <i>›</i> Iniciar grabación</span>. La pantalla del receptor dice «GRABANDO».</li>
-      <li><strong>Detén la grabación</strong> en el mismo sitio, con <span class="ui">Detener grabación</span>, y espera a que se cierre antes de apagar. Si apagas con el botón, el receptor la cierra antes de cortar. Cada 64&nbsp;MB (unas 2 a 4 horas con datos crudos) la grabación sigue sola en un archivo nuevo: no se corta.</li>
-      <li><strong>Descárgala por Wi-Fi</strong> en <span class="route">Receptor <i>›</i> Sistema y firmware <i>›</i> Descargar grabaciones</span> y toca <span class="ui">Compartir el archivo</span>. Puede tardar. Desde la lista del panel web se descarga mucho más rápido, con su nombre (unidad, fecha y hora: <code>MeridianV-74E828_20261019_1432UTC.bin</code>), y ahí también se borran las que ya descargaste.</li>
+      <li><strong>Inicia la grabación</strong> en <span class="route">Receptor <i>›</i> Sistema y firmware <i>›</i> Grabación <i>›</i> Iniciar grabación</span>. Funciona por Bluetooth. También puedes hacerlo desde el panel web, en <span class="route">Grabación / PPK <i>›</i> Iniciar grabación</span>, o sin teléfono, con cinco toques cortos del botón. La pantalla del receptor dice «GRABANDO».</li>
+      <li><strong>Detén la grabación</strong> en el mismo sitio, con <span class="ui">Detener grabación</span>, y espera a que se cierre antes de apagar. Si apagas con el botón, el receptor la cierra antes de cortar. Cada 64&nbsp;MB (unas 2.5&nbsp;h con datos crudos) la grabación sigue sola en un tramo nuevo, que empieza justo al terminar una época: no se pierde ninguna.</li>
+      <li><strong>Descárgala por Wi-Fi</strong> en <span class="route">Receptor <i>›</i> Sistema y firmware <i>›</i> Descargar grabaciones</span> y toca <span class="ui">Compartir el archivo</span>. Puede tardar. Una grabación de varios tramos sale en <span class="ui">Grabaciones largas</span>: <span class="ui">Descargar entera</span> baja los tramos en orden y los une en un solo archivo. Desde la lista del panel web se descarga mucho más rápido, con su nombre (unidad, fecha y hora: <code>MeridianV-74E828_20261019_1432UTC.bin</code>), y ahí también se borran las que ya descargaste.</li>
       <li><strong>Conviértela a RINEX</strong> en la computadora. La app te lo recuerda: «Datos crudos del receptor (no RINEX). Conviértelos para posproceso.»</li>
     </ol>
   </div>
@@ -1071,7 +1086,7 @@ body { margin: 0; }
   <div class="prose">
     <p>Es un programa de Python 3 con ventana; necesita Tk. Se abre así:</p>
     <p class="cmd">python3 to_rinex_gui.py</p>
-    <p>Elige el archivo <code>.bin</code> (o <code>.part</code>, si la grabación se cortó), escribe la altura de antena hasta la base del receptor y el nombre del punto, y toca «Convertir a RINEX». La herramienta suma los 0.116&nbsp;m.</p>
+    <p>Elige el archivo <code>.bin</code> (o <code>.part</code>, si la grabación se cortó; si es un tramo, la herramienta busca los demás en la misma carpeta y los une), escribe la altura de antena hasta la base del receptor y el nombre del punto, y toca «Convertir a RINEX». La herramienta suma los 0.116&nbsp;m.</p>
     <p>Salen dos archivos RINEX 3.04, <code>.obs</code> y <code>.nav</code>, con el nombre del punto, la fecha y la hora: <code>P01_20261020_143205.obs</code>.</p>
     <p>Desde la terminal hace lo mismo:</p>
     <p class="cmd">python3 to_rinex.py SESION.bin --antenna-height 1.800 --marker P01 --out ~/PPK</p>
@@ -1091,7 +1106,7 @@ body { margin: 0; }
     <div class="issue"><div><p class="msg">«No se encontraron receptores»</p></div><p class="fix">Revisa que el receptor esté encendido, a menos de 10&nbsp;m y sin otro teléfono conectado.<span data-os="android"> En Android 11 o anterior, enciende la ubicación.</span> Toca «Reintentar».</p></div>
     <div class="issue"><div><p class="msg">La posición se actualiza a saltos</p></div><p class="fix">La app está conectada por Wi-Fi. Para capturar, conecta por Bluetooth.</p></div>
     <div class="issue"><div><p class="msg">«Actualizar el firmware requiere Wi-Fi.»</p></div><p class="fix">Conecta el teléfono a la red MeridianV-XXXXXX y vuelve a intentarlo.</p></div>
-    <div class="issue"><div><p class="msg">El receptor no se apaga</p></div><p class="fix">Si la pantalla dice «Sigue alimentado», tiene el cable USB puesto: quítalo y se apaga en un segundo.</p></div>
+    <div class="issue"><div><p class="msg">Al apagar, la pantalla dice «CARGANDO»</p></div><p class="fix">Tiene el cable USB puesto: el receptor queda en reposo y solo carga. Para encenderlo, mantén el botón 1&nbsp;s.</p></div>
     <div class="issue" data-os="android"><div><p class="msg">La conexión se corta con la app en segundo plano</p></div><p class="fix">Excluye la app de la optimización de batería: Cuenta › Campo › Optimización de batería.</p></div>
   </div>
 
@@ -1099,7 +1114,7 @@ body { margin: 0; }
   <div class="issues">
     <div class="issue"><div><p class="msg"><span class="lvl e">Error</span>«El módulo GNSS no envía posiciones. Aplica una frecuencia de salida en los ajustes del receptor.»</p><span class="btn">Aplicar frecuencia</span></div><p class="fix">Toca el botón. Si sigue, reinicia el receptor.</p></div>
     <div class="issue"><div><p class="msg"><span class="lvl e">Error</span>«Error del módulo GNSS. Reinicia el receptor.»</p><span class="btn">Ver diagnóstico</span></div><p class="fix">Reinicia el receptor.</p></div>
-    <div class="issue"><div><p class="msg">«Sin compensar» o «El rumbo caducó: balancea de nuevo.»</p></div><p class="fix">Con RTK fijo y la punta quieta, balancea el bastón. Si dice que pasa de 30°, endereza el bastón.</p></div>
+    <div class="issue"><div><p class="msg">«Sin compensar» o «El rumbo caducó…»</p></div><p class="fix">Con RTK fijo, camina unos pasos o, con la punta quieta, balancea el bastón. Si dice que pasa de 60° o que endereces el bastón, enderézalo.</p></div>
   </div>
 
   <h3 class="issues-group">Correcciones y base</h3>
@@ -1110,6 +1125,7 @@ body { margin: 0; }
     <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«El receptor está en modo base y tiene una entrada de correcciones activa. Detén la entrada de correcciones.»</p><span class="btn" data-os="ios">Detener la entrada</span><span class="btn" data-os="android">Detener correcciones</span></div><p class="fix">Toca el botón: una base no recibe correcciones.</p></div>
     <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«Se publican correcciones, pero el receptor no está en modo base. Cambia a base o detén la publicación.»</p><span class="btn">Detener la publicación</span></div><p class="fix">Pasa el receptor a base o toca el botón.</p></div>
     <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«La base no está enviando correcciones a los rovers. Vuelve a aplicar la base.»</p></div><p class="fix">Vuelve a aplicar la base en el asistente de base.</p></div>
+    <div class="issue"><div><p class="msg"><span class="lvl w">Aviso</span>«La base de las correcciones cambió…»</p></div><p class="fix">La base se movió o volvió a promediar. Revisa la coordenada de la base, el desfase y la localización antes de seguir, y da el aviso por visto.</p></div>
   </div>
 
   <h3 class="issues-group">Batería</h3>
@@ -1128,8 +1144,9 @@ body { margin: 0; }
   </div>
 
   <div class="note" style="margin-top:2rem">
-    <p class="note-title">Para soporte técnico</p>
-    <p>Ten a la mano el número de serie (Receptor › Sistema y firmware). Si te lo piden, descarga el diagnóstico desde el panel web: Configuración › Más ajustes › Diagnóstico › «Descargar diagnóstico».</p>
+    <p class="note-title">Soporte técnico</p>
+    <p>Escríbenos a <a href="mailto:ingenieria@3vizo.com">ingenieria@3vizo.com</a> con el número de serie (Receptor › Sistema y firmware), la versión del firmware y de la app, tu teléfono y qué pasó. Si te lo pedimos, descarga el diagnóstico desde el panel web: Configuración › Más ajustes › Diagnóstico › «Descargar diagnóstico».</p>
+    <p>La app funciona en iPhone con iOS 26.2 o posterior y en Android 8.0 o posterior.</p>
   </div>
   <div class="note" style="margin-top:1rem">
     <p class="note-title">¿No se resolvió?</p>
@@ -1141,7 +1158,7 @@ body { margin: 0; }
 
 <footer class="wrap foot">
   <img src="img/tresvizo-logo.png" alt="TresVizo" width="990" height="444">
-  <span>Guía rápida MeridianV · firmware 0.10.0 · TresVizo Field para iPhone y Android</span>
+  <span>Guía rápida MeridianV · firmware 1.0.x · TresVizo Field para iPhone y Android · Soporte: <a href="mailto:ingenieria@3vizo.com">ingenieria@3vizo.com</a></span>
   <nav class="site-nav" aria-label="Sitio">
     <a href="../">Inicio</a>
     <a href="../soporte/">Soporte</a>
