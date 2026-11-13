@@ -28,11 +28,7 @@
       <p class="eyebrow">Aviso de privacidad integral</p>
       <h1>Política de privacidad</h1>
       <p class="lede">Qué datos tratan la app TresVizo Field y los receptores MeridianV y MeridianVI, dónde se guardan y con quién se conectan.</p>
-      <div class="draft" role="note">
-        <strong>Borrador. Pendiente de revisión legal.</strong>
-        <p>Esta política todavía no está vigente: falta la revisión de un abogado. Los datos marcados <mark class="todo">[COMPLETAR: …]</mark> y <mark class="todo">[VERIFICAR: …]</mark> se resuelven antes de publicarla.</p>
-      </div>
-      <p class="doc-meta"><span>Versión 0.4</span><span>Última revisión: 9 de noviembre de 2026</span><span>Vigente desde: <mark class="todo">[COMPLETAR: fecha de publicación, tras la revisión del abogado]</mark></span></p>
+      <p class="doc-meta"><span>Versión 1.0</span><span>Última revisión: 13 de noviembre de 2026</span><span>Vigente desde: 13 de noviembre de 2026</span></p>
     </div>
   </div>
 
@@ -62,17 +58,14 @@
       <section id="resumen" aria-labelledby="h-resumen">
         <h2 id="h-resumen"><span class="n">1</span>En resumen</h2>
         <ul>
-          <li><strong>Cuenta opcional.</strong> Puedes trabajar y comprar Pro sin registrarte. Si creas una cuenta o entras con Apple o Google, Firebase Authentication gestiona tu identidad y RevenueCat vincula tu acceso a Pro entre dispositivos.</li>
+          <li><strong>Cuenta opcional.</strong> Puedes trabajar y comprar Pro sin registrarte. Tu correo, tu nombre (si el proveedor lo entrega) y tu identificador de usuario se tratan solo cuando creas una cuenta o entras con Apple o Google: entonces Firebase Authentication gestiona tu identidad y RevenueCat vincula tu acceso a Pro entre dispositivos. Sin cuenta, no se recogen.</li>
           <li><strong>Tú controlas tus proyectos.</strong> Se guardan en el teléfono; no se envían a Firebase Authentication ni a RevenueCat. Los respaldos pueden guardarse en iCloud Drive, en la copia de seguridad de Android o en la carpeta que elijas.</li>
           <li><strong>Sin publicidad ni seguimiento publicitario.</strong> Los proveedores de autenticación, compras y mapas pueden procesar datos técnicos para prestar y analizar sus servicios. Los datos de uso opcionales de Mapbox vienen apagados (sección 6).</li>
           <li><strong>Servicios de la app.</strong> Firebase y los proveedores Apple o Google para la cuenta, RevenueCat y la tienda para Pro, tu servicio NTRIP, Mapbox o el servidor de mapas que añadas y los catálogos de datos y firmware en GitHub. El receptor también consulta órbitas públicas de CelesTrak.</li>
           <li><strong>Cuenta, compras y soporte.</strong> TresVizo puede consultar los datos de cuenta y suscripción en sus consolas de Firebase y RevenueCat para gestionar el servicio, además de lo que envíes a soporte.</li>
         </ul>
-        <p>Esta política se revisó el 21 de octubre de 2026 contra el código de la app para iPhone (versión del código <code>d9a9dcc</code>; los mapas, en <code>53ba7d7</code>), de la app para Android (<code>f8a3c526</code>; los mapas, en <code>ffc04dd1</code>) y del firmware del MeridianV (<code>7808cd1</code>) y del MeridianVI (<code>bf02d09</code>).</p>
+        <p>Esta política se comprobó el 13 de noviembre de 2026 contra el código de la app para iPhone (versión del código <code>91f4f94</code>), de la app para Android (<code>dc21091f</code>) y del firmware del MeridianV (<code>f304121</code>) y del MeridianVI (<code>f0cb314</code>).</p>
       </section>
-
-      <p>Los apartados de cuentas, compras, respaldos y telemetría se actualizaron el 9 de noviembre de 2026 contra las apps de iPhone (<code>1f799cd</code>) y Android (<code>941e6d09</code>). La configuración de los proveedores y el borrado de datos asociados todavía requieren comprobaciones antes de la publicación.</p>
-
       <section id="responsable" aria-labelledby="h-responsable">
         <h2 id="h-responsable"><span class="n">2</span>Responsable</h2>
         <p>El responsable del tratamiento de tus datos personales, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), es:</p>
@@ -139,7 +132,7 @@
         <h3>Respaldos</h3>
         <ul>
           <li><strong>Respaldo de la app.</strong> La app hace una copia automática de tus proyectos. En iPhone usa por omisión «iCloud Drive › TresVizo Field › Respaldos» cuando iCloud está disponible; si no lo está, usa la carpeta local de la app. También puedes elegir otra carpeta. En Android usa la carpeta que elijas. En iPhone llevan también tus ajustes, los receptores conocidos, los perfiles de NTRIP y los códigos de campo. Los respaldos no llevan las contraseñas de los servicios NTRIP. Si eliges una carpeta de iCloud Drive o de otro servicio en la nube, ese servicio guarda el respaldo bajo tu cuenta.</li>
-          <li><strong>Copia de seguridad de iPhone.</strong> Si tienes activada la copia de seguridad de iOS (en iCloud o en tu computadora), incluye los datos de la app, salvo las grabaciones descargadas, las zonas de mapa guardadas y los geoides y sistemas descargados. Esa copia la hace Apple bajo tu cuenta, no TresVizo. <mark class="todo">[VERIFICAR en un iPhone: que las zonas de Mapbox sin conexión, que guarda el almacén de teselas del SDK, quedan fuera de la copia de seguridad, como las zonas de antes de Mapbox]</mark></li>
+          <li><strong>Copia de seguridad de iPhone.</strong> Si tienes activada la copia de seguridad de iOS (en iCloud o en tu computadora), incluye los datos de la app, salvo lo que la app excluye a propósito: las grabaciones descargadas, las teselas de las fuentes de mapa propias, los geoides y sistemas descargados, el diario técnico y la carpeta local de respaldos. Las zonas sin conexión y el caché del mapa de Mapbox los guarda el SDK de Mapbox en sus propias carpetas, y la app no las marca como excluidas de la copia: pueden incluirse. Esa copia la hace Apple bajo tu cuenta, no TresVizo.</li>
           <li><strong>Copia de Android.</strong> Si tienes activada la copia de seguridad del sistema, Android puede incluir los proyectos y dibujos preparados por la app, tus ajustes, los receptores conocidos y los perfiles NTRIP sin contraseñas. La transferencia entre dispositivos usa la misma selección. Quedan fuera las contraseñas NTRIP, la sesión de Firebase, la caché de RevenueCat, las grabaciones y las teselas del mapa. Esta copia la gestiona el sistema bajo tu cuenta.</li>
         </ul>
 
@@ -230,7 +223,7 @@
               <tr>
                 <td>Mapbox</td>
                 <td data-label="Quién se conecta y cuándo">La app, mientras ves el mapa con «Calles», «Satélite» o «Satélite con calles», y al descargar zonas para usarlas sin conexión. Servidores de Mapbox, Inc.</td>
-                <td data-label="Qué recibe">La dirección IP, las teselas que pide la app (es decir, la zona que ves o que descargas) y un identificador de instalación con el que Mapbox cuenta los usuarios activos de cada mes. Si la activas, también recibe la <strong>telemetría del mapa</strong>: datos de uso, rendimiento y diagnóstico del mapa. La telemetría viene apagada; puedes cambiarla en <strong>Cuenta › Privacidad › Datos de uso para Mapbox</strong> o en la «i» del mapa. El SDK de Mapbox declara que estos datos no se vinculan a tu identidad ni sirven para rastrearte, y su licencia dice que envía datos limitados de ubicación y de uso sin identificar. La app no le da a Mapbox la posición del receptor ni la del teléfono, y no activa la ubicación del SDK. <mark class="todo">[VERIFICAR con Mapbox: si, con la telemetría encendida y el permiso de ubicación concedido para el GPS del teléfono, el SDK lee la ubicación del teléfono por su cuenta, y qué deja de enviar al apagarla]</mark> <a href="https://www.mapbox.com/legal/privacy">Política de privacidad de Mapbox</a>.</td>
+                <td data-label="Qué recibe">La dirección IP, las teselas que pide la app (es decir, la zona que ves o que descargas) y un identificador de instalación con el que Mapbox cuenta los usuarios activos de cada mes. Si la activas, también recibe la <strong>telemetría del mapa</strong>: datos de uso, rendimiento y diagnóstico del mapa. La telemetría viene apagada; puedes cambiarla en <strong>Cuenta › Privacidad › Datos de uso para Mapbox</strong> o en la «i» del mapa. El SDK de Mapbox declara que estos datos no se vinculan a tu identidad ni sirven para rastrearte, y su licencia dice que envía datos limitados de ubicación y de uso sin identificar. La app no le da a Mapbox la posición del receptor ni la del teléfono, y no activa el proveedor de ubicación del SDK ni su indicador de posición en el mapa: la posición que ves la dibuja la app con la que ya tiene. La única ubicación del teléfono que usa la app es la del GPS del teléfono, mientras la app está en uso y solo si no hay un receptor conectado y tú lo permites (sección 4). Lo que el SDK de Mapbox haga por su cuenta con la telemetría encendida lo determina Mapbox; por eso la telemetría viene apagada. <a href="https://www.mapbox.com/legal/privacy">Política de privacidad de Mapbox</a>.</td>
               </tr>
               <tr>
                 <td>Servidor de mapas que tú añadas</td>
@@ -271,7 +264,7 @@
       <section id="no" aria-labelledby="h-no">
         <h2 id="h-no"><span class="n">7</span>Lo que no se recoge</h2>
         <ul>
-          <li>No es obligatorio tener cuenta para trabajar. Las cuentas y sus datos de autenticación sí se procesan cuando usas esas funciones.</li>
+          <li>No es obligatorio tener cuenta para trabajar ni para comprar Pro. El correo, el nombre y el identificador de usuario se recogen únicamente si creas una cuenta o entras con Apple o Google; sin cuenta, no se recogen.</li>
           <li>No hay seguimiento publicitario entre apps o sitios web. RevenueCat ofrece estadísticas de compras; los proveedores de autenticación y mapas pueden procesar datos técnicos y de uso conforme a sus servicios. La telemetría opcional de Mapbox se controla en Cuenta › Privacidad.</li>
           <li>No hay publicidad ni identificadores publicitarios.</li>
           <li>El informe de soporte de TresVizo solo sale si tú lo compartes. Esto no excluye el diagnóstico técnico que puedan recopilar los SDK de autenticación y mapas.</li>
@@ -282,24 +275,24 @@
 
       <section id="tresvizo" aria-labelledby="h-tresvizo">
         <h2 id="h-tresvizo"><span class="n">8</span>Datos que recibe TresVizo</h2>
-        <p>TresVizo trata los datos necesarios para gestionar las cuentas y las suscripciones mediante los proveedores de la sección 6, y los que le envías para soporte:</p>
+        <p>TresVizo trata los datos necesarios para gestionar las cuentas y las suscripciones mediante los proveedores de la sección 6, y los que le envías para soporte. Los datos de cuenta (correo, nombre y identificador de usuario) existen solo si tú creas una cuenta:</p>
         <ul>
           <li><strong>Soporte técnico.</strong> Lo que pongas en tu mensaje: nombre, correo o teléfono, el número de serie del receptor y la descripción del problema.</li>
           <li><strong>Informe de soporte de la app.</strong> Antes de generarlo, la app te enseña qué lleva: versión de la app, modelo y versión del sistema del teléfono, número de serie, estado y configuración del receptor sin contraseñas, su diagnóstico y medidas de la conexión. Puede llevar las coordenadas del último estado leído y los nombres y las direcciones de las redes Wi-Fi del receptor. La app te avisa cuando lleva coordenadas; en iPhone, también cuando lleva redes. En iPhone lleva además el diario técnico de la app. Tú decides si lo envías y a quién.</li>
           <li><strong>Diagnóstico del panel web.</strong> El archivo que descargas del receptor y nos mandas si soporte técnico te lo pide.</li>
         </ul>
         <p><strong>Finalidades.</strong> Autenticar tu cuenta, comprobar y mantener el acceso a Pro, prevenir fraude, atender tus solicitudes, diagnosticar el equipo y cumplir la garantía. No usamos estos datos para publicidad.</p>
-        <p><strong>Proveedores y transferencias.</strong> Los servicios de la sección 6 pueden tratar datos fuera de México. <mark class="todo">[VERIFICAR con abogado: encargados, transferencias internacionales, consentimiento y garantías aplicables a Firebase, Apple, Google, RevenueCat y Mapbox]</mark>.</p>
-        <p><mark class="todo">[VERIFICAR con abogado: si esta política debe cubrir también los datos de compra y facturación del receptor, o si van en un aviso aparte]</mark></p>
+        <p><strong>Proveedores y transferencias.</strong> Firebase y Google, Apple, RevenueCat y Mapbox pueden tratar datos fuera de México, principalmente en Estados Unidos, como proveedores de servicios y para las finalidades de la sección 6.</p>
+        <p><strong>Compra de un receptor.</strong> Cuando compras un receptor a TresVizo, tu nombre, tus datos de contacto y de facturación se usan solo para la venta, la factura y la garantía.</p>
       </section>
 
       <section id="conservacion" aria-labelledby="h-conservacion">
         <h2 id="h-conservacion"><span class="n">9</span>Conservación y borrado</h2>
         <ul>
           <li><strong>En tu teléfono:</strong> mientras no los borres. Al borrar un proyecto se borra del teléfono, y al borrar un perfil de NTRIP se borra también su contraseña. Al desinstalar la app se borran sus datos; en iPhone, el Llavero puede conservar las contraseñas de NTRIP, así que bórralas en la app antes de desinstalarla. Los respaldos que guardaste en otra carpeta siguen ahí hasta que los borres.</li>
-          <li><strong>Cuenta y compras:</strong> «Cuenta › Borrar mi cuenta» elimina la identidad de Firebase tras comprobar tu acceso. Borrar la cuenta o desinstalar la app no cancela la suscripción de la tienda. <mark class="todo">[VERIFICAR antes de publicar: eliminación completa de los datos asociados en RevenueCat, revocación de Apple en Android, tratamiento de registros de transacciones y sus plazos de conservación]</mark>. Consulta la <a href="../eliminar-cuenta/">página para solicitar la eliminación de cuenta y datos</a>.</li>
+          <li><strong>Cuenta y compras:</strong> «Cuenta › Borrar mi cuenta» elimina la identidad de Firebase tras comprobar tu acceso y marca tus datos de suscripción en RevenueCat para su borrado: TresVizo los elimina en un máximo de 30 días naturales y conserva únicamente tu solicitud y la fecha en que se completó, durante 12 meses, como constancia. Los registros de compra que guardan Apple y Google Play se rigen por sus propias políticas. Borrar la cuenta o desinstalar la app no cancela la suscripción de la tienda. Consulta la <a href="../eliminar-cuenta/">página para solicitar la eliminación de cuenta y datos</a>.</li>
           <li><strong>En el receptor:</strong> las redes y los perfiles de NTRIP, hasta que los borres desde la app o el panel web; las grabaciones, hasta que las borres de la microSD. Antes de vender o prestar un receptor, borra sus redes y perfiles y las grabaciones que no quieras compartir.</li>
-          <li><strong>En TresVizo:</strong> los datos de soporte, durante <mark class="todo">[COMPLETAR: decisión del propietario con el abogado: plazo de conservación de los datos de soporte]</mark>. Después se bloquean y se suprimen, salvo lo que una ley obligue a conservar.</li>
+          <li><strong>En TresVizo:</strong> los datos de soporte, durante 12 meses después de cerrar el caso. Después se eliminan, salvo lo que una ley obligue a conservar.</li>
         </ul>
       </section>
 
@@ -346,7 +339,7 @@
 
       <section id="cambios" aria-labelledby="h-cambios">
         <h2 id="h-cambios"><span class="n">14</span>Cambios a esta política</h2>
-        <p>Si cambia lo que hacen la app o el receptor con tus datos, actualizaremos esta página antes de publicar el cambio, con su fecha y su versión arriba. Si el cambio es importante, también lo avisaremos en <mark class="todo">[VERIFICAR con abogado: el medio del aviso de cambios (LFPDPPP, artículo 15, fracción VI): este sitio, la app o ambos]</mark>.</p>
+        <p>Si cambia lo que hacen la app o el receptor con tus datos, lo avisaremos en esta página, con su fecha y su versión arriba, y, si el cambio es importante, con un aviso en la app.</p>
       </section>
 
       <section id="contacto" aria-labelledby="h-contacto">

@@ -125,7 +125,7 @@ Decisiones del propietario:
 | Catálogo de geoides y sistemas en GitHub, cada archivo con su licencia y crédito | Sección «Geoides y sistemas», arriba |
 | La garantía no cubre el firmware no oficial | `docs/garantia/index.html`, sección 4 («Firmware no oficial») |
 
-## Política de privacidad (`docs/privacidad/`, borrador)
+## Política de privacidad (`docs/privacidad/`, v1.0)
 
 Revisada entera el 21-10-2026 contra `iOS` `d9a9dcc`, `AND` `f8a3c526`, `MV` `7808cd1` y `VI` `bf02d09`; lo de los mapas, otra vez el mismo día contra `iOS-MB:` `53ba7d7` y `AND-MB:` `ffc04dd1` (en lo
 que afecta a privacidad, el firmware del VI se comporta igual que el del V). Rutas del firmware desde
@@ -203,3 +203,23 @@ siguen en borrador; no se afirma que haya una revisión legal ni un borrado inte
 | Responsable, correo de soporte y respuesta en un día hábil | Decisiones del propietario del 21-10-2026 (titular persona física, soporte `ingenieria@3vizo.com`, respuesta en un día hábil) |
 | Borrado completo en 30 días naturales; la app marca al cliente de RevenueCat al borrar la cuenta y TresVizo lo elimina en la consola | Proceso definido el 12-11-2026; la marca la añaden las apps de iPhone y Android (pendiente de commit en sus repositorios) y la revisión semanal está en `docs/guia-propietario-suscripciones.md` de las apps |
 | Constancia de la solicitud conservada 12 meses | Decisión del coordinador del 12-11-2026, pendiente de revisión legal |
+
+
+## Política de privacidad y eliminación de cuenta, v1.0 · 13-11-2026
+
+Publicación de `docs/privacidad/` y `docs/eliminar-cuenta/` como v1.0, vigentes desde el 13-11-2026, sin revisión legal previa
+(decisión del propietario; una versión posterior puede revisarla un abogado). Se comprobó contra `iOS` `91f4f94`, `AND`
+`dc21091f`, `MV` `f304121` y `VI` `f0cb314`. Los marcadores pendientes de la v0.4 se resolvieron así:
+
+| Afirmación | Fuente comprobada |
+| --- | --- |
+| La app excluye de la copia de iPhone: las grabaciones descargadas, las teselas de las fuentes de mapa propias, los geoides y sistemas descargados, el diario técnico y la carpeta local de respaldos | iOS `91f4f94`, `TresVizo Field/TresVizo Field/Session/RecordingsModel.swift:753`, `Session/MapsModel.swift:124-131`, `Session/DataLibrary.swift:320`, `Data/SessionLogStore.swift:119`, `Data/BackupFolder.swift:83` (todos con `isExcludedFromBackup`) |
+| El almacén de zonas sin conexión y el caché del mapa de Mapbox están en carpetas del SDK y la app no las marca como excluidas de la copia: la política dice «pueden incluirse». El comentario de `MapsModel.swift:124-131` dice que el `TileStore` vive en la caché de la app, pero no se pudo confirmar en código propio ni se comprobó en un iPhone | iOS `91f4f94`, `Data/MapboxOfflineZones.swift:16-21` (`TileStore.default`, sin ruta propia), `Data/MapboxMapCache.swift:5-15` (`MapboxMapsOptions.dataPath` por omisión); búsqueda de `isExcludedFromBackup` en todo el proyecto |
+| La app no activa el proveedor de ubicación del SDK de Mapbox ni su indicador de posición; la ubicación del teléfono la lee la app con `CLLocationManager`, «mientras se usa» y sin receptor | iOS `91f4f94`, `Data/CoreLocationFeed.swift:24-70` y búsqueda de `puck`/`locationProvider`/`location.options` sin resultados en `UI/Survey/MapCanvas*.swift`; Android `dc21091f`, búsqueda de `LocationComponent`/`locationComponent`/`puck` sin resultados en `android/` |
+| Lo que el SDK hace por su cuenta con la telemetría encendida lo determina Mapbox; la telemetría viene apagada | iOS `Data/MapboxSetup.swift:57-77`; Android `android/app/src/main/kotlin/com/tresvizo/field/maps/MapboxSetup.kt:55-72`; licencia y política de Mapbox |
+| «Borrar mi cuenta» marca al cliente en RevenueCat con `tvz_borrado_solicitado` antes de borrar la identidad de Firebase | iOS `9b4117a`, `Data/Accounts/PurchasesService.swift:32-41`; Android `android/core/domain/src/main/kotlin/com/tresvizo/field/core/domain/account/AccountDeletionMark.kt:13` |
+| TresVizo borra esos datos en un máximo de 30 días naturales y guarda la constancia de la solicitud 12 meses; no se afirma revocación de Apple en Android (en el código de Android no hay llamada de revocación; en iOS sí, `Data/Accounts/FirebaseAccountService.swift:124-126`) | Decisión del propietario (`eliminar-cuenta` v0.2); iOS y Android, búsqueda de `revoke` |
+| Datos de soporte: 12 meses después de cerrar el caso, y después se eliminan salvo lo que una ley obligue a conservar | Decisión del propietario (13-11-2026) |
+| Datos de compra y facturación de un receptor: solo para la venta, la factura y la garantía | Decisión del propietario (13-11-2026) |
+| Avisos de cambios: en esta página y, si el cambio es importante, en la app | Decisión del propietario (13-11-2026) |
+| El receptor solo se conecta fuera de la red del receptor a CelesTrak (órbitas públicas) | MV `f304121`, `firmware/esp32/src/gnss_visible.cpp` (única referencia a un dominio externo en `src/` e `include/`) |

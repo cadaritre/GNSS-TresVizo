@@ -19,8 +19,8 @@ compilación: lo que está en `docs/` es lo que se publica, y solo si pasa `tool
 | `docs/seguridad/` | Batería y seguridad: carga, uso en campo, almacenamiento y transporte |
 | `docs/geoides/` | Geoides y sistemas de coordenadas, con su autoridad y su licencia |
 | `docs/licencia/` | Contrato de licencia de uso del software, EULA (borrador) |
-| `docs/privacidad/` | Política de privacidad (borrador v0.4, 09-11-2026; cuentas, compras, respaldos y SDK) |
-| `docs/eliminar-cuenta/` | Eliminación de cuenta y datos (v0.2, 12-11-2026: proceso, plazo de 30 días y conservación definidos; texto pendiente de revisión legal) |
+| `docs/privacidad/` | Política de privacidad (v1.0, vigente desde el 13-11-2026; cuenta opcional, compras, respaldos y SDK) |
+| `docs/eliminar-cuenta/` | Eliminación de cuenta y datos (v1.0, vigente desde el 13-11-2026: borrado desde la app o por correo, plazo de 30 días y constancia de 12 meses) |
 | `docs/404.html` | Página de «no encontrada» |
 | `docs/assets/` | Hoja de estilos común y logotipos |
 | `tools/importar_guia.py` | Copia la guía rápida desde el repositorio del firmware |
