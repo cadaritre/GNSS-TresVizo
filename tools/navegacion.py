@@ -45,6 +45,7 @@ FOOTNAV = (
     ("geoides/", "Geoides y sistemas"),
     ("licencia/", "Contrato de licencia"),
     ("privacidad/", "Política de privacidad"),
+    ("eliminar-cuenta/", "Eliminar cuenta y datos"),
 )
 
 HEADER = """<header class="topbar">

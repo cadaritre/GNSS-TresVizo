@@ -171,3 +171,35 @@ que afecta a privacidad, el firmware del VI se comporta igual que el del V). Rut
 | Autoridad: Secretaría Anticorrupción y Buen Gobierno; solicitud de protección de datos | `LFPDPPP` arts. 2 fr. XV y 41 |
 | Contenido del aviso de privacidad, incluido el medio para avisar de cambios | `LFPDPPP` art. 15 |
 | Las páginas del sitio no cargan nada de terceros; la guía publicada todavía carga Google Fonts | `docs/assets/sitio.css` (fuentes del sistema); `tools/comprobar_sitio.py` (lo comprueba); `docs/guia/index.html:10` (`@import` de Google Fonts, hasta reimportarla con `tools/importar_guia.py`) |
+
+## Actualización técnica de privacidad y eliminación de cuenta · 09-11-2026
+
+Se conservan las fuentes anteriores para los apartados no revisados. Las afirmaciones nuevas de
+`docs/privacidad/` (v0.4) y `docs/eliminar-cuenta/` (v0.1) se apoyan en lo siguiente. Ambos documentos
+siguen en borrador; no se afirma que haya una revisión legal ni un borrado integral validado.
+
+| Afirmación o pendiente | Fuente comprobada |
+| --- | --- |
+| Cuenta opcional, Firebase con correo, Apple y Google | iOS `1f799cd`, `TresVizo Field/TresVizo Field/Data/Accounts/FirebaseAccountService.swift:41-86`, `Data/Accounts/AccountsConfiguration.swift`; Android `941e6d09`, `android/app/src/main/kotlin/com/tresvizo/field/subscription/FirebaseAccountService.kt:44-56`, `:112-181` |
+| RevenueCat se configura al arrancar, consulta derechos y admite compras sin cuenta | iOS `1f799cd`, `TresVizo Field/TresVizo Field/Data/Accounts/RevenueCatPurchases.swift:22-44`, `:65-94`; `Session/ProModel.swift:85-95`; Android `941e6d09`, `android/app/src/main/kotlin/com/tresvizo/field/subscription/RevenueCatProStore.kt:78-100` |
+| UID, correo verificado y nombre enviados a RevenueCat al entrar | iOS `1f799cd`, `TresVizo Field/TresVizo Field/Data/Accounts/RevenueCatPurchases.swift:47-55`; Android `941e6d09`, `android/app/src/main/kotlin/com/tresvizo/field/subscription/RevenueCatProStore.kt:197-203` |
+| Compras, identificadores, funcionalidades y análisis en RevenueCat; contacto si se envía como atributo | Documentación de RevenueCat consultada el 09-11-2026: <https://www.revenuecat.com/docs/platform-resources/apple-platform-resources/apple-app-privacy> |
+| IP y ubicación general para prevención de fraude de Google Sign-In | Google, documentación consultada el 09-11-2026: <https://developers.google.com/identity/sign-in/ios/app-privacy> |
+| Datos y conservación propios de Firebase | Google, documentación consultada el 09-11-2026: <https://firebase.google.com/support/privacy> |
+| Borrado en la app elimina la identidad de Firebase; no se encontró llamada de borrado del cliente RevenueCat en ese flujo | iOS `1f799cd`, `TresVizo Field/TresVizo Field/Data/Accounts/FirebaseAccountService.swift:109-132`, `Session/ProModel.swift:128-146`; Android `941e6d09`, `android/app/src/main/kotlin/com/tresvizo/field/subscription/FirebaseAccountService.kt:189-219`. No se confunde cerrar la sesión de RevenueCat con eliminar su cliente |
+| Revocación de Apple presente en iOS; pendiente de comprobar en Android | iOS `1f799cd`, `TresVizo Field/TresVizo Field/Data/Accounts/FirebaseAccountService.swift:119-125`; Android `941e6d09`, `android/app/src/main/kotlin/com/tresvizo/field/subscription/FirebaseAccountService.kt:203-220` |
+| Proceso de borrado completo de RevenueCat pendiente antes de publicación | RevenueCat describe una operación separada de eliminación del cliente en panel o API: <https://www.revenuecat.com/docs/dashboard-and-metrics/customer-profile> (consulta 09-11-2026); el código anterior solo borra Firebase y cierra sesión |
+| Respaldo de iPhone en iCloud Drive por omisión si está disponible, o local si no | iOS `1f799cd`, `TresVizo Field/TresVizo Field/Data/BackupFolder.swift:7-14`, `:39-83` |
+| Android permite copia del sistema y transferencia con lista explícita; sesiones y contraseñas fuera | Android `941e6d09`, `android/app/src/main/AndroidManifest.xml:93-97`, `android/app/src/main/res/xml/data_extraction_rules.xml`, `android/app/src/main/res/xml/backup_rules.xml` |
+| Telemetría opcional de Mapbox apagada por omisión | iOS `1f799cd`, `TresVizo Field/TresVizo Field/Data/MapboxSetup.swift:57-77`; Android `941e6d09`, `android/app/src/main/kotlin/com/tresvizo/field/maps/MapboxSetup.kt:58-78` |
+| Notificaciones, iCloud y servicios de autenticación/compras incluidos | iOS `1f799cd`, `TresVizo Field/Support/TresVizoField.entitlements`, `Data/BackupFolder.swift`, `Data/Accounts/`; Android `941e6d09`, `android/app/src/main/AndroidManifest.xml:70`, `android/app/src/main/kotlin/com/tresvizo/field/subscription/FirebaseAccountService.kt`, `android/app/src/main/kotlin/com/tresvizo/field/subscription/RevenueCatProStore.kt` |
+| Contacto para solicitar eliminación por correo | Dirección de soporte ya pública y decisión `PROP-21`; el perfil público de desarrollador de Play muestra `ingenieria@3vizo.com` verificado el 09-11-2026. No se promete un plazo operativo sin decisión del propietario |
+| Borrar cuenta no equivale a cancelar suscripción de la tienda | Flujos de borrado citados y gestión de compras separada; instrucciones oficiales <https://support.apple.com/118428> y <https://support.google.com/googleplay/answer/7018481> |
+
+## Eliminación de cuenta, v0.2 · 12-11-2026
+
+| Afirmación | Fuente |
+| --- | --- |
+| Responsable, correo de soporte y respuesta en un día hábil | Decisiones del propietario del 21-10-2026 (titular persona física, soporte `ingenieria@3vizo.com`, respuesta en un día hábil) |
+| Borrado completo en 30 días naturales; la app marca al cliente de RevenueCat al borrar la cuenta y TresVizo lo elimina en la consola | Proceso definido el 12-11-2026; la marca la añaden las apps de iPhone y Android (pendiente de commit en sus repositorios) y la revisión semanal está en `docs/guia-propietario-suscripciones.md` de las apps |
+| Constancia de la solicitud conservada 12 meses | Decisión del coordinador del 12-11-2026, pendiente de revisión legal |
